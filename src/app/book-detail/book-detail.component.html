@@ -1,0 +1,32 @@
+<!-- <p *ngIf="book">{{ book.title }}</p> -->
+
+<div class="container" *ngIf="book">
+    <div class="row">
+        <div class="col-lg-3 mb-3">
+            <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" class="book-cover" alt="{{ book.title }}">
+        </div>
+        <div class="col-lg-9">
+            <div class="row">
+                <h3>{{ book.title }}</h3>
+                <h4>by {{ book.author }}</h4>
+                <p class="book-rating-info">Average rating: <span class="fw-bold">{{ book.averageRating }}</span> · {{ book.ratingCtr }} ratings · Published by {{ book.publisher }} in {{ book.published }}</p>
+                <p class="book-description serif">{{ book.description }}</p>
+
+                <ul>
+                    <a *ngFor="let genre of genres" routerLink="/books" [queryParams]="{ genre: genre }">
+                        <li class="genre-tag d-inline-block me-2 mb-2">
+                            {{ genre }}
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            
+            <hr class="bg-dark border-2 border-dark">
+
+            <div class="row mt-4">
+                <p class="text-uppercase fw-bold">Reviews</p>
+                <app-reviews></app-reviews>
+            </div>
+        </div>
+    </div>
+</div>

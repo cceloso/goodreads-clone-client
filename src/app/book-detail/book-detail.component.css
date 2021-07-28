@@ -1,0 +1,21 @@
+.genre-tag {
+    border: solid 1px #D6D0C4;
+    padding: 6px;
+    font-size: .8rem;
+    background-color: #f4f1ea;
+    cursor: pointer;
+}
+
+.genre-tag:hover {
+    background-color: #ede6d6;
+}
+
+.book-cover {
+    /* position: sticky; */
+    /* width: 15vw; */
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+}

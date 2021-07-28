@@ -1,0 +1,39 @@
+<!-- <h2>Books</h2> -->
+<h3 class="text-capitalize">{{ genreName.split('-').join(' ') }}</h3>
+
+<div *ngIf="books.length == 0">
+    No results found.
+</div>
+
+<div class="row mx-auto" *ngIf="books.length != 0">
+    <div class="col-sm-2" *ngFor="let book of books">
+        <a routerLink="/books/{{ book.id }}">
+            <div class="card my-3" style="width: 18rem;">
+                    <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" class="card-img-top" alt="{{ book.title }}">
+                <!-- <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">{{ book.author }}</p>
+                </div> -->
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- <a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>
+
+<script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();   
+    });
+</script> -->
+
+<button type="button" class="btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="right" title="Tooltip on right">
+    Tooltip on right
+  </button>
+
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>

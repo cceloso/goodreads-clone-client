@@ -1,0 +1,21 @@
+.navbar-light .navbar-nav .nav-link  {
+    color: #767676;
+}
+
+.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link:hover, .dropdown-item {
+    color: #382110;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #d6d0c4;
+}
+
+.btn-outline-dark:hover {
+    color: #382110;
+    border-color: #382110;
+}
+
+.btn-outline-dark:hover {
+    color: white;
+    background-color: #382110;
+}

@@ -1,0 +1,38 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.serif {
+    font-family: "Merriweather", "Georgia", serif;
+}
+
+.material-icons {
+    vertical-align: middle;
+}
+
+h3 {
+    font-family: "Merriweather", "Georgia", serif;
+    font-weight: bold;
+}
+
+h4 {
+    font-family: "Merriweather", "Georgia", serif;
+    /* font-weight: 300; */
+    font-size: 1rem;
+}
+
+.book-description {
+    font-size: 0.9rem;
+}
+
+.book-rating-info {
+    font-size: 0.85rem;
+}
+
+* {
+    font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+.navbar {
+    background-color: #F4F1EA;
+}

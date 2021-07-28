@@ -1,0 +1,30 @@
+.material-icons {
+    vertical-align: middle;
+}
+
+.account-circle {
+    font-size: 3.5rem;
+}
+
+.star-rate {
+    font-size: 1.1rem;
+    color: #767676;
+}
+
+.checked {
+    color: #fa604a;
+}
+
+.review-text {
+    font-size: .9rem;
+}
+
+.view-comments {
+    font-size: .9rem;
+    color: #00635d;
+    cursor: pointer;
+}
+
+.view-comments:hover {
+    text-decoration: underline;
+}
