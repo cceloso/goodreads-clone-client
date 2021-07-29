@@ -15,6 +15,7 @@ export class BookDetailComponent implements OnInit {
   // books: Book[] = [];
   book?: Book;
   genres: string[] = [];
+  readMore: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +35,10 @@ export class BookDetailComponent implements OnInit {
         this.genres = this.book.genres.split(',');
         console.log(this.genres);
       });
+  }
+
+  onClickReadMore(): void {
+    this.readMore = !this.readMore;
   }
 
 }
