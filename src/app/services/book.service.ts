@@ -5,8 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Book } from '../models/book';
-import { BookData } from '../models/book-data';
-// import { BOOKS } from './mock-books';
+import { Genre } from '../models/genre';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +58,15 @@ export class BookService {
     return this.http.get<Book[]>(newUrl)
       .pipe(
         catchError(this.handleError<Book[]>('getBooksByGenre', []))
+      );
+  }
+
+  getGenres(): Observable<Genre[]> {
+    const newUrl = `${this.url}?genre=all`;
+    console.log("newUrl", newUrl);
+    return this.http.get<Genre[]>(newUrl)
+      .pipe(
+        catchError(this.handleError<Genre[]>('getGenres', []))
       );
   }
 }

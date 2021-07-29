@@ -1,0 +1,34 @@
+<div class="row" *ngIf="books.length == 0">
+    No results found.
+</div>
+
+<div class="row mx-auto" *ngIf="books.length != 0">
+    <div class="col-sm-2" *ngFor="let book of books.slice(0, 6)">
+        <a routerLink="/books/{{ book.id }}">
+            <div class="card my-3">
+                    <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" class="card-img-top book-cover" alt="{{ book.title }}">
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- <div class="row mx-auto" *ngIf="books.length != 0">
+    <div class="card my-3" *ngFor="let book of books.slice(0, 6)">
+        <a routerLink="/books/{{ book.id }}">
+                <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" class="card-img-top book-cover" alt="{{ book.title }}">
+        </a>
+    </div>
+</div> -->
+
+<!-- <div class="row mx-auto" *ngIf="books.length != 0">
+    <div class="card-group">
+        <div class="card" *ngFor="let book of books.slice(0,6)">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div> -->

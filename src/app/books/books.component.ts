@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Book } from '../models/book';
-import { BookData } from '../models/book-data';
+import { Genre } from '../models/genre';
 import { BookService } from '../services/book.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { BookService } from '../services/book.service';
 })
 export class BooksComponent implements OnInit {
   books: Book[] = [];
+  genres: Genre[] = [];
   genreName: string = "";
 
   constructor(
@@ -22,29 +23,24 @@ export class BooksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getBooks();
+    this.route.queryParams
+      .subscribe(queryParams => {
+        this.genreName = String(this.route.snapshot.queryParams.genre);
+        
+        if(this.genreName == "all" || this.genreName == "undefined") {
+          this.genreName = "All";
+        }
+
+        this.books = []
+        // this.genres = [];
+        this.getGenres();
+      })
   }
 
-  getBooks(): void {
-    this.genreName = String(this.route.snapshot.queryParams.genre);
-    
-    if(this.genreName !== "undefined") {
-      console.log("get books by genre");
-      console.log("genre is", this.genreName)
-      this.bookService.getBooksByGenre(this.genreName)
-      .subscribe(books => {
-        this.books = books;
-        // console.log(this.books);
-      });
-    } else {
-      console.log("get all books");
-      this.genreName = "All";
-      this.bookService.getBooks()
-      .subscribe(books => {
-        this.books = books;
-        // console.log(this.books);
-      });
-    }
-    
+  getGenres(): void {
+    this.bookService.getGenres()
+    .subscribe(genres => {
+      this.genres = genres;
+    });
   }
 }
