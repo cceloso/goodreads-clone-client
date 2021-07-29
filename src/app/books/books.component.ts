@@ -43,4 +43,8 @@ export class BooksComponent implements OnInit {
       this.genres = genres;
     });
   }
+
+  onGenreClick(genreName: string): void {
+    // this.genreName = genreName;
+  }
 }

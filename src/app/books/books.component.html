@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col mx-auto">
                 <div *ngFor="let genre of genres.slice(0, genres.length / 2)">
-                    <a class="text-capitalize genre-item" routerLink="/books" [queryParams]="{ genre: genre.name }">{{ genre.name.split('-').join(' ') }}</a>
+                    <a class="text-capitalize genre-item" routerLink="/books" [queryParams]="{ genre: genre.name }" (click)="onGenreClick(genre.name)">{{ genre.name.split('-').join(' ') }}</a>
 
                 </div>
             </div>

@@ -1,25 +1,25 @@
-<!-- <ul class="list-group">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-</ul> -->
+<div class="view-comments mb-2" *ngIf="!viewComments" (click)="onViewComments()">View comments</div>
+<div class="view-comments mb-2" *ngIf="viewComments" (click)="onViewComments()">Hide comments</div>
 
-<!-- <div class="card" style="width: 40rem;"> -->
-<div class="card" style="width: 46rem;">
+<div class="card" *ngIf="viewComments">
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li class="list-group-item" *ngFor="let comment of comments">
             <div class="row">
                 <div class="col-lg-1">
                     <span class="material-icons account-circle me-1">account_circle</span>
                 </div>
                 <div class="col comment-text">
-                    <span class="fw-bold">Username</span>
-                    <!-- This is a comment. -->
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <span class="fw-bold me-1">User with id {{ comment.userId }}</span>
+                    {{ comment.comment }}
                     <div class="text-muted">
-                        2021-07-27 5:06 PM
+                        {{ comment.createdAt.split('T')[0] }} {{ comment.createdAt.split('T')[1].split(':').slice(0, 2).join(':') }}
                     </div>
                 </div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <input type="text" name="newComment" id="newComment" placeholder="Write a comment..." class="comment-text py-2">
             </div>
         </li>
     </ul>

@@ -23,9 +23,8 @@
                         <div class="review-text serif mt-2">{{ review.review }}</div>
                     </div>
                     <div class="row">
-                        <div class="view-comments">View comments</div>
-                        <!-- <app-comments *ngIf="viewComments"></app-comments> -->
-                        <app-comments class="mt-2"></app-comments>
+                        <!-- <div class="view-comments">View comments</div> -->
+                        <app-comments class="mt-2" [reviewId]="review.id"></app-comments>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,13 @@
+.view-comments {
+    font-size: .9rem;
+    color: #00635d;
+    cursor: pointer;
+}
+
+.view-comments:hover {
+    text-decoration: underline;
+}
+
 .list-group-item {
     background-color: #f3f3f3;
 }
@@ -7,7 +17,7 @@
 }
 
 .account-circle {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
 }
 
 .comment-text {

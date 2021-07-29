@@ -35,7 +35,7 @@ export class CommentService {
   }
 
   getComments(bookId: string, reviewId: string): Observable<Comment[]> {
-    const newUrl = `${this.url}/${bookId}/reviews/${reviewId}`;
+    const newUrl = `${this.url}/${bookId}/reviews/${reviewId}/comments`;
     return this.http.get<Comment[]>(newUrl).pipe(
       catchError(this.handleError<Comment[]>(`getComments for bookId=${bookId} and reviewId=${reviewId}`))
     );
