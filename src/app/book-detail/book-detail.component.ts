@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Book } from '../models/book';
-import { BookData } from '../models/book-data';
 import { BookService } from '../services/book.service';
 
 @Component({

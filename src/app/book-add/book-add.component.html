@@ -1,1 +1,46 @@
-<p>book-add works!</p>
+<h3>Add a New Book</h3>
+
+<form [formGroup]="bookForm">
+    <label for="title">Title:</label>
+    <input id="title" type="text" formControlName="title">
+    <br>
+
+    <label for="author">Author:</label>
+    <input id="author" type="text" formControlName="author">
+    <br>
+
+    <label for="isbn">ISBN:</label>
+    <input id="isbn" type="text" formControlName="isbn">
+    <br>
+
+    <label for="publisher">Publisher:</label>
+    <input id="publisher" type="text" formControlName="publisher">
+    <br>
+
+    <label for="published">Year published:</label>
+    <input id="published" type="text" formControlName="published">
+    <br>
+
+    <label for="description">Description:</label>
+    <input id="description" type="text" formControlName="description">
+    <br>
+
+    <div formArrayName="genres">
+        <p>Genres</p>
+        <button (click)="addGenre()">+ Add another genre</button>
+
+        <div *ngFor="let genre of genres.controls; let i=index">
+            <!-- The repeated genre template -->
+            <label for="genre-{{ i }}">Genre:</label>
+            <input id="genre-{{ i }}" type="text" [formControlName]="i">
+        </div>
+    </div>
+
+    <label for="imageUrl">Image url:</label>
+    <input id="imageUrl" type="text" formControlName="imageUrl">
+</form>
+
+<p>Complete the form to enable button.</p>
+<p>Form Status: {{ bookForm.status }}</p>
+<button type="submit" [disabled]="!bookForm.valid" (click)="onSubmit()">Submit</button>
+<button (click)="updateBook()">Update Book</button>

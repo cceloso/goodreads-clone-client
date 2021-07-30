@@ -54,7 +54,6 @@ export class BookService {
 
   getBooksByGenre(genreName: string): Observable<Book[]> {
     const newUrl = `${this.url}?genre=${genreName}`;
-    console.log("newUrl", newUrl);
     return this.http.get<Book[]>(newUrl)
       .pipe(
         catchError(this.handleError<Book[]>('getBooksByGenre', []))
@@ -63,10 +62,16 @@ export class BookService {
 
   getGenres(): Observable<Genre[]> {
     const newUrl = `${this.url}?genre=all`;
-    console.log("newUrl", newUrl);
     return this.http.get<Genre[]>(newUrl)
       .pipe(
         catchError(this.handleError<Genre[]>('getGenres', []))
       );
+  }
+
+  addBook(book: any): Observable<any> {
+    const newUrl = `${this.url}`;
+    return this.http.post<any>(newUrl, book).pipe(
+      catchError(this.handleError<any>(`addBook book`))
+    );
   }
 }
