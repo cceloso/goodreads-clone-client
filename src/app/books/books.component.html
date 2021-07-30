@@ -12,9 +12,12 @@
             </div>
         </div>
     </div>
+
     <div class="col" *ngIf="genreName != 'All'">
-        <app-books-by-genre [genreName]="genreName"></app-books-by-genre>
+        <!-- <app-books-by-genre [genreName]="genreName"></app-books-by-genre> -->
+        <app-books-by-genre></app-books-by-genre>
     </div>
+    
     <div class="col-sm-3">
         <span class="text-uppercase fw-bold">Browse</span>
         <hr>
@@ -33,7 +36,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div class="row" *ngIf="genres.length == 0">
-    <app-books-by-genre [genreName]="genreName"></app-books-by-genre>
-</div> -->

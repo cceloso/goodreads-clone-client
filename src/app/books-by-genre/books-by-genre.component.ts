@@ -22,17 +22,22 @@ export class BooksByGenreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getBooksByGenre();
+    if(this.genreName == "") {
+      this.route.queryParams
+      .subscribe(queryParams => {
+        this.genreName = String(this.route.snapshot.queryParams.genre);
+        // this.books = [];
+        this.getBooksByGenre();
+      })
+    } else {
+      this.getBooksByGenre();
+    }
   }
   
   getBooksByGenre(): void {    
-    // console.log("get books by genre");
-    // console.log("genre is", this.genreName)
     this.bookService.getBooksByGenre(this.genreName)
     .subscribe(books => {
       this.books = books;
-      // console.log("books:")
-      // console.log(this.books);
     });
   }
 }

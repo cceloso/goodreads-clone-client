@@ -10,6 +10,7 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { CommentsComponent } from './comments/comments.component';
 import { BooksByGenreComponent } from './books-by-genre/books-by-genre.component';
+import { BookAddComponent } from './book-add/book-add.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BooksByGenreComponent } from './books-by-genre/books-by-genre.component
     BookDetailComponent,
     ReviewsComponent,
     CommentsComponent,
-    BooksByGenreComponent
+    BooksByGenreComponent,
+    BookAddComponent
   ],
   imports: [
     BrowserModule,

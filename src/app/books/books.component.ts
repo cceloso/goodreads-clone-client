@@ -31,8 +31,7 @@ export class BooksComponent implements OnInit {
           this.genreName = "All";
         }
 
-        this.books = []
-        // this.genres = [];
+        // this.books = [];
         this.getGenres();
       })
   }
