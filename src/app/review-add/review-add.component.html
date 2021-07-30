@@ -1,0 +1,40 @@
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReviewModal">
+    Write a review
+</button>
+
+<div class="modal fade" id="addReviewModal" tabindex="-1" aria-labelledby="addReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Write a review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="reviewForm">
+                    <!-- <div id="new-book-note" class="form-text mb-3"><span class="fw-bold">Note:</span> Please do a search before adding a book, as it may be a duplicate. Please also carefully read the guidelines, especially the part about what kind of books to add.</div> -->
+
+                    <div class="mb-3">
+                        <label for="rating" class="form-label me-1">Rating</label>
+                        <!-- <input type="text" class="form-control" id="rating" formControlName="rating"> -->
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 1" (click)="updateReview(1)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 2" (click)="updateReview(2)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 3" (click)="updateReview(3)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 4" (click)="updateReview(4)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue == 5" (click)="updateReview(5)">star_rate</span>
+                        <a class="clear ms-1" (click)="onClearRating()">Clear</a>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="review" class="form-label">Review</label>
+                        <textarea class="form-control" id="review" rows="5" formControlName="review"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Submit</button> -->
+                <button type="submit" class="btn btn-primary" [disabled]="!reviewForm.valid" (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

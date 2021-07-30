@@ -40,4 +40,11 @@ export class ReviewService {
       catchError(this.handleError<Review[]>(`getReviews for bookId=${bookId}`))
     );
   }
+
+  addReview(bookId: string, userId: string, review: any): Observable<any> {
+    const newUrl = `${this.url}/${bookId}/reviews?userId=${userId}`;
+    return this.http.post<any>(newUrl, review).pipe(
+      catchError(this.handleError<any>(`addReview`))
+    );
+  }
 }

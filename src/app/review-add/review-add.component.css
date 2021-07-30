@@ -1,0 +1,24 @@
+.material-icons {
+    vertical-align: middle;
+}
+
+.star-rate {
+    font-size: 1.1rem;
+    color: #767676;
+    cursor: pointer;
+}
+
+.star-rate:hover, .checked {
+    color: #fa604a;
+}
+
+.clear {
+    font-size: .8rem;
+    color: #767676;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.clear:hover {
+    text-decoration: underline;
+}

@@ -16,8 +16,6 @@ export class ReviewsComponent implements OnInit {
   bookId: string = "";
   userId: string = "";
 
-  // viewComments: boolean = false;
-  viewCommentsBtns = <HTMLCollection>document.getElementsByClassName('view-comments');
   reviews: Review[] = [];
   users: User[] = [];
 
@@ -27,16 +25,12 @@ export class ReviewsComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private reviewService: ReviewService,
-    private userService: UserService
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
     this.getReviews();
     this.getUsers();
-    console.log(this.viewCommentsBtns);
-    // for(let btn of this.viewCommentsBtns) {
-    //   console.log(btn);
-    // }
   }
 
   getReviews(): void {

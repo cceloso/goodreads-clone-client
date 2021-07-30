@@ -9,8 +9,6 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./book-add.component.css']
 })
 export class BookAddComponent implements OnInit {
-  // submitForm = new EventEmitter();
-
   bookForm = this.fb.group({
     title: ['', Validators.required],
     author: [''],
@@ -61,9 +59,9 @@ export class BookAddComponent implements OnInit {
     this.genres.push(this.fb.control(''));
   }
 
-  updateBook(): void {
-    this.bookForm.patchValue({
-      title: "Hi World",
-    });
-  }
+  // updateBook(): void {
+  //   this.bookForm.patchValue({
+  //     title: "Hi World",
+  //   });
+  // }
 }
