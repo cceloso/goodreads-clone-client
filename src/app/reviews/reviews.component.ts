@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { Review } from '../models/review';
 import { ReviewService } from '../services/review.service';
@@ -13,17 +11,13 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
-  bookId: string = "";
+  @Input() bookId: string = "";  
   userId: string = "";
-
   reviews: Review[] = [];
   users: User[] = [];
-
   currentUser?: User;
 
   constructor(
-    private route: ActivatedRoute,
-    private location: Location,
     private reviewService: ReviewService,
     private userService: UserService,
   ) { }
@@ -34,7 +28,6 @@ export class ReviewsComponent implements OnInit {
   }
 
   getReviews(): void {
-    this.bookId = String(this.route.snapshot.paramMap.get('bookId'));
     this.reviewService.getReviews(this.bookId)
       .subscribe(reviews => {
         this.reviews = reviews;
@@ -46,7 +39,6 @@ export class ReviewsComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(users => {
         this.users = users;
-        // console.log(this.users);
       });
   }
 

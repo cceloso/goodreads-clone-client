@@ -40,4 +40,11 @@ export class CommentService {
       catchError(this.handleError<Comment[]>(`getComments for bookId=${bookId} and reviewId=${reviewId}`))
     );
   }
+
+  addComment(bookId: string, reviewId: string, userId: string, comment: any): Observable<any> {
+    const newUrl = `${this.url}/${bookId}/reviews/${reviewId}/comments?userId=${userId}`;
+    return this.http.post<any>(newUrl, comment).pipe(
+      catchError(this.handleError<any>(`addComment`))
+    );
+  }
 }

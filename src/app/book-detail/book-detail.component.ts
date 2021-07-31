@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { Book } from '../models/book';
 import { BookService } from '../services/book.service';
@@ -11,14 +10,13 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
-  // books: Book[] = [];
   book?: Book;
+  bookId: string = "";
   genres: string[] = [];
   readMore: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private location: Location,
     private bookService: BookService,
   ) { }
 
@@ -27,8 +25,8 @@ export class BookDetailComponent implements OnInit {
   }
 
   getBook(): void {
-    const bookId = String(this.route.snapshot.paramMap.get('bookId'));
-    this.bookService.getBook(bookId)
+    this.bookId = String(this.route.snapshot.paramMap.get('bookId'));
+    this.bookService.getBook(this.bookId)
       .subscribe(books => {
         this.book = books[0];
         this.genres = this.book.genres.split(',');

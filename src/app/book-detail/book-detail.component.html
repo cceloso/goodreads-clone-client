@@ -1,4 +1,4 @@
-<!-- <p *ngIf="book">{{ book.title }}</p> -->
+bookId from book-detail component: {{ bookId }}
 
 <div class="container" *ngIf="book">
     <div class="row">
@@ -30,7 +30,7 @@
 
             <div class="row mt-4">
                 <p class="text-uppercase fw-bold">Reviews</p>
-                <app-reviews></app-reviews>
+                <app-reviews [bookId]="bookId"></app-reviews>
             </div>
         </div>
     </div>

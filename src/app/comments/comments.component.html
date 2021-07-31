@@ -1,3 +1,6 @@
+bookId from comments component: {{ bookId }}
+reviewId from comments component: {{ reviewId }}
+
 <div class="view-comments mb-2" *ngIf="!viewComments" (click)="onViewComments()">View comments</div>
 <div class="view-comments mb-2" *ngIf="viewComments" (click)="onViewComments()">Hide comments</div>
 
@@ -18,9 +21,10 @@
             </div>
         </li>
         <li class="list-group-item">
-            <div class="row">
+            <app-comment-add [bookAndReviewId]="{bookId: bookId, reviewId: reviewId}"></app-comment-add>
+            <!-- <div class="row">
                 <input type="text" name="newComment" id="newComment" placeholder="Write a comment..." class="comment-text py-2">
-            </div>
+            </div> -->
         </li>
     </ul>
 </div>
