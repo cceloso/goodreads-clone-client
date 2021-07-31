@@ -13,7 +13,8 @@ export class ReviewService {
 
   constructor(private http: HttpClient) { }
 
-  private url = 'http://localhost:3000/books';
+  private booksUrl = 'http://localhost:3000/books';
+  private usersUrl = 'http://localhost:3000/users';
 
   // Handle Http operation that failed.
   // Let the app continue.
@@ -35,14 +36,21 @@ export class ReviewService {
   }
 
   getReviews(bookId: string): Observable<Review[]> {
-    const newUrl = `${this.url}/${bookId}/reviews`;
+    const newUrl = `${this.booksUrl}/${bookId}/reviews`;
     return this.http.get<Review[]>(newUrl).pipe(
       catchError(this.handleError<Review[]>(`getReviews for bookId=${bookId}`))
     );
   }
 
+  getReviewsByUser(userId: string): Observable<Review[]> {
+    const newUrl = `${this.usersUrl}/${userId}/reviews`;
+    return this.http.get<Review[]>(newUrl).pipe(
+      catchError(this.handleError<Review[]>(`getReviewsByUser for userId=${userId}`))
+    );
+  }
+
   addReview(bookId: string, userId: string, review: any): Observable<any> {
-    const newUrl = `${this.url}/${bookId}/reviews?userId=${userId}`;
+    const newUrl = `${this.booksUrl}/${bookId}/reviews?userId=${userId}`;
     return this.http.post<any>(newUrl, review).pipe(
       catchError(this.handleError<any>(`addReview`))
     );

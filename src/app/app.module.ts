@@ -14,6 +14,7 @@ import { BooksByGenreComponent } from './books-by-genre/books-by-genre.component
 import { BookAddComponent } from './book-add/book-add.component';
 import { ReviewAddComponent } from './review-add/review-add.component';
 import { CommentAddComponent } from './comment-add/comment-add.component';
+import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { CommentAddComponent } from './comment-add/comment-add.component';
     BooksByGenreComponent,
     BookAddComponent,
     ReviewAddComponent,
-    CommentAddComponent
+    CommentAddComponent,
+    ReviewsByUserComponent
   ],
   imports: [
     BrowserModule,
