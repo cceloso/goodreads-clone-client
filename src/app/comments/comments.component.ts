@@ -28,11 +28,13 @@ export class CommentsComponent implements OnInit {
 
   onViewComments(): void {
     this.viewComments = !this.viewComments;
+    this.getComments();
+  }
+
+  getComments(): void {
     this.commentService.getComments(this.bookId, this.reviewId)
     .subscribe(comments => {
       this.comments = comments;
-      // console.log("comments:");
-      // console.log(this.comments);
     });
   }
 }

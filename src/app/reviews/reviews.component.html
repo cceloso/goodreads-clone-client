@@ -1,5 +1,4 @@
-<app-review-add></app-review-add>
-bookId from reviews component: {{ bookId }}
+<app-review-add (addReview)="getReviews()"></app-review-add>
 
 <div *ngIf="reviews.length == 0">
     There are no reviews for this book.
@@ -26,8 +25,6 @@ bookId from reviews component: {{ bookId }}
                         <div class="review-text serif mt-2">{{ review.review }}</div>
                     </div>
                     <div class="row">
-                        <!-- <div class="view-comments">View comments</div> -->
-                        <!-- <app-comments class="mt-2" [bookId]="bookId" [reviewId]="review.id"></app-comments> -->
                         <app-comments class="mt-2" [bookAndReviewId]="{bookId: bookId, reviewId: review.id}"></app-comments>
                     </div>
                 </div>

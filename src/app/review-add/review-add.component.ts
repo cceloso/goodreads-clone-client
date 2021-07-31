@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
@@ -10,6 +10,8 @@ import { ReviewService } from '../services/review.service';
   styleUrls: ['./review-add.component.css']
 })
 export class ReviewAddComponent implements OnInit {
+  @Output() addReview: EventEmitter<any> = new EventEmitter();
+
   reviewForm = this.fb.group({
     rating: ['', Validators.required],
     review: ['', Validators.required]
@@ -33,8 +35,13 @@ export class ReviewAddComponent implements OnInit {
 
     this.reviewService.addReview(this.bookId, this.userId, this.reviewForm.value)
       .subscribe(val => {
-        console.log("added review!");
-        console.log(val);
+        // console.log("added review!");
+        // console.log(val);
+        this.reviewForm.setValue({
+          rating: '',
+          review: ''
+        });
+        this.addReview.emit(null);
       });
   }
 

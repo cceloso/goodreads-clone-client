@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { CommentService } from '../services/comment.service';
@@ -10,6 +10,7 @@ import { CommentService } from '../services/comment.service';
 })
 export class CommentAddComponent implements OnInit {
   @Input() bookAndReviewId?: any;
+  @Output() addComment: EventEmitter<any> = new EventEmitter();
   bookId: string = "";
   reviewId: string = "";
   userId: string = "1";
@@ -36,8 +37,12 @@ export class CommentAddComponent implements OnInit {
 
     this.commentService.addComment(this.bookId, this.reviewId, this.userId, this.commentForm.value)
       .subscribe(val => {
-        console.log("added comment!");
-        console.log(val);
+        // console.log("added comment!");
+        // console.log(val);
+        this.commentForm.setValue({
+          comment: '',
+        });
+        this.addComment.emit(null);
       });
   }
 }

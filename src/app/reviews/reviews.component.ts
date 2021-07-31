@@ -49,13 +49,4 @@ export class ReviewsComponent implements OnInit {
   //       console.log(this.users);
   //     });
   // }
-
-  // viewComments.forEach(button => {
-  //   button.addEventListener('click', () => {
-  //     console.log("clicked button");
-  //   })
-  // });
-  // onClickViewComments(): void {
-  //   this.viewComments = true;
-  // }
 }
