@@ -16,6 +16,7 @@ export class ReviewsComponent implements OnInit {
   reviews: Review[] = [];
   users: User[] = [];
   currentUser?: User;
+  readMore: boolean = false;
 
   constructor(
     private reviewService: ReviewService,
@@ -49,4 +50,8 @@ export class ReviewsComponent implements OnInit {
   //       console.log(this.users);
   //     });
   // }
+
+  onClickReadMore(): void {
+    this.readMore = !this.readMore;
+  }
 }

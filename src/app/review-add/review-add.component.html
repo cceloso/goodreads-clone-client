@@ -14,16 +14,22 @@
                     <!-- <div id="new-book-note" class="form-text mb-3"><span class="fw-bold">Note:</span> Please do a search before adding a book, as it may be a duplicate. Please also carefully read the guidelines, especially the part about what kind of books to add.</div> -->
 
                     <div class="mb-3">
-                        <label for="rating" class="form-label me-1">Rating</label>
-                        <!-- <input type="text" class="form-control" id="rating" formControlName="rating"> -->
+                        <label for="rating" class="form-label me-1 d-inline">Rating</label>
+                        <!-- <div id="rating_bar" class="d-inline">
+                            <span class="d-inline" [class.checked]="ratingValue >= 1" (click)="updateReview(1)"></span>
+                            <span class="d-inline" [class.checked]="ratingValue >= 2" (click)="updateReview(2)"></span>
+                            <span class="d-inline" [class.checked]="ratingValue >= 3" (click)="updateReview(3)"></span>
+                            <span class="d-inline" [class.checked]="ratingValue >= 4" (click)="updateReview(4)"></span>
+                            <span class="d-inline" [class.checked]="ratingValue >= 5" (click)="updateReview(5)"></span>
+                        </div> -->
                         <span class="material-icons star-rate" [class.checked]="ratingValue >= 1" (click)="updateReview(1)">star_rate</span>
                         <span class="material-icons star-rate" [class.checked]="ratingValue >= 2" (click)="updateReview(2)">star_rate</span>
                         <span class="material-icons star-rate" [class.checked]="ratingValue >= 3" (click)="updateReview(3)">star_rate</span>
                         <span class="material-icons star-rate" [class.checked]="ratingValue >= 4" (click)="updateReview(4)">star_rate</span>
                         <span class="material-icons star-rate" [class.checked]="ratingValue == 5" (click)="updateReview(5)">star_rate</span>
-                        <a class="clear ms-1" (click)="onClearRating()">Clear</a>
+                        <a class="clear ms-1 d-inline" (click)="onClearRating()">Clear</a>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="review" class="form-label">Review</label>
                         <textarea class="form-control" id="review" rows="5" formControlName="review"></textarea>

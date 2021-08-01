@@ -50,6 +50,7 @@ export class ReviewAddComponent implements OnInit {
     this.reviewForm.patchValue({
       rating: this.ratingValue,
     });
+    console.log("changed rating to", this.ratingValue);
   }
 
   onClearRating(): void {

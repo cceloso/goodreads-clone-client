@@ -15,6 +15,7 @@ import { BookAddComponent } from './book-add/book-add.component';
 import { ReviewAddComponent } from './review-add/review-add.component';
 import { CommentAddComponent } from './comment-add/comment-add.component';
 import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.component';
+import { ReviewDetailComponent } from './review-detail/review-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.compon
     BookAddComponent,
     ReviewAddComponent,
     CommentAddComponent,
-    ReviewsByUserComponent
+    ReviewsByUserComponent,
+    ReviewDetailComponent
   ],
   imports: [
     BrowserModule,

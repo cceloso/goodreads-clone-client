@@ -2,6 +2,21 @@
     vertical-align: middle;
 }
 
+#rating_bar > span:before {
+    content: "\2605";
+    font-size: 1.1rem;
+    color: #767676;
+    cursor: pointer;
+}
+
+#rating_bar:hover > span:before, .checked {
+    color: #fa604a;
+}
+
+#rating_bar > span:hover ~ span:before {
+    color: #767676;
+}
+
 .star-rate {
     font-size: 1.1rem;
     color: #767676;
