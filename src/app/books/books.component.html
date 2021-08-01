@@ -13,7 +13,6 @@
             <a class="text-uppercase fw-bold" routerLink="/books" [queryParams]="{ genre: genre.name }">{{ genre.name.split('-').join(' ') }}</a>
             <!-- <hr> -->
             <app-books-by-genre [genreName]="genre.name"></app-books-by-genre>
-            <!-- <div class="row" style="background-color: red;">Test</div> -->
             <div class="row view-more float-end">
                 <a routerLink="/books" [queryParams]="{ genre: genre.name }">View more</a>
             </div>
@@ -21,14 +20,10 @@
     </div>
 
     <div class="col" *ngIf="genreName != 'All'">
-        <!-- <app-books-by-genre [genreName]="genreName"></app-books-by-genre> -->
         <app-books-by-genre></app-books-by-genre>
     </div>
     
     <div class="col-sm-3">
-        <!-- <div class="row">
-            <app-book-add></app-book-add>
-        </div> -->
         <span class="text-uppercase fw-bold">Browse</span>
         <hr>
         <div class="row">

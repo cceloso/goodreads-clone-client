@@ -13,6 +13,7 @@ export class BookDetailComponent implements OnInit {
   book?: Book;
   bookId: string = "";
   genres: string[] = [];
+  description: string = "";
   readMore: boolean = false;
 
   constructor(
@@ -30,7 +31,11 @@ export class BookDetailComponent implements OnInit {
       .subscribe(books => {
         this.book = books[0];
         this.genres = this.book.genres.split(',');
-        console.log(this.genres);
+        // console.log(this.genres);
+        // console.log(this.book.description);
+        // this.description = this.book.description.replace("\n", "<br/>");
+        this.description = this.book.description.replace(/\\n/g,'\n');
+        console.log(this.description);
       });
   }
 

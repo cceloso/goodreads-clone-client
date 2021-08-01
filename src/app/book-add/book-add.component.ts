@@ -11,11 +11,11 @@ import { BookService } from '../services/book.service';
 export class BookAddComponent implements OnInit {
   bookForm = this.fb.group({
     title: ['', Validators.required],
-    author: [''],
-    isbn: [''],
+    author: ['', Validators.required],
     publisher: [''],
     published: [''],
-    description: [''],
+    isbn: [''],
+    description: ['', Validators.required],
     genres: this.fb.array([
       this.fb.control('')
     ]),
@@ -28,6 +28,14 @@ export class BookAddComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  get genres() {
+    return this.bookForm.get('genres') as FormArray;
+  }
+
+  addGenre() {
+    this.genres.push(this.fb.control(''));
   }
 
   onSubmit(): void {
@@ -44,24 +52,25 @@ export class BookAddComponent implements OnInit {
     
     console.log(this.bookForm.value.genres);
 
-    // this.bookService.addBook(this.bookForm.value)
-    //   .subscribe(val => {
-    //     console.log("added book!");
-    //     console.log(val);
-    //   });
+    this.bookService.addBook(this.bookForm.value)
+      .subscribe(val => {
+        console.log("added book!");
+        console.log(val);
+      });
   }
 
-  get genres() {
-    return this.bookForm.get('genres') as FormArray;
-  }
+  onClose(): void {
+    this.bookForm.patchValue({
+      title: '',
+      author: '',
+      publisher: '',
+      published: '',
+      isbn: '',
+      imageUrl: '',
+      description: ''
+    });
 
-  addGenre() {
+    this.genres.clear();
     this.genres.push(this.fb.control(''));
   }
-
-  // updateBook(): void {
-  //   this.bookForm.patchValue({
-  //     title: "Hi World",
-  //   });
-  // }
 }

@@ -44,3 +44,8 @@ img:hover {
     color: #FFF8DC;
     border-color: #f1eacd;
 }
+
+.book-cover {
+    height: 200px;
+    width: 125px;
+}

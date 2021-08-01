@@ -8,27 +8,30 @@
     <div class="modal-dialog modal-dialog-centered modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header px-5">
-                <!-- <h3 class="modal-title" id="exampleModalLabel">Add a new book</h3> -->
                 <h5 class="modal-title" id="exampleModalLabel">Add a new book</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
             </div>
             <div class="modal-body px-5">
                 <div class="row">
                     <div class="col">
                         <form [formGroup]="bookForm">
-                            <div id="new-book-note" class="form-text mb-3"><span class="fw-bold">Note:</span> Please do a search before adding a book, as it may be a duplicate. Please also carefully read the guidelines, especially the part about what kind of books to add.</div>
+                            <div id="new-book-note" class="form-text mb-3">
+                                <span class="fw-bold">Note:</span> Please do a search before adding a book, as it may be a duplicate. Please also carefully read the guidelines, especially the part about what kind of books to add.
+                                <br>
+                                <span class="fst-italic">* denotes required field</span>
+                            </div>
             
                             <div class="row">
                                 <div class="col-md">
                                     <div class="mb-3">
-                                        <label for="title" class="form-label">Title</label>
+                                        <label for="title" class="form-label">Title *</label>
                                         <input type="text" class="form-control" id="title" formControlName="title">
                                     </div>
                                 </div>
                                 <div class="col-md">
                                     <div class="mb-3">
-                                        <label for="isbn" class="form-label">ISBN</label>
-                                        <input type="text" class="form-control" id="isbn" formControlName="isbn">
+                                        <label for="author" class="form-label">Author *</label>
+                                        <input type="text" class="form-control" id="author" formControlName="author">
                                     </div>
                                 </div>
                             </div>
@@ -51,8 +54,8 @@
                             <div class="row">
                                 <div class="col-md">
                                     <div class="mb-3">
-                                        <label for="author" class="form-label">Author</label>
-                                        <input type="text" class="form-control" id="author" formControlName="author">
+                                        <label for="isbn" class="form-label">ISBN</label>
+                                        <input type="text" class="form-control" id="isbn" formControlName="isbn">
                                     </div>        
                                 </div>
                                 <div class="col-md">
@@ -63,19 +66,18 @@
                                     <label for="imageUrl" class="form-label">Book cover</label>
                                     <div class="input-group mb-3">
                                         <input type="file" class="form-control" id="imageUrl" formControlName="imageUrl">
-                                        <!-- <label class="input-group-text" for="inputGroupFile02">Upload</label> -->
                                       </div>
                                 </div>
                             </div>
                             
                             <div class="mb-3">
-                                <label for="description" class="form-label">Description</label>
+                                <label for="description" class="form-label">Description *</label>
                                 <textarea class="form-control" id="description" rows="5" formControlName="description"></textarea>
                             </div>
             
                             <div class="mb-3" formArrayName="genres">
                                 <p class="fw-bold d-inline">Genres</p>
-                                <button (click)="addGenre()" class="btn btn-primary d-inline ms-2">+ Add another genre</button>
+                                <button (click)="addGenre()" class="btn btn-dark d-inline ms-2">+ Add another genre</button>
                         
                                 <div *ngFor="let genre of genres.controls; let i=index">
                                     <label for="genre-{{ i }}" class="form-label">Genre {{ i + 1 }}</label>
@@ -97,134 +99,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid" (click)="onSubmit()">Submit</button>
-                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Close</button>
+                <button type="submit" class="btn btn-dark" [disabled]="!bookForm.valid" data-bs-dismiss="modal" (click)="onSubmit()">Submit</button>
             </div>
         </div>
     </div>
 </div>
-
-<!-- <div class="modal-dialog modal-fullscreen">
-    <h3>Add a New Book</h3>
-
-    <div class="row">
-        <div class="col">
-            <form [formGroup]="bookForm">
-                <div id="new-book-note" class="form-text mb-3"><span class="fw-bold">Note:</span> Please do a search before adding a book, as it may be a duplicate. Please also carefully read the guidelines to the right, especially the part about what kind of books to add.</div>
-
-                <div class="row">
-                    <div class="col-md">
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" formControlName="title">
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="mb-3">
-                            <label for="isbn" class="form-label">ISBN</label>
-                            <input type="text" class="form-control" id="isbn" formControlName="isbn">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="col-md">
-                        <div class="mb-3">
-                            <label for="publisher" class="form-label">Publisher</label>
-                            <input type="text" class="form-control" id="publisher" formControlName="publisher">
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="mb-3">
-                            <label for="published" class="form-label">Year published</label>
-                            <input type="text" class="form-control" id="published" formControlName="published">
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="mb-3">
-                    <label for="author" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="author" formControlName="author">
-                </div>
-            
-                <div class="mb-3">
-                    <label for="imageUrl" class="form-label">Image url</label>
-                    <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="description" rows="5" formControlName="description"></textarea>
-                </div>
-
-                <div class="mb-3" formArrayName="genres">
-                    <p class="fw-bold d-inline">Genres</p>
-                    <button (click)="addGenre()" class="btn btn-primary d-inline ms-2">+ Add another genre</button>
-            
-                    <div *ngFor="let genre of genres.controls; let i=index">
-                        <label for="genre-{{ i }}" class="form-label">Genre {{ i + 1 }}</label>
-                        <input type="text" class="form-control" id="genre-{{ i }}" [formControlName]="i">
-                    </div>
-                </div>
-                
-            
-                <button type="submit" class="btn btn-primary" [disabled]="!bookForm.valid" (click)="onSubmit()">Submit</button>
-            </form>
-        </div>
-
-        <div class="col-sm-3">
-            <span class="text-uppercase fw-bold">Guidelines</span>
-            <hr>
-            <ul>
-                <li class="guideline"><span class="fw-bold">Authors:</span> Add authors in the order they are listed on the book cover, or alphabetically if there is no cover or various editions disagree.</li>
-                <li class="guideline"><span class="fw-bold">Types of books:</span> Please only add books. Books generally have ISBN numbers (but don't have to), and are usually published. Periodicals such as newspapers, magazines, and comics are not books. However a volume of comics or articles or a graphic novel is considered a book.</li>
-            </ul>
-        </div>
-    </div>
-</div> -->
-
-
-<!-- <form [formGroup]="bookForm">
-    <label for="title">Title:</label>
-    <input id="title" type="text" formControlName="title">
-    <br>
-
-    <label for="author">Author:</label>
-    <input id="author" type="text" formControlName="author">
-    <br>
-
-    <label for="isbn">ISBN:</label>
-    <input id="isbn" type="text" formControlName="isbn">
-    <br>
-
-    <label for="publisher">Publisher:</label>
-    <input id="publisher" type="text" formControlName="publisher">
-    <br>
-
-    <label for="published">Year published:</label>
-    <input id="published" type="text" formControlName="published">
-    <br>
-
-    <label for="description">Description:</label>
-    <input id="description" type="text" formControlName="description">
-    <br>
-
-    <div formArrayName="genres">
-        <p>Genres</p>
-        <button (click)="addGenre()">+ Add another genre</button>
-
-        <div *ngFor="let genre of genres.controls; let i=index">
-            <label for="genre-{{ i }}">Genre:</label>
-            <input id="genre-{{ i }}" type="text" [formControlName]="i">
-        </div>
-    </div>
-
-    <label for="imageUrl">Image url:</label>
-    <input id="imageUrl" type="text" formControlName="imageUrl">
-</form>
-
-<p>Complete the form to enable button.</p>
-<p>Form Status: {{ bookForm.status }}</p>
-<button type="submit" [disabled]="!bookForm.valid" (click)="onSubmit()">Submit</button>
-<button (click)="updateBook()">Update Book</button> -->
