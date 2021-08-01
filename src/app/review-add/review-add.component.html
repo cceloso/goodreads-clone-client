@@ -1,5 +1,5 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addReviewModal">
-    Write a review
+<button type="button" class="btn btn-outline-dark mb-3" data-bs-toggle="modal" data-bs-target="#addReviewModal">
+    + Write a review
 </button>
 
 <div class="modal fade" id="addReviewModal" tabindex="-1" aria-labelledby="addReviewModalLabel" aria-hidden="true">
@@ -38,7 +38,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary" [disabled]="!reviewForm.valid" (click)="onSubmit()" data-bs-dismiss="modal">Submit</button>
+                <button type="submit" class="btn btn-dark" [disabled]="!reviewForm.valid" (click)="onSubmit()" data-bs-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>

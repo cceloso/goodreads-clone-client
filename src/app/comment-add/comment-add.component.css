@@ -1,3 +1,12 @@
 .comment-text {
     font-size: .9rem;
 }
+
+.btn-dark {
+    background-color: #382110;
+}
+
+/* .btn-dark:hover {
+    color: #382110;
+    background-color: white;
+} */

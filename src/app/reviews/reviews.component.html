@@ -1,4 +1,7 @@
-<app-review-add (addReview)="getReviews()"></app-review-add>
+<div class="row">
+    <p class="text-uppercase fw-bold">Reviews</p>    
+    <app-review-add (addReview)="getReviews()"></app-review-add>
+</div>
 
 <div *ngIf="reviews.length == 0">
     There are no reviews for this book.

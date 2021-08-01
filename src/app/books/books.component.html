@@ -1,9 +1,14 @@
-<app-book-add></app-book-add>
-
-<h3 class="text-capitalize">{{ genreName.split('-').join(' ') }}</h3>
+<div class="row">
+    <span>
+        <h3 class="text-capitalize d-inline">{{ genreName.split('-').join(' ') }}</h3>
+        <app-book-add class="d-inline"></app-book-add>
+    </span>
+</div>
 
 <div class="row">
     <div class="col" *ngIf="genreName == 'All'">
+        <div class="row">
+        </div>        
         <div class="mb-5" *ngFor="let genre of genres">
             <a class="text-uppercase fw-bold" routerLink="/books" [queryParams]="{ genre: genre.name }">{{ genre.name.split('-').join(' ') }}</a>
             <!-- <hr> -->
@@ -21,6 +26,9 @@
     </div>
     
     <div class="col-sm-3">
+        <!-- <div class="row">
+            <app-book-add></app-book-add>
+        </div> -->
         <span class="text-uppercase fw-bold">Browse</span>
         <hr>
         <div class="row">
