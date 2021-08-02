@@ -32,6 +32,7 @@ export class ReviewAddComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.reviewForm.value);
+    console.log(this.userId);
 
     this.reviewService.addReview(this.bookId, this.userId, this.reviewForm.value)
       .subscribe(val => {

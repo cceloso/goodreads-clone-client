@@ -12,8 +12,10 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./books-by-genre.component.css']
 })
 export class BooksByGenreComponent implements OnInit {
-  books: Book[] = [];
   @Input() genreName: string = "";
+  books: Book[] = [];
+  totalBooks: number = 0;
+  displayViewMore: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,17 +29,22 @@ export class BooksByGenreComponent implements OnInit {
       .subscribe(queryParams => {
         this.genreName = String(this.route.snapshot.queryParams.genre);
         // this.books = [];
-        this.getBooksByGenre();
+        this.getBooksByGenre(true);
+        this.displayViewMore = false;
       })
     } else {
-      this.getBooksByGenre();
+      this.getBooksByGenre(false);
     }
   }
   
-  getBooksByGenre(): void {    
+  getBooksByGenre(displayAll: boolean): void {    
     this.bookService.getBooksByGenre(this.genreName)
     .subscribe(books => {
       this.books = books;
+      this.totalBooks = this.books.length;
+      if(!displayAll) {
+        this.books = this.books.slice(0, 6);
+      }
     });
   }
 }

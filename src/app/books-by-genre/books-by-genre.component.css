@@ -49,3 +49,11 @@ img:hover {
     height: 200px;
     width: 125px;
 }
+
+.view-more {
+    font-size: .8rem;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}

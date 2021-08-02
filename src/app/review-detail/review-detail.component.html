@@ -4,7 +4,7 @@
             <span class="material-icons account-circle me-1">account_circle</span>
         </div>
         <div class="col">
-            <div class="user-description d-inline me-1"><span class="fw-bold">User with id {{ review.id }}</span> rated it</div>
+            <div class="user-description d-inline me-1"><span class="fw-bold">User with id {{ review.userId }}</span> rated it</div>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 1">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 2">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 3">star_rate</span>

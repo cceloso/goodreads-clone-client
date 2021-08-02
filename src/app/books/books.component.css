@@ -51,6 +51,6 @@ img:hover {
     border-color: #f1eacd;
 }
 
-.genre-item, .view-more {
+.genre-item {
     font-size: .8rem;
 }

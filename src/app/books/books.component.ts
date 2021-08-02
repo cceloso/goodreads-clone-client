@@ -15,6 +15,7 @@ export class BooksComponent implements OnInit {
   books: Book[] = [];
   genres: Genre[] = [];
   genreName: string = "";
+  pages: number = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,6 +41,7 @@ export class BooksComponent implements OnInit {
     this.bookService.getGenres()
     .subscribe(genres => {
       this.genres = genres;
+      this.pages = Math.ceil(genres.length / 4);
     });
   }
 
