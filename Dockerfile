@@ -19,7 +19,7 @@ RUN npm install
 COPY . .
  
 # expose the port where the app will listen to
-EXPOSE 4200
+EXPOSE 4200 49153
  
 # start the server
 CMD ["ng", "serve", "--open"]
