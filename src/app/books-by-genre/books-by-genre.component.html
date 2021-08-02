@@ -30,6 +30,6 @@
     </div>
 </div>
 
-<div class="row view-more float-end" *ngIf="totalBooks > 6">
+<div class="row view-more float-end" *ngIf="totalBooks > 6 && displayViewMore">
     <a routerLink="/books" [queryParams]="{ genre: genreName }">View more</a>
 </div>
