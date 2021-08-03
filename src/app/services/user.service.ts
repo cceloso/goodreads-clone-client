@@ -54,9 +54,31 @@ export class UserService {
     );
   }
   
+  // loginUser(user: any): Observable<any> {
+  //   return this.http.post<any>(this.url, user).pipe(
+  //     catchError(this.handleError<any>(`loginUser`))
+  //   );
+  // }
+
   loginUser(user: any): Observable<any> {
-    return this.http.post<any>(this.url, user).pipe(
+    const newUrl = "http://localhost:3000/login";
+    return this.http.post<any>(newUrl, user).pipe(
       catchError(this.handleError<any>(`loginUser`))
     );
   }
+
+  signupUser(user: any): Observable<any> {
+    const newUrl = "http://localhost:3000/signup";
+    return this.http.post<any>(newUrl, user).pipe(
+      catchError(this.handleError<any>(`signupUser`))
+    );
+  }
+
+  getProtected(): Observable<any> {
+    const newUrl = "http://localhost:3000/protected";
+    // return this.http.get<any>(newUrl).pipe(
+    //   catchError(this.handleError<any>(`signupUser`))
+    // );
+    return this.http.get<any>(newUrl);
+  }  
 }

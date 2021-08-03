@@ -28,7 +28,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.signupForm.value);
-    this.userService.addUser(this.signupForm.value)
+    this.userService.signupUser(this.signupForm.value)
       .subscribe(val => {
         console.log("added user!");
         console.log(val);
