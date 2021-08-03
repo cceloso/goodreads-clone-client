@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 import { BooksComponent } from './books/books.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.component';
 
 const routes: Routes = [
+  { path: '', component: DashboardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'books', component: BooksComponent },
-  { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: 'books/:bookId', component: BookDetailComponent },
   { path: 'books?genre=:genreName', component: BooksComponent },
   { path: 'books/:bookId/reviews', component: ReviewsComponent },

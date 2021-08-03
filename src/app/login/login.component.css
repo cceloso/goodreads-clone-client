@@ -1,0 +1,13 @@
+.btn-dark {
+    background-color: #382110;
+}
+
+.signup {
+    color: #767676;
+    text-decoration: none;
+}
+
+.signup:hover {
+    color: #382110;
+    text-decoration: underline;
+}

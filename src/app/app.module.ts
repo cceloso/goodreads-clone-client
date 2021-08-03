@@ -16,6 +16,9 @@ import { ReviewAddComponent } from './review-add/review-add.component';
 import { CommentAddComponent } from './comment-add/comment-add.component';
 import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.component';
 import { ReviewDetailComponent } from './review-detail/review-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import { ReviewDetailComponent } from './review-detail/review-detail.component';
     ReviewAddComponent,
     CommentAddComponent,
     ReviewsByUserComponent,
-    ReviewDetailComponent
+    ReviewDetailComponent,
+    DashboardComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

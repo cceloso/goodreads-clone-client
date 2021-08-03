@@ -1,8 +1,8 @@
-.navbar-light .navbar-nav .nav-link  {
+.navbar-light .navbar-nav .nav-link, .signupOrLogin  {
     color: #767676;
 }
 
-.navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link:hover, .dropdown-item {
+.signupOrLogin:hover, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link:hover, .dropdown-item {
     color: #382110;
 }
 

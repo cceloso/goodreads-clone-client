@@ -101,14 +101,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Close</button>
                 <button type="submit" class="btn btn-dark" [disabled]="!bookForm.valid" data-bs-dismiss="modal" (click)="onSubmit()" data-bs-toggle="modal" data-bs-target="#successModal">Submit</button>
-                <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#successModal">
-                    Launch demo modal
-                </button> -->
             </div>
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -120,9 +116,6 @@
             <div class="modal-body">
                 Book was successfully added!
             </div>
-            <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div> -->
         </div>
     </div>
 </div>

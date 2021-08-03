@@ -47,4 +47,16 @@ export class UserService {
       catchError(this.handleError<User[]>(`getUser for userId=${userId}`))
     );
   }
+
+  addUser(user: any): Observable<any> {
+    return this.http.post<any>(this.url, user).pipe(
+      catchError(this.handleError<any>(`addUser`))
+    );
+  }
+  
+  loginUser(user: any): Observable<any> {
+    return this.http.post<any>(this.url, user).pipe(
+      catchError(this.handleError<any>(`loginUser`))
+    );
+  }
 }
