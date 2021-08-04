@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { UserService } from '../services/user.service';
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
@@ -30,7 +32,8 @@ export class LoginComponent implements OnInit {
       .subscribe(val => {
         console.log("logged in user!");
         console.log("val from login onSubmit:", val);
-        // this.authService.setLocalStorage(val);
+        this.authService.setLocalStorage(val);
+        this.router.navigate(['/'])
       });
   }
 }

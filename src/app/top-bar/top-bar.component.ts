@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from '../services/user.service';
 
@@ -11,10 +12,21 @@ export class TopBarComponent implements OnInit {
   isLoggedIn: boolean = false;
   
   constructor(
+    private router: Router,
     private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.checkIfAuthenticated();
+  }
+
+  onLogout(): void {
+    localStorage.clear();
+    this.isLoggedIn = false;
+    this.router.navigate(['/login'])
+  }
+
+  checkIfAuthenticated(): void {
     this.userService.getProtected()
       .subscribe(val => {
         if(val) {
@@ -27,5 +39,4 @@ export class TopBarComponent implements OnInit {
         this.isLoggedIn = false;
       });
   }
-
 }
