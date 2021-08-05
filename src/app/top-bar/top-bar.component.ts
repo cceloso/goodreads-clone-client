@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { UserService } from '../services/user.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -14,15 +15,20 @@ export class TopBarComponent implements OnInit {
   constructor(
     private router: Router,
     private userService: UserService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     this.checkIfAuthenticated();
+    // this.isLoggedIn = this.authService.isLoggedIn();
+    // console.log("isLoggedIn:", this.isLoggedIn);
   }
 
   onLogout(): void {
-    localStorage.clear();
+    // localStorage.clear();
+    this.authService.logout();
     this.isLoggedIn = false;
+    // this.isLoggedIn = this.authService.isLoggedOut();
     this.router.navigate(['/login'])
   }
 
