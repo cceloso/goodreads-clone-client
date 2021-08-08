@@ -24,13 +24,13 @@ export class UserService {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
-
+      console.error(error.error.error); // log to console instead
+      const errorMessage = error.error.error.message;
       // TODO: better job of transforming error for user consumption
       // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
-      return of(result as T);
+      return of(errorMessage as T);
     };
   }
 
@@ -61,14 +61,14 @@ export class UserService {
   // }
 
   loginUser(user: any): Observable<any> {
-    const newUrl = "http://localhost:3000/login";
+    const newUrl = "http://localhost:3000/users/login";
     return this.http.post<any>(newUrl, user).pipe(
       catchError(this.handleError<any>(`loginUser`))
     );
   }
 
   signupUser(user: any): Observable<any> {
-    const newUrl = "http://localhost:3000/signup";
+    const newUrl = "http://localhost:3000/users";
     return this.http.post<any>(newUrl, user).pipe(
       catchError(this.handleError<any>(`signupUser`))
     );

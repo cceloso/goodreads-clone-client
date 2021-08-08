@@ -28,14 +28,11 @@ export class BookDetailComponent implements OnInit {
   getBook(): void {
     this.bookId = String(this.route.snapshot.paramMap.get('bookId'));
     this.bookService.getBook(this.bookId)
-      .subscribe(books => {
-        this.book = books[0];
+      .subscribe(book => {
+        console.log("book from getBook:", book);
+        this.book = book;
         this.genres = this.book.genres.split(',');
-        // console.log(this.genres);
-        // console.log(this.book.description);
-        // this.description = this.book.description.replace("\n", "<br/>");
-        this.description = this.book.description.replace(/\\n/g,'\n');
-        console.log(this.description);
+        this.description = this.book.description.replace(/\\n/g,'<br/><br/>');
       });
   }
 

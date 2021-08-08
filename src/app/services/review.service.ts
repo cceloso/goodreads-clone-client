@@ -35,6 +35,13 @@ export class ReviewService {
     };
   }
 
+  getReviewByUserAndBook(userId: number, bookId: string): Observable<any> {
+    const newUrl = `${this.booksUrl}/${bookId}/reviews?userId=${userId}`;
+    return this.http.get<any>(newUrl).pipe(
+      catchError(this.handleError<any>(`getReviewByUserAndBook`))
+    );
+  }
+
   getReviews(bookId: string): Observable<Review[]> {
     const newUrl = `${this.booksUrl}/${bookId}/reviews`;
     return this.http.get<Review[]>(newUrl).pipe(
@@ -49,8 +56,9 @@ export class ReviewService {
     );
   }
 
-  addReview(bookId: string, userId: string, review: any): Observable<any> {
-    const newUrl = `${this.booksUrl}/${bookId}/reviews?userId=${userId}`;
+  addReview(bookId: string, review: any): Observable<any> {
+    // const newUrl = `${this.booksUrl}/${bookId}/reviews?userId=${userId}`;
+    const newUrl = `${this.booksUrl}/${bookId}/reviews`;
     return this.http.post<any>(newUrl, review).pipe(
       catchError(this.handleError<any>(`addReview`))
     );

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
-import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -11,38 +13,55 @@ import { AuthService } from '../services/auth.service';
 })
 export class TopBarComponent implements OnInit {
   isLoggedIn: boolean = false;
-  
+
+  searchForm = this.fb.group({
+    searchParam: ['', Validators.required]
+  });
+
   constructor(
+    private route: ActivatedRoute,
     private router: Router,
+    private fb: FormBuilder,
     private userService: UserService,
     private authService: AuthService,
-  ) { }
+  ) {  }
 
   ngOnInit(): void {
-    this.checkIfAuthenticated();
+    this.authService.isLoggedIn()
+    .subscribe(isLoggedIn => {
+      console.log("val from login observable:", isLoggedIn);
+      this.isLoggedIn = isLoggedIn;
+    });
+    
     // this.isLoggedIn = this.authService.isLoggedIn();
     // console.log("isLoggedIn:", this.isLoggedIn);
+    
+    // this.route.params.subscribe(routeParams => {
+    //   console.log("routeParams:", routeParams);
+    //   this.isLoggedIn = this.authService.isLoggedIn();
+    //   // this.authService.isLoggedIn()
+    //   // .subscribe(isLoggedIn => {
+    //   //   console.log("val from login observable:", isLoggedIn);
+    //   //   this.isLoggedIn = isLoggedIn;
+    //   // });
+    // });
   }
 
   onLogout(): void {
-    // localStorage.clear();
     this.authService.logout();
     this.isLoggedIn = false;
-    // this.isLoggedIn = this.authService.isLoggedOut();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
-  checkIfAuthenticated(): void {
-    this.userService.getProtected()
-      .subscribe(val => {
-        if(val) {
-          console.log(val);
-          this.isLoggedIn = true;
-        }
-      },
-      (err) => {
-        console.log("err:", err);
-        this.isLoggedIn = false;
-      });
+  onSubmit(): void {
+    const searchParam = this.searchForm.value.searchParam;
+    console.log(this.searchForm.value);
+    console.log(searchParam);
+
+    this.searchForm.setValue({
+      searchParam: ''
+    });
+
+    this.router.navigate(['/search'], { queryParams: { q: searchParam} });
   }
 }

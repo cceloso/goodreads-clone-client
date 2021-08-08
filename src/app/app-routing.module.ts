@@ -7,16 +7,23 @@ import { BooksComponent } from './books/books.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.component';
+import { SearchComponent } from './search/search.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { BooksByAuthorComponent } from './books-by-author/books-by-author.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  // { path: '', component: DashboardComponent },
+  { path: '', redirectTo: '/books', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'books', component: BooksComponent },
   { path: 'books/:bookId', component: BookDetailComponent },
   { path: 'books?genre=:genreName', component: BooksComponent },
   { path: 'books/:bookId/reviews', component: ReviewsComponent },
-  { path: 'reviews', component: ReviewsByUserComponent }
+  { path: 'reviews', component: ReviewsByUserComponent },
+  { path: 'search', component: SearchComponent },
+  { path: 'authors', component: BooksByAuthorComponent },
+  { path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

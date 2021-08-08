@@ -9,15 +9,18 @@
                     <span class="material-icons account-circle me-1">account_circle</span>
                 </div>
                 <div class="col comment-text">
-                    <span class="fw-bold me-1">User with id {{ comment.userId }}</span>
+                    <span class="fw-bold me-1">{{ comment.userName }}</span>
                     {{ comment.comment }}
                     <div class="text-muted">
-                        {{ comment.createdAt.split('T')[0] }} {{ comment.createdAt.split('T')[1].split(':').slice(0, 2).join(':') }}
+                        {{ comment.dateCreated.split('T')[0] }} {{ comment.dateCreated.split('T')[1].split(':').slice(0, 2).join(':') }}
                     </div>
                 </div>
             </div>
         </li>
-        <li class="list-group-item">
+        <li class="list-group-item" *ngIf="comments.length == 0">
+            There are no comments for this review.
+        </li>
+        <li class="list-group-item" *ngIf="userId != 0">
             <app-comment-add [bookAndReviewId]="{bookId: bookId, reviewId: reviewId}" (addComment)="getComments()"></app-comment-add>
         </li>
         <!-- <button type="submit" class="btn btn-primary" (click)="onAddComment()">Test</button> -->

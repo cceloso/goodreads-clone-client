@@ -2,8 +2,21 @@
     <div class="row">
         <div class="col-md-4 offset-md-4">
             <div class="login-form bg-light mt-4 p-4">
+                <h4 class="fw-bold">Welcome back</h4>
+                <div class="alert alert-danger align-items-center d-flex" role="alert" *ngIf="errorMessage">
+                    <span class="material-icons me-2">
+                        warning
+                    </span>
+                    {{ errorMessage }}
+                </div>
+                <!-- <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                        An example danger alert with an icon
+                    </div>
+                </div> -->
+                <!-- <p class="text-danger fw-bold">{{ errorMessage }}</p> -->
                 <form class="row g-3" [formGroup]="loginForm">
-                    <h4 class="fw-bold">Welcome back</h4>
                     <div class="col-12">
                         <label for="usernameOrEmail" class="form-label">Username/Email address</label>
                         <input type="text" name="usernameOrEmail" class="form-control" placeholder="Enter username/email address" id="usernameOrEmail" formControlName="usernameOrEmail">
@@ -19,7 +32,7 @@
                         </div>
                     </div> -->
                     <div class="col-12">
-                        <button type="submit" class="btn btn-dark float-end" (click)="onSubmit()">Login</button>
+                        <button type="submit" class="btn btn-dark float-end" [disabled]="!loginForm.valid" (click)="onSubmit()">Login</button>
                     </div>
                 </form>
                 <hr class="mt-4">

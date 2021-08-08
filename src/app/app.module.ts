@@ -22,6 +22,9 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { SearchComponent } from './search/search.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { BooksByAuthorComponent } from './books-by-author/books-by-author.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     ReviewDetailComponent,
     DashboardComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent,
+    NotFoundComponent,
+    BooksByAuthorComponent
   ],
   imports: [
     BrowserModule,

@@ -4,5 +4,6 @@ export interface Review {
     review: string,
     dateCreated: string,
     bookId: string,
-    userId: string
+    userId: string,
+    userName: string
 }

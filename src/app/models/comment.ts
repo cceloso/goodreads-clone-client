@@ -1,8 +1,9 @@
 export interface Comment {
     id: string,
     comment: string,
-    createdAt: string,
+    dateCreated: string,
     bookId: string,
     reviewId: string,
-    userId: string
+    userId: string,
+    userName: string
 }

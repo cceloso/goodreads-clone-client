@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
+import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -10,16 +12,18 @@ import { UserService } from '../services/user.service';
 })
 export class SignupComponent implements OnInit {
   signupForm = this.fb.group({
-    firstname: ['', Validators.required],
-    lastname: ['', Validators.required],
+    firstname: [''],
+    lastname: [''],
     username: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
-    imageUrl: ['', Validators.required]
+    imageUrl: ['']
   });
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
+    private authService: AuthService,
     private userService: UserService,
   ) { }
 
@@ -32,6 +36,8 @@ export class SignupComponent implements OnInit {
       .subscribe(val => {
         console.log("added user!");
         console.log(val);
+        this.authService.setLocalStorage(val);
+        this.router.navigate(['/']);
       });
   }
 }

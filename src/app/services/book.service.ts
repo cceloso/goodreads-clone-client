@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -13,29 +14,35 @@ import { Genre } from '../models/genre';
 export class BookService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private router: Router,
   ) { }
 
   private url = 'http://localhost:3000/books';
-
-  // Handle Http operation that failed.
-  // Let the app continue.
-  // @param operation - name of the operation that failed
-  // @param result - optional value to return as the observable result
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
       // TODO: send the error to remote logging infrastructure
       console.log("There's an error!");
-      console.error(error); // log to console instead
+      console.error(error.error.error.message); // log to console instead
       
       // TODO: better job of transforming error for user consumption
       // this.log(`${operation} failed: ${error.message}`);
 
+      // redirect to 404 page
+      // this.router.navigate(['/']);
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  getBook(bookId: string): Observable<Book> {
+    const newUrl = `${this.url}/${bookId}`;
+    return this.http.get<Book>(newUrl).pipe(
+      catchError(this.handleError<Book>(`getBook bookId=${bookId}`))
+    );
   }
 
   getBooks(): Observable<Book[]> {
@@ -45,11 +52,12 @@ export class BookService {
       );
   }
 
-  getBook(bookId: string): Observable<Book[]> {
-    const newUrl = `${this.url}/${bookId}`;
-    return this.http.get<Book[]>(newUrl).pipe(
-      catchError(this.handleError<Book[]>(`getBook bookId=${bookId}`))
-    );
+  getBooksByAuthor(author: string): Observable<Book[]> {
+    const newUrl = `${this.url}?author=${author}`;
+    return this.http.get<Book[]>(newUrl)
+      .pipe(
+        catchError(this.handleError<Book[]>('getBooksByAuthor', []))
+      );
   }
 
   getBooksByGenre(genreName: string): Observable<Book[]> {
@@ -60,8 +68,16 @@ export class BookService {
       );
   }
 
+  searchBooks(searchParam: string): Observable<Book[]> {
+    const newUrl = `${this.url}?search=${searchParam}`;
+    return this.http.get<Book[]>(newUrl)
+      .pipe(
+        catchError(this.handleError<Book[]>('searchBooks', []))
+      );
+  }
+
   getGenres(): Observable<Genre[]> {
-    const newUrl = `${this.url}?genre=all`;
+    const newUrl = 'http://localhost:3000/genres';
     return this.http.get<Genre[]>(newUrl)
       .pipe(
         catchError(this.handleError<Genre[]>('getGenres', []))

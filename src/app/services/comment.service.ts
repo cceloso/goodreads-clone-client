@@ -14,11 +14,6 @@ export class CommentService {
   constructor(private http: HttpClient) { }
 
   private url = 'http://localhost:3000/books';
-
-  // Handle Http operation that failed.
-  // Let the app continue.
-  // @param operation - name of the operation that failed
-  // @param result - optional value to return as the observable result
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -41,7 +36,7 @@ export class CommentService {
     );
   }
 
-  addComment(bookId: string, reviewId: string, userId: string, comment: any): Observable<any> {
+  addComment(bookId: string, reviewId: string, userId: number, comment: any): Observable<any> {
     const newUrl = `${this.url}/${bookId}/reviews/${reviewId}/comments?userId=${userId}`;
     return this.http.post<any>(newUrl, comment).pipe(
       catchError(this.handleError<any>(`addComment`))

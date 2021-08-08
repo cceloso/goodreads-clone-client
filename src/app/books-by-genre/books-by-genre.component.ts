@@ -12,10 +12,18 @@ import { BookService } from '../services/book.service';
   styleUrls: ['./books-by-genre.component.css']
 })
 export class BooksByGenreComponent implements OnInit {
-  @Input() genreName: string = "";
+  @Input() inputParams?: any;
+  genreName: string = "";
+  inHomepage: boolean = true;
   books: Book[] = [];
   totalBooks: number = 0;
-  displayViewMore: boolean = true;
+  displayElementsForGenrePage: boolean = true;
+
+  currentPage: number = 1;
+  maxPage: number = 1;
+  pages: number[] = [];
+  booksToDisplayCount: number = 18;
+  booksToDisplay: Book[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -24,13 +32,14 @@ export class BooksByGenreComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.genreName = this.inputParams.genreName;
+    this.inHomepage = this.inputParams.inHomepage;
     if(this.genreName == "") {
       this.route.queryParams
       .subscribe(queryParams => {
         this.genreName = String(this.route.snapshot.queryParams.genre);
-        // this.books = [];
         this.getBooksByGenre(true);
-        this.displayViewMore = false;
+        this.displayElementsForGenrePage = false;
       })
     } else {
       this.getBooksByGenre(false);
@@ -42,9 +51,23 @@ export class BooksByGenreComponent implements OnInit {
     .subscribe(books => {
       this.books = books;
       this.totalBooks = this.books.length;
+
       if(!displayAll) {
-        this.books = this.books.slice(0, 6);
+        this.booksToDisplay = this.books.slice(0, 6);
+      } else {
+        this.booksToDisplay = this.books.slice(0, this.booksToDisplayCount);
+        this.maxPage = Math.ceil(this.books.length / this.booksToDisplayCount);
+        this.pages = Array.from(Array(this.maxPage),(x,i)=>i+1);
       }
     });
+  }
+
+  onSelectPage(page: number): void {
+    if(page < 1 || page > this.maxPage) {
+      return;
+    }
+
+    this.currentPage = page;
+    this.booksToDisplay = this.books.slice((this.currentPage - 1) * this.booksToDisplayCount, this.currentPage * this.booksToDisplayCount);
   }
 }

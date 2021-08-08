@@ -1,9 +1,14 @@
 <!-- Only show if user is not logged in -->
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm mb-5" *ngIf="!isLoggedIn">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" routerLink="/books">
             <img src="../../assets/goodreads_logo.svg" alt="" width="140" height="50" class="d-inline-block align-text-top">
         </a>
+
+        <form class="d-flex ms-auto" [formGroup]="searchForm">
+            <input class="form-control me-2" type="search" placeholder="Search books" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
+            <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid" (click)="onSubmit()">Search</button>
+        </form>
 
         <div class="d-flex">
             <a class="nav-link signupOrLogin" routerLink="/signup">Sign Up</a>
@@ -15,7 +20,7 @@
 <!-- Only show if user is logged in -->
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm mb-5" *ngIf="isLoggedIn">
     <div class="container">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" routerLink="/books">
             <img src="../../assets/goodreads_logo.svg" alt="" width="140" height="50" class="d-inline-block align-text-top">
         </a>
 
@@ -26,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" routerLink="/">Home</a>
+                    <a class="nav-link" routerLink="/books">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" routerLink="/reviews">My Reviews</a>
@@ -48,14 +53,19 @@
                 </li>
             </ul>
 
-            <form class="d-flex ms-auto">
-                <input class="form-control me-2" type="search" placeholder="Search books" aria-label="Search">
-                <button class="btn btn-outline-dark" type="submit">Search</button>
+            <form class="d-flex ms-auto" [formGroup]="searchForm">
+                <input class="form-control me-2" type="search" placeholder="Search books" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
+                <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid" (click)="onSubmit()">Search</button>
             </form>
-
+            
             <div class="d-flex">
                 <a class="nav-link signupOrLogin" routerLink="/login" (click)="onLogout()">Logout</a>
             </div>
         </div>
     </div>
 </nav>
+
+<!-- <form class="d-flex ms-auto">
+    <input class="form-control me-2" type="search" placeholder="Search books" aria-label="Search">
+    <button class="btn btn-outline-dark" type="submit" (click)="onSubmit()">Search</button>
+</form> -->

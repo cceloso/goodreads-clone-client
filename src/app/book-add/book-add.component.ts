@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { BookService } from '../services/book.service';
@@ -28,6 +29,7 @@ export class BookAddComponent implements OnInit {
   });
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private bookService: BookService,
   ) { }
@@ -54,7 +56,12 @@ export class BookAddComponent implements OnInit {
       .subscribe(val => {
         console.log("added book!");
         console.log(val);
+        this.onClose();
       });
+  }
+
+  onSuccessClose(): void {
+    window.location.reload();
   }
 
   onClose(): void {
@@ -69,7 +76,6 @@ export class BookAddComponent implements OnInit {
     });
 
     this.genres.clear();
-    // this.genres.push(this.fb.control(''));
   }
 
   getGenres(): void {

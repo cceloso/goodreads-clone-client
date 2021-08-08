@@ -1,0 +1,47 @@
+<h3>Search results for "{{ searchParam }}"</h3>
+<!-- <h4>Search results for "{{ searchParam }}"</h4> -->
+
+<div class="row" *ngIf="books.length == 0">
+    <div>
+        No results found.
+    </div>
+</div>
+
+<div class="row mx-auto" *ngIf="books.length != 0">
+    <div class="col-md-2 col-sm-6 d-inline my-2" *ngFor="let book of booksToDisplay">
+        <div class="card mb-3" style="width: 18rem;">
+            <a routerLink="/books/{{ book.id }}">
+                <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="card-img-top" alt="{{ book.title }}" title="{{ book.title }}">
+            </a>
+            <div class="card-body">
+                <a routerLink="/books/{{ book.id }}">
+                    <h5 class="card-title fw-bold serif text-truncate" title="{{ book.title }}">{{ book.title }}</h5>
+                </a>
+                <p class="card-text serif text-truncate" title="by {{ book.author }}">by {{ book.author }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    Average rating: {{ book.averageRating }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<nav aria-label="Page navigation" *ngIf="maxPage > 1">
+    <ul class="pagination justify-content-end">
+        <li class="page-item" [class.disabled]="currentPage === 1" (click)="onSelectPage(currentPage - 1)">
+            <a class="page-link" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages; let i = index">
+            <a class="page-link" [class.active]="page === currentPage" (click)="onSelectPage(i + 1)">{{ i + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === maxPage" (click)="onSelectPage(currentPage + 1)">
+            <a class="page-link" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
