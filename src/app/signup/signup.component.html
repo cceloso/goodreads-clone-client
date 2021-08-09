@@ -1,11 +1,16 @@
 <div class="container">
     <div class="row">
-        <!-- <div class="col-md-4 offset-md-4"> -->
         <div class="col-md-6 offset-md-3">
             <div class="login-form bg-light mt-4 p-4">
+                <h4 class="fw-bold">Create an account</h4>
+                <p class="fst-italic">* denote required fields</p>
+                <div class="alert alert-danger align-items-center d-flex" role="alert" *ngIf="errorMessage">
+                    <span class="material-icons me-2">
+                        warning
+                    </span>
+                    {{ errorMessage }}
+                </div>
                 <form class="row g-3" [formGroup]="signupForm">
-                    <h4 class="fw-bold">Create an account</h4>
-                    <p class="fst-italic">* denote required fields</p>
                     <div class="col-md-6">
                         <label for="firstname" class="form-label">First name</label>
                         <input type="text" name="username" class="form-control" placeholder="Enter first name" id="firstname" formControlName="firstname">

@@ -50,6 +50,22 @@ export class AuthService {
     // return false;
   }
 
+  public isAuthenticated() {
+    const token = localStorage.getItem("id_token") || "";
+    
+    if(token) {
+      const isExpired = this.jwtHelper.isTokenExpired(token);
+
+      if(isExpired) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
   // isLoggedOut() {
   //   return !this.isLoggedIn();
   // }

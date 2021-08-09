@@ -20,6 +20,8 @@ export class SignupComponent implements OnInit {
     imageUrl: ['']
   });
 
+  errorMessage: string = "";
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -34,10 +36,14 @@ export class SignupComponent implements OnInit {
     console.log(this.signupForm.value);
     this.userService.signupUser(this.signupForm.value)
       .subscribe(val => {
-        console.log("added user!");
-        console.log(val);
-        this.authService.setLocalStorage(val);
-        this.router.navigate(['/']);
+        if(typeof val == "string") {
+          this.errorMessage = val;
+        } else {
+          console.log("added user!");
+          console.log("val from signup onsubmit", val);
+          this.authService.setLocalStorage(val);
+          this.router.navigate(['/']);
+        }
       });
   }
 }

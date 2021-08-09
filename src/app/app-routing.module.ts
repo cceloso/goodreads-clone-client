@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
+
+import { 
+  AuthGuardService as AuthGuard 
+} from './services/auth-guard.service';
+
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
@@ -10,6 +15,7 @@ import { ReviewsByUserComponent } from './reviews-by-user/reviews-by-user.compon
 import { SearchComponent } from './search/search.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BooksByAuthorComponent } from './books-by-author/books-by-author.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   // { path: '', component: DashboardComponent },
@@ -20,9 +26,10 @@ const routes: Routes = [
   { path: 'books/:bookId', component: BookDetailComponent },
   { path: 'books?genre=:genreName', component: BooksComponent },
   { path: 'books/:bookId/reviews', component: ReviewsComponent },
-  { path: 'reviews', component: ReviewsByUserComponent },
+  { path: 'reviews', component: ReviewsByUserComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent },
   { path: 'authors', component: BooksByAuthorComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent}
 ];
 

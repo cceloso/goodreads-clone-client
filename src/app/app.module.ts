@@ -25,6 +25,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { SearchComponent } from './search/search.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BooksByAuthorComponent } from './books-by-author/books-by-author.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { BooksByAuthorComponent } from './books-by-author/books-by-author.compon
     LoginComponent,
     SearchComponent,
     NotFoundComponent,
-    BooksByAuthorComponent
+    BooksByAuthorComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

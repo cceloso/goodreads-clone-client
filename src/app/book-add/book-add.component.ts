@@ -61,7 +61,7 @@ export class BookAddComponent implements OnInit {
   }
 
   onSuccessClose(): void {
-    window.location.reload();
+    // window.location.reload();
   }
 
   onClose(): void {

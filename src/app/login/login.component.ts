@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
           console.log("logged in user!");
           console.log("val from login onSubmit:", val);
           this.authService.setLocalStorage(val);
-          // window.location.reload();
           this.router.navigate(['/']);
         }
       });
