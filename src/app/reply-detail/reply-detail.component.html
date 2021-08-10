@@ -1,0 +1,26 @@
+<div class="card" *ngIf="replies">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let reply of replies">
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="material-icons account-circle me-1">account_circle</span>
+                </div>
+                <div class="col reply-text">
+                    <span class="fw-bold me-1">{{ reply.userName }}</span>
+                    {{ reply.content }}
+                    <div class="text-muted">
+                        {{ reply.dateCreated.split('T')[0] }} {{ reply.dateCreated.split('T')[1].split(':').slice(0, 2).join(':') }}
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="list-group-item" *ngIf="replies.length == 0">
+            There are no replies for this review.
+        </li>
+        <!-- <li class="list-group-item" *ngIf="userId != 0"> -->
+        <li class="list-group-item">
+            <app-reply-add [topicId]="topicId"></app-reply-add>
+            <!-- <app-comment-add [bookAndReviewId]="{bookId: bookId, reviewId: reviewId}" (addComment)="getComments()"></app-comment-add> -->
+        </li>
+    </ul>
+</div>

@@ -26,6 +26,10 @@ import { SearchComponent } from './search/search.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BooksByAuthorComponent } from './books-by-author/books-by-author.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForumsComponent } from './forums/forums.component';
+import { TopicDetailComponent } from './topic-detail/topic-detail.component';
+import { ReplyDetailComponent } from './reply-detail/reply-detail.component';
+import { ReplyAddComponent } from './reply-add/reply-add.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,11 @@ import { ProfileComponent } from './profile/profile.component';
     SearchComponent,
     NotFoundComponent,
     BooksByAuthorComponent,
-    ProfileComponent
+    ProfileComponent,
+    ForumsComponent,
+    TopicDetailComponent,
+    ReplyDetailComponent,
+    ReplyAddComponent
   ],
   imports: [
     BrowserModule,

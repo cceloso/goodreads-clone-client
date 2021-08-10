@@ -22,7 +22,7 @@ export class BooksByGenreComponent implements OnInit {
   currentPage: number = 1;
   maxPage: number = 1;
   pages: number[] = [];
-  booksToDisplayCount: number = 18;
+  booksToDisplayCount: number = 12;
   booksToDisplay: Book[] = [];
 
   constructor(

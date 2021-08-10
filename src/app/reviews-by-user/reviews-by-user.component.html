@@ -1,18 +1,31 @@
+<h3 class="mb-4">My Reviews</h3>
+
 <div class="row mx-auto">
-    <div class="col-md-2 col-sm-4" *ngFor="let review of reviews">
-        <a routerLink="/">
-            <div class="card my-3 d-flex align-items-stretch" style="width: 18rem;">
-                    <!-- <img src="..." class="card-img-top" alt="..."> -->
-                    <img src="../../assets/books/The_Lightning_Thief.jpg" class="card-img-top" alt="">
-                <div class="card-header">
-                    <h5 class="card-title">Title</h5>
-                    <p class="card-text">Author</p>
+    <div class="col-md-6" *ngFor="let review of reviews">
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="../../assets/books/Default.jpg" class="img-fluid rounded-start" alt="...">
                 </div>
-                <div class="card-body">
-                    <p class="card-text">Rating</p>
-                    <p class="card-text">{{ review.review }}</p>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title serif fw-bold">Title</h5>
+                        <p class="card-text serif">by Author</p>
+                        <p class="card-text">Rating: {{ review.rating }}</p>
+                        <p class="card-text"><small class="text-muted">{{ review.dateCreated.split('T')[0] }}</small></p>
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                Show review
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                {{ review.review }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </a>
+        </div>
     </div>
 </div>

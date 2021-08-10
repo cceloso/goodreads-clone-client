@@ -56,7 +56,7 @@ export class BookAddComponent implements OnInit {
       .subscribe(val => {
         console.log("added book!");
         console.log(val);
-        this.onClose();
+        // this.onClose();
       });
   }
 

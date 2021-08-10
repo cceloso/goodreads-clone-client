@@ -16,6 +16,8 @@ import { SearchComponent } from './search/search.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BooksByAuthorComponent } from './books-by-author/books-by-author.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForumsComponent } from './forums/forums.component';
+import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 
 const routes: Routes = [
   // { path: '', component: DashboardComponent },
@@ -30,6 +32,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'authors', component: BooksByAuthorComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'forums', component: ForumsComponent },
+  { path: 'forums/:topicId', component: TopicDetailComponent },
   { path: '**', component: NotFoundComponent}
 ];
 

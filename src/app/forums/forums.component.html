@@ -1,0 +1,31 @@
+<h3 class="mb-3">Forums</h3>
+
+<form class="d-flex ms-auto mb-4" [formGroup]="searchForm">
+    <!-- <input class="form-control me-2" type="search" placeholder="Search topics" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
+    <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid" (click)="onSubmit()">Search</button> -->
+    <input class="form-control me-2" type="search" placeholder="Search topics" aria-label="Search" formControlName="searchParam">
+    <button class="btn btn-outline-dark" type="button">
+        <span class="material-icons">search</span>
+    </button>
+</form>
+
+<div class="card mb-3 px-2 py-2" *ngFor="let topic of topics">
+    <div class="card-body">
+        <p class="card-text">
+            <small class="text-muted">
+                Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
+            </small>
+        </p>
+        <a routerLink="/forums/{{ topic.id }}">
+            <h5 class="card-title fw-bold serif">{{ topic.title }}</h5>
+        </a>
+        <p class="card-text text-truncate">{{ topic.content }}</p>
+        <p class="card-text">
+            <small class="text-muted">
+                <span class="material-icons me-2">comment</span>
+                <span *ngIf="topic.replyCtr == 0">No replies</span>
+                <span *ngIf="topic.replyCtr != 0">{{ topic.replyCtr }} <span *ngIf="topic.replyCtr == 1">reply</span><span *ngIf="topic.replyCtr > 1">replies</span></span>
+        </small>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,4 @@
+<form [formGroup]="replyForm">
+    <textarea class="form-control reply-text py-2" id="newReply" rows="1" formControlName="content" placeholder="Write a reply..."></textarea>
+    <button type="submit" class="btn btn-dark float-end mt-2" [disabled]="!replyForm.valid" (click)="onSubmit()">Submit</button>
+</form>
