@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
+import { Observable, Subscription } from 'rxjs';
+
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 
@@ -33,6 +35,12 @@ export class TopBarComponent implements OnInit {
       this.isLoggedIn = isLoggedIn;
     });
     
+    this.userService.newUserState
+      .subscribe(() => {
+        console.log("newUserState triggered in top bar");
+        this.isLoggedIn = true;
+      });
+
     // this.isLoggedIn = this.authService.isLoggedIn();
     // console.log("isLoggedIn:", this.isLoggedIn);
     

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Socket } from 'ngx-socket-io';
 
 import { User } from '../models/user';
 
@@ -11,14 +12,19 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private socket: Socket
+  ) { }
+
+  newUserState = this.socket.fromEvent<any>("newUserState");
+
+  updateNavbar() {
+    console.log("inside updateNavbar service");
+    this.socket.emit("updateNavbar");
+  }
 
   private url = 'http://localhost:3000/users';
-
-  // Handle Http operation that failed.
-  // Let the app continue.
-  // @param operation - name of the operation that failed
-  // @param result - optional value to return as the observable result
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -53,12 +59,6 @@ export class UserService {
       catchError(this.handleError<any>(`addUser`))
     );
   }
-  
-  // loginUser(user: any): Observable<any> {
-  //   return this.http.post<any>(this.url, user).pipe(
-  //     catchError(this.handleError<any>(`loginUser`))
-  //   );
-  // }
 
   loginUser(user: any): Observable<any> {
     const newUrl = "http://localhost:3000/users/login";

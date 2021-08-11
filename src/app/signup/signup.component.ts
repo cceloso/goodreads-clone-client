@@ -42,6 +42,7 @@ export class SignupComponent implements OnInit {
           console.log("added user!");
           console.log("val from signup onsubmit", val);
           this.authService.setLocalStorage(val);
+          this.userService.updateNavbar();
           this.router.navigate(['/']);
         }
       });
