@@ -12,28 +12,34 @@ import { Reply } from '../models/reply';
   providedIn: 'root'
 })
 export class ForumService {
-  // topicStr = this.socket.fromEvent<any>('topic');
-
   constructor(
     private http: HttpClient,
     private socket: Socket
-    ) { }
+  ) { }
 
-  // getTopicTest(topicId: string) {
-  //   this.socket.emit('getTopicTest', topicId);
-  // }
+  newTopic = this.socket.fromEvent<Topic>("newTopic");
+  newReply = this.socket.fromEvent<Reply>("newReply");
+
+  joinForum(topicId: string) {
+    console.log("inside joinForum service");
+    this.socket.emit("joinForum", topicId);
+  }
+
+  sendTopic(topicObject: Topic) {
+    console.log("inside addTopic service");
+    this.socket.emit("sendTopic", topicObject);
+  }
+
+  sendReply(replyObject: Reply, topicId: string) {
+    console.log("inside sendReply service");
+    this.socket.emit("sendReply", replyObject, topicId);
+  }
 
   private url = 'http://localhost:3000/forums';
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-
-      // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }

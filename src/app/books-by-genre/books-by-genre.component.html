@@ -1,7 +1,5 @@
-<!-- <a class="text-uppercase fw-bold" routerLink="/books" [queryParams]="{ genre: genreName }" *ngIf="books.length != 0">{{ genreName.split('-').join(' ') }}</a> -->
 <a class="text-uppercase fw-bold" routerLink="/books" [queryParams]="{ genre: genreName }" *ngIf="displayElementsForGenrePage">{{ genreName.split('-').join(' ') }}</a>
 
-<!-- <div class="row" *ngIf="books.length == 0 && inHomepage == false"> -->
 <div class="row" *ngIf="books.length == 0">
     <div>
         No results found.

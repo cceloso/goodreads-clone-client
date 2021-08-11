@@ -6,15 +6,22 @@
             </small>
         </p>
         <a routerLink="/forums/{{ topic.id }}">
-            <h5 class="card-title fw-bold serif">{{ topic.title }}</h5>
+            <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
         </a>
+        <span
+            class="d-inline-block flair mb-2"
+            [class.discussion]="topic.flair == 'Discussion'"
+            [class.recommendations]="topic.flair == 'Recommendations'"
+            [class.others]="topic.flair == 'Others'">
+            {{ topic.flair }}
+        </span>
         <p class="card-text">{{ topic.content }}</p>
         <p class="card-text">
             <a (click)="onSelect()" title="View/hide replies">
                 <small class="text-muted">
                     <span class="material-icons me-2">comment</span>
-                    <span *ngIf="topic.replyCtr == 0">No replies</span>
-                    <span *ngIf="topic.replyCtr != 0">{{ topic.replyCtr }} <span *ngIf="topic.replyCtr == 1">reply</span><span *ngIf="topic.replyCtr > 1">replies</span></span>
+                    <span *ngIf="replyCtr == 0">No replies</span>
+                    <span *ngIf="replyCtr != 0">{{ replyCtr }} <span *ngIf="replyCtr == 1">reply</span><span *ngIf="replyCtr > 1">replies</span></span>
                 </small>
             </a>
         </p>
@@ -22,4 +29,4 @@
 </div>
 
 <!-- <app-reply-detail *ngIf="viewReplies"></app-reply-detail> -->
-<app-reply-detail></app-reply-detail>
+<app-reply-detail (increaseReplyCtr)="increaseReplyCtr()"></app-reply-detail>

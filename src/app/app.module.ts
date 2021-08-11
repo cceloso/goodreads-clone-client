@@ -33,6 +33,8 @@ import { ReplyDetailComponent } from './reply-detail/reply-detail.component';
 import { ReplyAddComponent } from './reply-add/reply-add.component';
 import { TopicAddComponent } from './topic-add/topic-add.component';
 
+import { ChangeGenreFormatPipe } from './books/books.component';
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
@@ -60,7 +62,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     TopicDetailComponent,
     ReplyDetailComponent,
     ReplyAddComponent,
-    TopicAddComponent
+    TopicAddComponent,
+    ChangeGenreFormatPipe
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,9 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     HttpClientModule,
     ReactiveFormsModule,
     SocketIoModule.forRoot(config),
+  ],
+  exports: [
+    ChangeGenreFormatPipe
   ],
   providers: [
     AuthService,

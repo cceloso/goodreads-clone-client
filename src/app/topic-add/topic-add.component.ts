@@ -48,9 +48,13 @@ export class TopicAddComponent implements OnInit {
     console.log(this.topicForm.value);
 
     this.forumService.addTopic(this.topicForm.value, this.userId)
-    .subscribe(val => {
+    .subscribe(topicObject => {
       console.log("added topic!");
-      console.log(val);
+      console.log(topicObject);
+
+      console.log("will send topic via socket!");
+      this.forumService.sendTopic(topicObject);
+
       this.topicForm.setValue({
         title: '',
         content: '',

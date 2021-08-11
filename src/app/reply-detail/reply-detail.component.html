@@ -17,10 +17,14 @@
         <li class="list-group-item" *ngIf="replies.length == 0">
             There are no replies for this topic.
         </li>
-        <!-- <li class="list-group-item" *ngIf="userId != 0"> -->
-        <li class="list-group-item">
-            <app-reply-add [topicId]="topicId"></app-reply-add>
-            <!-- <app-comment-add [bookAndReviewId]="{bookId: bookId, reviewId: reviewId}" (addComment)="getComments()"></app-comment-add> -->
+        <li class="list-group-item" *ngIf="userId != 0">
+        <!-- <li class="list-group-item"> -->
+            <!-- <app-reply-add [topicId]="topicId"></app-reply-add> -->
+
+            <form [formGroup]="replyForm">
+                <textarea class="form-control reply-text py-2" id="newReply" rows="1" formControlName="content" placeholder="Write a reply..."></textarea>
+                <button type="submit" class="btn btn-dark float-end mt-2" [disabled]="!replyForm.valid" (click)="onSubmit()">Submit</button>
+            </form>
         </li>
     </ul>
 </div>

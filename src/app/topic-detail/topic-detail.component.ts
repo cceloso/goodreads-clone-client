@@ -14,6 +14,7 @@ export class TopicDetailComponent implements OnInit {
   topic?: Topic;
   topicId: string = "";
   viewReplies: boolean = false;
+  replyCtr: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class TopicDetailComponent implements OnInit {
     this.forumService.getTopic(this.topicId)
       .subscribe(topic => {
         this.topic = topic[0];
+        this.replyCtr = this.topic.replyCtr;
         // console.log(this.topic);
       });
   }
@@ -54,5 +56,9 @@ export class TopicDetailComponent implements OnInit {
   onSelect() {
     this.viewReplies = !this.viewReplies;
     console.log("View replies in topic-detail:", this.viewReplies);
+  }
+
+  increaseReplyCtr() {
+    this.replyCtr += 1;
   }
 }

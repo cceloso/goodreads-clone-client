@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -7,6 +7,14 @@ import { Genre } from '../models/genre';
 
 import { AuthService } from '../services/auth.service';
 import { BookService } from '../services/book.service';
+
+@Pipe({ name: 'changeGenreFormat' })
+
+export class ChangeGenreFormatPipe implements PipeTransform {
+  transform(value: string) {
+    return value.split('-').join(' ');
+  }
+}
 
 @Component({
   selector: 'app-books',

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
+import { Observable, Subscription } from 'rxjs';
+
 import { Topic } from '../models/topic';
 
 import { ForumService } from '../services/forum.service';
@@ -24,13 +26,17 @@ export class ForumsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTopics();
+    this.forumService.newTopic
+      .subscribe(topicObject => {
+        console.log("topicObject from socket event:", topicObject);
+        this.topics.unshift(topicObject);
+      });
   }
 
   getTopics(): void {
     this.forumService.getTopics()
       .subscribe(topics => {
         this.topics = topics;
-        // console.log(this.topics);
       });
   }
 
