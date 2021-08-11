@@ -6,3 +6,30 @@ a {
 .material-icons {
     vertical-align: middle;
 }
+
+.flair {
+    /* border: solid 1px #D6D0C4; */
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: .7rem;
+    background-color: #f4f1ea;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.discussion {
+    background-color: #c9ecfa;
+}
+
+.recommendations {
+    background-color: #b5f7bb;
+}
+
+.others {
+    background-color: #f7b5b5;
+}
+
+.card-title {
+    line-height: 26pt;
+    font-size: 1.1rem;
+}

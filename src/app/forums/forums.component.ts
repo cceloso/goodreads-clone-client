@@ -47,4 +47,16 @@ export class ForumsComponent implements OnInit {
 
     return datePostedStr;
   }
+
+  onSubmit(): void {
+    const searchParam = this.searchForm.value.searchParam;
+    console.log(this.searchForm.value);
+    console.log(searchParam);
+
+    this.searchForm.setValue({
+      searchParam: ''
+    });
+
+    // this.router.navigate(['/search'], { queryParams: { q: searchParam} });
+  }
 }

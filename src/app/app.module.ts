@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +31,9 @@ import { ForumsComponent } from './forums/forums.component';
 import { TopicDetailComponent } from './topic-detail/topic-detail.component';
 import { ReplyDetailComponent } from './reply-detail/reply-detail.component';
 import { ReplyAddComponent } from './reply-add/reply-add.component';
+import { TopicAddComponent } from './topic-add/topic-add.component';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 @NgModule({
   declarations: [
@@ -55,13 +59,15 @@ import { ReplyAddComponent } from './reply-add/reply-add.component';
     ForumsComponent,
     TopicDetailComponent,
     ReplyDetailComponent,
-    ReplyAddComponent
+    ReplyAddComponent,
+    TopicAddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     AuthService,

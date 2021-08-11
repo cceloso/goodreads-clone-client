@@ -1,15 +1,14 @@
 <h3 class="mb-3">Forums</h3>
 
-<form class="d-flex ms-auto mb-4" [formGroup]="searchForm">
-    <!-- <input class="form-control me-2" type="search" placeholder="Search topics" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
-    <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid" (click)="onSubmit()">Search</button> -->
-    <input class="form-control me-2" type="search" placeholder="Search topics" aria-label="Search" formControlName="searchParam">
+<app-topic-add class="d-flex float-end ms-4"></app-topic-add>
+<form class="d-flex mb-4" [formGroup]="searchForm">
+    <input class="form-control me-2" type="search" placeholder="Search topics" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
     <button class="btn btn-outline-dark" type="button">
-        <span class="material-icons">search</span>
+        <span class="material-icons" (click)="onSubmit()">search</span>
     </button>
 </form>
 
-<div class="card mb-3 px-2 py-2" *ngFor="let topic of topics">
+<div class="card px-2 mb-2" *ngFor="let topic of topics">
     <div class="card-body">
         <p class="card-text">
             <small class="text-muted">
@@ -17,8 +16,15 @@
             </small>
         </p>
         <a routerLink="/forums/{{ topic.id }}">
-            <h5 class="card-title fw-bold serif">{{ topic.title }}</h5>
+            <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
         </a>
+        <span
+            class="d-inline-block flair mb-2"
+            [class.discussion]="topic.flair == 'Discussion'"
+            [class.recommendations]="topic.flair == 'Recommendations'"
+            [class.others]="topic.flair == 'Others'">
+            {{ topic.flair }}
+        </span>
         <p class="card-text text-truncate">{{ topic.content }}</p>
         <p class="card-text">
             <small class="text-muted">

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
+import { Socket } from 'ngx-socket-io';
 
 import { Topic } from '../models/topic';
 import { Reply } from '../models/reply';
@@ -11,8 +12,16 @@ import { Reply } from '../models/reply';
   providedIn: 'root'
 })
 export class ForumService {
+  // topicStr = this.socket.fromEvent<any>('topic');
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private socket: Socket
+    ) { }
+
+  // getTopicTest(topicId: string) {
+  //   this.socket.emit('getTopicTest', topicId);
+  // }
 
   private url = 'http://localhost:3000/forums';
 
@@ -39,6 +48,21 @@ export class ForumService {
   getTopics(): Observable<Topic[]> {
     return this.http.get<Topic[]>(this.url).pipe(
       catchError(this.handleError<Topic[]>(`getTopics`))
+    );
+  }
+
+  searchBooks(searchParam: string): Observable<Topic[]> {
+    const newUrl = `${this.url}?search=${searchParam}`;
+    return this.http.get<Topic[]>(newUrl)
+      .pipe(
+        catchError(this.handleError<Topic[]>('searchTopics', []))
+      );
+  }
+
+  addTopic(topic: any, userId: number): Observable<any> {
+    const newUrl = `${this.url}?userId=${userId}`;
+    return this.http.post<any>(newUrl, topic).pipe(
+      catchError(this.handleError<any>(`addTopic`))
     );
   }
 

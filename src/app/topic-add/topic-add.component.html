@@ -1,0 +1,40 @@
+<button type="button" class="btn btn-outline-dark mb-3" data-bs-toggle="modal" data-bs-target="#addTopicModal">
+    + Add new topic
+</button>
+
+<div class="modal fade" id="addTopicModal" tabindex="-1" aria-labelledby="addTopicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new topic</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="topicForm">
+                    <div id="new-topic-note" class="form-text mb-3"><span class="fw-bold">Note:</span> Please observe...</div>
+
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <textarea class="form-control" id="title" rows="1" formControlName="title"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" id="content" rows="5" formControlName="content"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="flair" class="form-label d-block">Flair</label>
+                        <select class="dropdown px-2 py-2" name="dropdown" formControlName="flair" (change)="changeFlair($event)">
+                            <option class="flair-option" *ngFor="let flair of flairs">{{ flair }}</option>
+                         </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Close</button>
+                <button type="submit" class="btn btn-dark" [disabled]="!topicForm.valid" (click)="onSubmit()" data-bs-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
