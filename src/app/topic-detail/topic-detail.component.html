@@ -15,9 +15,14 @@
             [class.others]="topic.flair == 'Others'">
             {{ topic.flair }}
         </span>
-        <p class="card-text">{{ topic.content }}</p>
         <p class="card-text">
-            <a (click)="onSelect()" title="View/hide replies">
+            {{ topic.content.slice(0, 300) }}
+            <span *ngIf="readMore">{{ topic.content.slice(300) }}</span>
+            <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && topic.content.length > 300">...read more</a>
+            <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && topic.content.length > 300">(read less)</a>
+        </p>
+        <p class="card-text">
+            <a (click)="onClickViewReplies()" title="View/hide replies">
                 <small class="text-muted">
                     <span class="material-icons me-2">comment</span>
                     <span *ngIf="replyCtr == 0">No replies</span>

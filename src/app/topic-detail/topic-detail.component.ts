@@ -15,6 +15,7 @@ export class TopicDetailComponent implements OnInit {
   topicId: string = "";
   viewReplies: boolean = false;
   replyCtr: number = 0;
+  readMore: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,9 +28,6 @@ export class TopicDetailComponent implements OnInit {
 
   getTopic(): void {
     this.topicId = String(this.route.snapshot.paramMap.get('topicId'));
-
-    // console.log("inside getTopic");
-    // console.log("topicId:", this.topicId);
 
     this.forumService.getTopic(this.topicId)
       .subscribe(topic => {
@@ -53,12 +51,16 @@ export class TopicDetailComponent implements OnInit {
     return datePostedStr;
   }
 
-  onSelect() {
+  onClickViewReplies() {
     this.viewReplies = !this.viewReplies;
     console.log("View replies in topic-detail:", this.viewReplies);
   }
 
   increaseReplyCtr() {
     this.replyCtr += 1;
+  }
+
+  onClickReadMore(): void {
+    this.readMore = !this.readMore;
   }
 }

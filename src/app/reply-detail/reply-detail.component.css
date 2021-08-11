@@ -13,3 +13,16 @@
 .reply-text {
     font-size: .9rem;
 }
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.read-more {
+    color: #382110;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}

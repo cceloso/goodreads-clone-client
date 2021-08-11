@@ -7,7 +7,12 @@
                 </div>
                 <div class="col reply-text">
                     <span class="fw-bold me-1">{{ reply.userName }}</span>
-                    {{ reply.content }}
+                    <span>
+                        {{ reply.content.slice(0, 300) }}
+                        <span *ngIf="readMore">{{ reply.content.slice(300) }}</span>
+                        <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && reply.content.length > 300">...read more</a>
+                        <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && reply.content.length > 300">(read less)</a>
+                    </span>
                     <div class="text-muted">
                         {{ reply.dateCreated.split('T')[0] }} {{ reply.dateCreated.split('T')[1].split(':').slice(0, 2).join(':') }}
                     </div>

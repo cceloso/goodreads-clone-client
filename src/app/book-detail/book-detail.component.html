@@ -9,7 +9,6 @@
                 <h4>by {{ book.author }}</h4>
                 <p class="book-rating-info">Average rating: <span class="fw-bold">{{ book.averageRating }}</span> · {{ book.ratingCtr }} rating<span *ngIf="book.ratingCtr != 1">s</span> · Published by {{ book.publisher }} in {{ book.published }} · ISBN: {{ book.isbn }}</p>
                 <p class="book-description serif">
-                    <!-- {{ book.description.slice(0, 300) }} -->
                     {{ description.slice(0, 300) }}
                     <span class="book-description serif" *ngIf="readMore">{{ description.slice(300) }}</span>
                     <a class="book-description serif read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && book.description.length > 300">...read more</a>

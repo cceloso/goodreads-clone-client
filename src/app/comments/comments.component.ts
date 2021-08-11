@@ -19,6 +19,7 @@ export class CommentsComponent implements OnInit {
   userId: number = 0;
   comments: Comment[] = [];
   viewComments: boolean = false;
+  readMore: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -41,5 +42,9 @@ export class CommentsComponent implements OnInit {
     .subscribe(comments => {
       this.comments = comments;
     });
+  }
+
+  onClickReadMore(): void {
+    this.readMore = !this.readMore;
   }
 }

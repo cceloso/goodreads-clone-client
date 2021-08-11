@@ -4,6 +4,14 @@ a {
     cursor: pointer;
 }
 
+.read-more {
+    color: #382110;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
 .flair {
     /* border: solid 1px #D6D0C4; */
     border-radius: 20px;

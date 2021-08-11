@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Observable, Subscription } from 'rxjs';
 
@@ -21,7 +20,6 @@ export class TopBarComponent implements OnInit {
   });
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
     private userService: UserService,
@@ -40,19 +38,6 @@ export class TopBarComponent implements OnInit {
         console.log("newUserState triggered in top bar");
         this.isLoggedIn = true;
       });
-
-    // this.isLoggedIn = this.authService.isLoggedIn();
-    // console.log("isLoggedIn:", this.isLoggedIn);
-    
-    // this.route.params.subscribe(routeParams => {
-    //   console.log("routeParams:", routeParams);
-    //   this.isLoggedIn = this.authService.isLoggedIn();
-    //   // this.authService.isLoggedIn()
-    //   // .subscribe(isLoggedIn => {
-    //   //   console.log("val from login observable:", isLoggedIn);
-    //   //   this.isLoggedIn = isLoggedIn;
-    //   // });
-    // });
   }
 
   onLogout(): void {

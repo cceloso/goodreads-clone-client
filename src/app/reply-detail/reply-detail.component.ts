@@ -17,6 +17,7 @@ export class ReplyDetailComponent implements OnInit {
   replies: Reply[] = [];
   topicId: string = "";
   userId: number = 0;
+  readMore: boolean = false;
 
   replyForm = this.fb.group({
     content: ['', Validators.required],
@@ -67,5 +68,9 @@ export class ReplyDetailComponent implements OnInit {
           content: '',
         });
       });
+  }
+
+  onClickReadMore(): void {
+    this.readMore = !this.readMore;
   }
 }
