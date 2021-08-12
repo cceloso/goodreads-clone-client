@@ -5,7 +5,7 @@
                 <div class="col-md-1">
                     <span class="material-icons account-circle me-1">account_circle</span>
                 </div>
-                <div class="col reply-text">
+                <!-- <div class="col reply-text">
                     <span class="fw-bold me-1">{{ reply.userName }}</span>
                     <span>
                         {{ reply.content.slice(0, 300) }}
@@ -15,6 +15,18 @@
                     </span>
                     <div class="text-muted">
                         {{ reply.dateCreated.split('T')[0] }} {{ reply.dateCreated.split('T')[1].split(':').slice(0, 2).join(':') }}
+                    </div>
+                </div> -->
+                <div class="col reply-text">
+                    <span class="fw-bold me-1">{{ reply.userName }}</span>
+                    <span class="text-muted">
+                        {{ reply.dateCreated.split('T')[0] }} {{ reply.dateCreated.split('T')[1].split(':').slice(0, 2).join(':') }}
+                    </span>
+                    <div>
+                        {{ reply.content.slice(0, 300) }}
+                        <span *ngIf="readMore">{{ reply.content.slice(300) }}</span>
+                        <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && reply.content.length > 300">...read more</a>
+                        <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && reply.content.length > 300">(read less)</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +39,7 @@
             <!-- <app-reply-add [topicId]="topicId"></app-reply-add> -->
 
             <form [formGroup]="replyForm">
-                <textarea class="form-control reply-text py-2" id="newReply" rows="1" formControlName="content" placeholder="Write a reply..."></textarea>
+                <textarea class="form-control reply-text py-2" id="newReply" rows="2" formControlName="content" placeholder="Write a reply..."></textarea>
                 <button type="submit" class="btn btn-dark float-end mt-2" [disabled]="!replyForm.valid" (click)="onSubmit()">Submit</button>
             </form>
         </li>

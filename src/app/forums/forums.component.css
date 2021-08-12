@@ -8,14 +8,35 @@ a {
     font-size: 1.2rem;
 }
 
+.nav-link {
+    background-color: #f4f1ea;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.nav-link:hover {
+    background-color: #f4f1ea;
+    transform: scale(1.05);
+    color: black;
+}
+
 .flair {
-    /* border: solid 1px #D6D0C4; */
     border-radius: 20px;
     padding: 4px 12px;
     font-size: .7rem;
-    background-color: #f4f1ea;
+    /* background-color: #f4f1ea; */
+    background-color: #f7ddb5;
     cursor: pointer;
     vertical-align: middle;
+}
+
+.all {
+    background-color: #d8d8d8;
+}
+
+.general {
+    background-color: #f7ddb5;
 }
 
 .discussion {

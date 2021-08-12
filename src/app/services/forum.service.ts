@@ -57,8 +57,15 @@ export class ForumService {
     );
   }
 
-  searchBooks(searchParam: string): Observable<Topic[]> {
-    const newUrl = `${this.url}?search=${searchParam}`;
+  getTopicsByFlair(flair: string): Observable<Topic[]> {
+    const newUrl = `${this.url}?flair=${flair}`;
+    return this.http.get<Topic[]>(newUrl).pipe(
+      catchError(this.handleError<Topic[]>(`getTopics`))
+    );
+  }
+
+  searchTopics(searchParam: string): Observable<Topic[]> {
+    const newUrl = `${this.url}?q=${searchParam}`;
     return this.http.get<Topic[]>(newUrl)
       .pipe(
         catchError(this.handleError<Topic[]>('searchTopics', []))

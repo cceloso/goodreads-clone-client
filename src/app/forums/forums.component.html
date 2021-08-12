@@ -1,37 +1,96 @@
-<h3 class="mb-3">Forums</h3>
+<a routerLink="/forums">
+    <h3 class="mb-3">Forums</h3>
+</a>
 
-<app-topic-add class="d-flex float-end ms-4"></app-topic-add>
+<app-topic-add class="d-flex float-end ms-4" *ngIf="userId != 0"></app-topic-add>
 <form class="d-flex mb-4" [formGroup]="searchForm">
     <input class="form-control me-2" type="search" placeholder="Search topics" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
-    <button class="btn btn-outline-dark" type="button">
-        <span class="material-icons" (click)="onSubmit()">search</span>
+    <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid" (click)="onSubmit()">
+        <span class="material-icons">search</span>
     </button>
 </form>
 
-<div class="card px-2 mb-2" *ngFor="let topic of topics">
-    <div class="card-body">
-        <p class="card-text">
-            <small class="text-muted">
-                Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
-            </small>
-        </p>
-        <a routerLink="/forums/{{ topic.id }}">
-            <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
+<!-- <ul class="nav nav-pills mb-3">
+    <li class="nav-item">
+        <a class="nav-link">
+            <span class="material-icons">schedule</span>
+            Newest first
         </a>
-        <span
-            class="d-inline-block flair mb-2"
-            [class.discussion]="topic.flair == 'Discussion'"
-            [class.recommendations]="topic.flair == 'Recommendations'"
-            [class.others]="topic.flair == 'Others'">
-            {{ topic.flair }}
-        </span>
-        <p class="card-text text-truncate">{{ topic.content }}</p>
-        <p class="card-text">
-            <small class="text-muted">
-                <span class="material-icons me-2">comment</span>
-                <span *ngIf="topic.replyCtr == 0">No replies</span>
-                <span *ngIf="topic.replyCtr != 0">{{ topic.replyCtr }} <span *ngIf="topic.replyCtr == 1">reply</span><span *ngIf="topic.replyCtr > 1">replies</span></span>
-        </small>
-        </p>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link">
+            Oldest first
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active">
+            <span class="material-icons">local_fire_department</span>
+            Most replies
+        </a>
+    </li>
+</ul> -->
+
+<ul class="nav nav-pills" *ngIf="searchParam == 'undefined'">
+    <li class="nav-item me-3 mb-3">
+        <a class="nav-link" [class.all]="selectedFlair == 'All'" (click)="onClickFlair('All')">
+            All
+        </a>
+    </li>
+    <li class="nav-item me-3 mb-3">
+        <a class="nav-link" [class.general]="selectedFlair == 'General Question/Information'" (click)="onClickFlair('General Question/Information')">
+            General Question/Information
+        </a>
+    </li>
+    <li class="nav-item me-3 mb-3">
+        <a class="nav-link" [class.discussion]="selectedFlair == 'Discussion'" (click)="onClickFlair('Discussion')">
+            Discussion
+        </a>
+    </li>
+    <li class="nav-item me-3 mb-3">
+        <a class="nav-link" [class.recommendations]="selectedFlair == 'Recommendations'" (click)="onClickFlair('Recommendations')">
+            Recommendations
+        </a>
+    </li>
+    <li class="nav-item me-3 mb-3">
+        <a class="nav-link" [class.others]="selectedFlair == 'Others'" (click)="onClickFlair('Others')">
+            Others
+        </a>
+    </li>
+</ul>
+
+<div *ngIf="topics.length == 0">
+    No results found.
+</div>
+
+<div *ngIf="topics.length != 0">
+    <div *ngIf="searchParam != 'undefined'" class="fw-bold mb-2">
+        Search results for "{{ searchParam }}"
+    </div>
+    <div class="card px-2 mb-2" *ngFor="let topic of topicsToDisplay">
+        <div class="card-body">
+            <p class="card-text">
+                <small class="text-muted">
+                    Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
+                </small>
+            </p>
+            <a routerLink="/forums/{{ topic.id }}">
+                <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
+            </a>
+            <span
+                class="d-inline-block flair mb-2"
+                [class.discussion]="topic.flair == 'Discussion'"
+                [class.recommendations]="topic.flair == 'Recommendations'"
+                [class.others]="topic.flair == 'Others'">
+                {{ topic.flair }}
+            </span>
+            <p class="card-text text-truncate">{{ topic.content }}</p>
+            <p class="card-text">
+                <small class="text-muted">
+                    <span class="material-icons me-2">comment</span>
+                    <span *ngIf="topic.replyCtr == 0">No replies</span>
+                    <span *ngIf="topic.replyCtr != 0">{{ topic.replyCtr }} <span *ngIf="topic.replyCtr == 1">reply</span><span *ngIf="topic.replyCtr > 1">replies</span></span>
+            </small>
+            </p>
+        </div>
     </div>
 </div>

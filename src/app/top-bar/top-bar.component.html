@@ -38,8 +38,8 @@
 
             <form class="d-flex ms-auto me-2" [formGroup]="searchForm">
                 <input class="form-control me-2" type="search" placeholder="Search books" aria-label="Search" formControlName="searchParam" (keyup.enter)="onSubmit()">
-                <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid">
-                    <span class="material-icons" (click)="onSubmit()">search</span>
+                <button class="btn btn-outline-dark" type="button" [disabled]="!searchForm.valid" (click)="onSubmit()">
+                    <span class="material-icons">search</span>
                 </button>
             </form>
             
