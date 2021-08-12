@@ -1,9 +1,7 @@
 <a class="text-uppercase fw-bold" routerLink="/books" [queryParams]="{ genre: genreName }" *ngIf="displayElementsForGenrePage">{{ genreName.split('-').join(' ') }}</a>
 
 <div class="row" *ngIf="books.length == 0">
-    <div>
-        No results found.
-    </div>
+    <div>No results found.</div>
 </div>
 
 <div class="row mx-auto" *ngIf="books.length != 0">

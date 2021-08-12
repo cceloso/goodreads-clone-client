@@ -5,11 +5,11 @@ import { Book } from '../models/book';
 import { BookService } from '../services/book.service';
 
 @Component({
-  selector: 'app-books-by-genre',
-  templateUrl: './books-by-genre.component.html',
-  styleUrls: ['./books-by-genre.component.css']
+  selector: 'app-books-list',
+  templateUrl: './books-list.component.html',
+  styleUrls: ['./books-list.component.css']
 })
-export class BooksByGenreComponent implements OnInit {
+export class BooksListComponent implements OnInit {
   @Input() inputParams?: any;
   genreName: string = "";
   inHomepage: boolean = true;
@@ -20,7 +20,7 @@ export class BooksByGenreComponent implements OnInit {
   currentPage: number = 1;
   maxPage: number = 1;
   pages: number[] = [];
-  booksToDisplayCount: number = 12;
+  booksToDisplayCount: number = 6;
   booksToDisplay: Book[] = [];
 
   constructor(
@@ -42,7 +42,7 @@ export class BooksByGenreComponent implements OnInit {
       this.getBooksByGenre(false);
     }
   }
-  
+
   getBooksByGenre(displayAll: boolean): void {    
     this.bookService.getBooksByGenre(this.genreName)
     .subscribe(books => {
@@ -50,7 +50,7 @@ export class BooksByGenreComponent implements OnInit {
       this.totalBooks = this.books.length;
 
       if(!displayAll) {
-        this.booksToDisplay = this.books.slice(0, 6);
+        this.booksToDisplay = this.books.slice(0, 3);
       } else {
         this.booksToDisplay = this.books.slice(0, this.booksToDisplayCount);
         this.maxPage = Math.ceil(this.books.length / this.booksToDisplayCount);
@@ -67,4 +67,5 @@ export class BooksByGenreComponent implements OnInit {
     this.currentPage = page;
     this.booksToDisplay = this.books.slice((this.currentPage - 1) * this.booksToDisplayCount, this.currentPage * this.booksToDisplayCount);
   }
+
 }

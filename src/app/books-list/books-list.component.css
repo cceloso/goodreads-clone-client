@@ -1,0 +1,26 @@
+a {
+    color: #3a3a3a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: black;
+}
+
+img {
+    width: 50px;
+    height: auto;
+}
+
+.text-muted {
+    font-size: .8rem;
+}
+
+.view-more {
+    font-size: .8rem;
+}
+
+.view-more:hover {
+    text-decoration: underline;
+}

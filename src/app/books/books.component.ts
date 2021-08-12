@@ -31,6 +31,7 @@ export class BooksComponent implements OnInit {
   pages: number[] = [];
   genresToDisplayCount: number = 4;
   genresToDisplay: Genre[] = [];
+  listView: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +42,7 @@ export class BooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
+    this.currentPage = 1;
     this.route.queryParams
       .subscribe(queryParams => {
         this.genreName = String(this.route.snapshot.queryParams.genre);
@@ -63,10 +65,6 @@ export class BooksComponent implements OnInit {
     });
   }
 
-  onGenreClick(genreName: string): void {
-    // this.genreName = genreName;
-  }
-
   onSelectPage(page: number): void {
     if(page < 1 || page > this.maxPage) {
       return;
@@ -74,5 +72,9 @@ export class BooksComponent implements OnInit {
 
     this.currentPage = page;
     this.genresToDisplay = this.genres.slice((this.currentPage - 1) * this.genresToDisplayCount, this.currentPage * this.genresToDisplayCount);
+  }
+
+  onClickListView(listView: boolean): void {
+    this.listView = listView;
   }
 }

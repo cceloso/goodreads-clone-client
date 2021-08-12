@@ -7,32 +7,71 @@
 
 <div class="row">
     <div class="col" *ngIf="genreName == 'All'">
-        <div class="row">
-        </div>        
-        <div class="mb-5" *ngFor="let genre of genresToDisplay">
-            <app-books-by-genre [inputParams]="{genreName: genre.name, inHomepage: true}"></app-books-by-genre>
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="listView" aria-current="page" (click)="onClickListView(true)">List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="!listView" (click)="onClickListView(false)">Gallery</a>
+            </li>
+        </ul>
+        <div *ngIf="listView">
+            <div class="mb-3" *ngFor="let genre of genresToDisplay">
+                <app-books-list [inputParams]="{genreName: genre.name, inHomepage: true}"></app-books-list>
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item" [class.disabled]="currentPage === 1" (click)="onSelectPage(currentPage - 1)">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pages; let i = index">
+                        <a class="page-link" [class.active]="page === currentPage" (click)="onSelectPage(i + 1)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === maxPage" (click)="onSelectPage(currentPage + 1)">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-end">
-                <li class="page-item" [class.disabled]="currentPage === 1" (click)="onSelectPage(currentPage - 1)">
-                    <a class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item" *ngFor="let page of pages; let i = index">
-                    <a class="page-link" [class.active]="page === currentPage" (click)="onSelectPage(i + 1)">{{ i + 1 }}</a>
-                </li>
-                <li class="page-item" [class.disabled]="currentPage === maxPage" (click)="onSelectPage(currentPage + 1)">
-                    <a class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div *ngIf="!listView">
+            <div class="mb-3" *ngFor="let genre of genresToDisplay">
+                <app-books-by-genre [inputParams]="{genreName: genre.name, inHomepage: true}"></app-books-by-genre>
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item" [class.disabled]="currentPage === 1" (click)="onSelectPage(currentPage - 1)">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of pages; let i = index">
+                        <a class="page-link" [class.active]="page === currentPage" (click)="onSelectPage(i + 1)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === maxPage" (click)="onSelectPage(currentPage + 1)">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 
     <div class="col" *ngIf="genreName != 'All'">
-        <app-books-by-genre [inputParams]="{genreName: '', inHomepage: false}"></app-books-by-genre>
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="listView" aria-current="page" (click)="onClickListView(true)">List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="!listView" (click)="onClickListView(false)">Gallery</a>
+            </li>
+        </ul>
+        <app-books-list [inputParams]="{genreName: '', inHomepage: false}" *ngIf="listView"></app-books-list>
+        <app-books-by-genre [inputParams]="{genreName: '', inHomepage: false}" *ngIf="!listView"></app-books-by-genre>
     </div>
     
     <div class="col-sm-3">
@@ -41,7 +80,7 @@
         <div class="row">
             <div class="col mx-auto">
                 <div *ngFor="let genre of genres.slice(0, genres.length / 2)">
-                    <a class="text-capitalize genre-item" routerLink="/books" [queryParams]="{ genre: genre.name }" (click)="onGenreClick(genre.name)">{{ genre.name | changeGenreFormat }}</a>
+                    <a class="text-capitalize genre-item" routerLink="/books" [queryParams]="{ genre: genre.name }">{{ genre.name | changeGenreFormat }}</a>
 
                 </div>
             </div>
