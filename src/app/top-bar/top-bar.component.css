@@ -19,3 +19,8 @@
     color: white;
     background-color: #382110;
 }
+
+.material-icons {
+    vertical-align: middle;
+    font-size: 1.2rem;
+}
