@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'reviews', component: ReviewsByUserComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent },
   { path: 'authors', component: BooksByAuthorComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'users/:userId', component: ProfileComponent },
   { path: 'forums', component: ForumsComponent },
   { path: 'forums/:topicId', component: TopicDetailComponent },
   { path: '**', component: NotFoundComponent}

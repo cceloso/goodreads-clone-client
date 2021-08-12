@@ -14,6 +14,7 @@ import { UserService } from '../services/user.service';
 })
 export class TopBarComponent implements OnInit {
   isLoggedIn: boolean = false;
+  userId: number = 0;
 
   searchForm = this.fb.group({
     searchParam: ['', Validators.required]
@@ -27,6 +28,7 @@ export class TopBarComponent implements OnInit {
   ) {  }
 
   ngOnInit(): void {
+    this.userId = this.authService.getUserId();
     this.authService.isLoggedIn()
     .subscribe(isLoggedIn => {
       console.log("val from login observable:", isLoggedIn);

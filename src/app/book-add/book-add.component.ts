@@ -13,6 +13,8 @@ import { Genre } from '../models/genre';
 })
 export class BookAddComponent implements OnInit {
   allGenres: Genre[] = [];
+  addResultHeading: string = "";
+  addResultMessage: string = "";
 
   bookForm = this.fb.group({
     title: ['', Validators.required],
@@ -55,8 +57,15 @@ export class BookAddComponent implements OnInit {
     this.bookService.addBook(this.bookForm.value)
       .subscribe(val => {
         console.log("added book!");
-        console.log(val);
-        // this.onClose();
+        console.log("val:", val);
+        if(val == undefined) {
+          this.addResultHeading = "Error";
+          this.addResultMessage = "Book was not added. Book with that title and author already exists."
+        } else {
+          this.addResultHeading = "Success";
+          this.addResultMessage = "Book was successfully added!";
+          this.onClose();
+        }
       });
   }
 

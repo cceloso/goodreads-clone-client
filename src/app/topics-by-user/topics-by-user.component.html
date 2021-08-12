@@ -1,0 +1,24 @@
+<div *ngIf="topics.length == 0">
+    User has no forum posts.
+</div>
+
+<div class="row mx-auto" *ngIf="topics.length != 0">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="col" class="col-8">Title</th>
+                <th scope="col">Flair</th>
+                <th scope="col">Replies</th>
+                <th scope="col">Date added</th>
+            </tr>
+            <tr *ngFor="let topic of topicsToDisplay">
+                <td>
+                    <a routerLink="/forums/{{ topic.id }}">{{ topic.title }}</a>
+                </td>
+                <td>{{ topic.flair }}</td>
+                <td>{{ topic.replyCtr }}</td>
+                <td>{{ topic.dateCreated.split('T')[0] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

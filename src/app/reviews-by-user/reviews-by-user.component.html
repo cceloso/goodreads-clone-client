@@ -1,31 +1,42 @@
-<h3 class="mb-4">My Reviews</h3>
+<!-- <h3 class="mb-4">My Reviews</h3> -->
 
-<div class="row mx-auto">
-    <div class="col-md-6" *ngFor="let review of reviews">
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="../../assets/books/Default.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title serif fw-bold">Title</h5>
-                        <p class="card-text serif">by Author</p>
-                        <p class="card-text">Rating: {{ review.rating }}</p>
-                        <p class="card-text"><small class="text-muted">{{ review.dateCreated.split('T')[0] }}</small></p>
-                        <p>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                Show review
-                            </button>
-                        </p>
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
-                                {{ review.review }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div *ngIf="reviews.length == 0">
+    User has no reviews.
+</div>
+
+<div class="row mx-auto" *ngIf="reviews.length != 0">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="col">Cover</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Rating</th>
+                <th scope="col" class="col-8">Review</th>
+                <th scope="col">Date added</th>
+            </tr>
+            <tr *ngFor="let review of reviewsToDisplay">
+                <td style="width: 60px">
+                    <a routerLink="/books/{{ review.bookId }}">
+                        <img src="../../assets/books/{{ review.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="card-img-top book-cover">
+                    </a>
+                </td>
+                <td>
+                    <a routerLink="/books/{{ review.bookId }}" class="fw-bold">
+                        {{ review.title }}
+                    </a>
+                </td>
+                <td>{{ review.author }}</td>
+                <td>{{ review.rating }}</td>
+                <td>
+                    {{ review.review }}
+                    <!-- {{ review.review.slice(0, 300) }}
+                    <span class="review-content" *ngIf="readMore">{{ review.review.slice(300) }}</span>
+                    <a class="review-content read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && review.review.length > 300">...read more</a>
+                    <a class="review-content read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && review.review.length > 300">(read less)</a> -->
+                </td>
+                <td>{{ review.dateCreated.split('T')[0] }}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>

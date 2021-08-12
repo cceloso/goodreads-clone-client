@@ -9,7 +9,7 @@
     <div class="col" *ngIf="genreName == 'All'">
         <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
-                <a class="nav-link" [class.active]="listView" aria-current="page" (click)="onClickListView(true)">List</a>
+                <a class="nav-link" [class.active]="listView" (click)="onClickListView(true)">List</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" [class.active]="!listView" (click)="onClickListView(false)">Gallery</a>

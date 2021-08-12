@@ -35,6 +35,7 @@ import { TopicAddComponent } from './topic-add/topic-add.component';
 
 import { ChangeGenreFormatPipe } from './books/books.component';
 import { BooksListComponent } from './books-list/books-list.component';
+import { TopicsByUserComponent } from './topics-by-user/topics-by-user.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -65,7 +66,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ReplyAddComponent,
     TopicAddComponent,
     ChangeGenreFormatPipe,
-    BooksListComponent
+    BooksListComponent,
+    TopicsByUserComponent
   ],
   imports: [
     BrowserModule,

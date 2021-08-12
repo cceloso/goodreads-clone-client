@@ -60,7 +60,14 @@ export class ForumService {
   getTopicsByFlair(flair: string): Observable<Topic[]> {
     const newUrl = `${this.url}?flair=${flair}`;
     return this.http.get<Topic[]>(newUrl).pipe(
-      catchError(this.handleError<Topic[]>(`getTopics`))
+      catchError(this.handleError<Topic[]>(`getTopicsByFlair`))
+    );
+  }
+
+  getTopicsByUser(userId: string): Observable<Topic[]> {
+    const newUrl = `${this.url}?userId=${userId}`;
+    return this.http.get<Topic[]>(newUrl).pipe(
+      catchError(this.handleError<Topic[]>(`getTopicsByUser`))
     );
   }
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Review } from '../models/review';
+
 import { ReviewService } from '../services/review.service';
 
 @Component({
@@ -10,21 +12,45 @@ import { ReviewService } from '../services/review.service';
 })
 export class ReviewsByUserComponent implements OnInit {
   reviews: Review[] = [];
-  userId: string = "1";
+  // userId: string = "1";
+  userId: number = 0;
 
+  readMore: boolean = false;
+  reviewsToDisplay: Review[] = [];
+  reviewsToDisplayCount: number = 6;
+  lastReviewIndex: number = 6;
+  
   constructor(
+    private route: ActivatedRoute,
     private reviewService: ReviewService,
   ) { }
 
   ngOnInit(): void {
+    this.userId = Number(this.route.snapshot.paramMap.get('userId'));
     this.getReviewsByUser();
   }
 
   getReviewsByUser(): void {
-    this.reviewService.getReviewsByUser(this.userId)
+    this.reviewService.getReviewsByUser(this.userId.toString())
       .subscribe(reviews => {
         this.reviews = reviews;
-        // console.log(this.reviews);
+        this.reviewsToDisplay = this.reviews.slice(0, this.reviewsToDisplayCount);
       });
+  }
+
+  onClickReadMore(): void {
+    this.readMore = !this.readMore;
+  }
+
+  @HostListener("window:scroll", [])
+  onScroll(): void {
+    if(this.bottomReached()) {
+      this.lastReviewIndex += this.reviewsToDisplayCount;
+      this.reviewsToDisplay = this.reviews.slice(0, this.lastReviewIndex);
+    }
+  }
+
+  bottomReached(): boolean {
+    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
   }
 }

@@ -2,6 +2,24 @@
     max-width: 100%;
 }
 
-/* .card-body {
-    max-height: 7vw;
-} */
+a {
+    color: #3a3a3a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+th {
+    font-size: .9rem;
+}
+
+.read-more {
+    color: #382110;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}

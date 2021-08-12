@@ -1,0 +1,37 @@
+.account-circle {
+    font-size: 10rem;
+}
+
+.profile-pic {
+    width: 100px;
+}
+
+.username {
+    font-size: 1.5rem;
+}
+
+.card {
+    max-width: 100%;
+}
+
+a {
+    color: #3a3a3a;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: black;
+}
+
+th {
+    font-size: .9rem;
+}
+
+.read-more {
+    color: #382110;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}

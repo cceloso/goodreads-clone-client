@@ -47,7 +47,7 @@ export class UserService {
     );
   }
 
-  getUser(userId: string): Observable<User[]> {
+  getUser(userId: number): Observable<User[]> {
     const newUrl = `${this.url}/${userId}`;
     return this.http.get<User[]>(newUrl).pipe(
       catchError(this.handleError<User[]>(`getUser for userId=${userId}`))

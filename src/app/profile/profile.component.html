@@ -1,1 +1,38 @@
-<p>profile works!</p>
+<!-- <table class="table"> -->
+<table class="table table-borderless" *ngIf="userInfo">
+    <tbody>
+        <tr>
+            <th class="profile-pic">
+                <span class="material-icons account-circle">account_circle</span>
+            </th>
+            <td>
+                <tbody>
+                    <tr>
+                        <th class="serif username">{{ userInfo.userName }}</th>
+                    </tr>
+                    <tr>
+                        <th>Joined in</th>
+                        <td>{{ userInfo.dateCreated }}</td>
+                    </tr>
+                    <tr>
+                        <th>About me</th>
+                        <td>Empty</td>
+                    </tr>
+                </tbody>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="displayReviews" (click)="onClickDisplayNav(true)">Reviews</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [class.active]="!displayReviews" (click)="onClickDisplayNav(false)">Forum posts</a>
+    </li>
+</ul>
+
+<app-reviews-by-user *ngIf="displayReviews"></app-reviews-by-user>
+
+<app-topics-by-user *ngIf="!displayReviews"></app-topics-by-user>

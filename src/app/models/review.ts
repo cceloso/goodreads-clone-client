@@ -4,6 +4,8 @@ export interface Review {
     review: string,
     dateCreated: string,
     bookId: string,
+    title: string,
+    author: string,
     userId: string,
     userName: string
 }
