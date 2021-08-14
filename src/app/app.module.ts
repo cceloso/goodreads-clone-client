@@ -37,7 +37,9 @@ import { ChangeGenreFormatPipe } from './books/books.component';
 import { BooksListComponent } from './books-list/books-list.component';
 import { TopicsByUserComponent } from './topics-by-user/topics-by-user.component';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+import { environment } from 'src/environments/environment';
+
+const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
 @NgModule({
   declarations: [

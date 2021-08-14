@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
 import { User } from '../models/user';
 
@@ -24,61 +25,54 @@ export class UserService {
     this.socket.emit("updateNavbar");
   }
 
-  private url = 'http://localhost:3000/users';
+  private apiUrl = environment.apiUrl;
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
-      // TODO: send the error to remote logging infrastructure
       console.error(error.error.error); // log to console instead
       const errorMessage = error.error.error.message;
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
 
-      // Let the app keep running by returning an empty result.
       return of(errorMessage as T);
     };
   }
 
   getUsers(): Observable<User[]> {
-    const newUrl = `${this.url}`;
+    const newUrl = `${this.apiUrl}/users`;
     return this.http.get<User[]>(newUrl).pipe(
       catchError(this.handleError<User[]>(`getUsers`))
     );
   }
 
   getUser(userId: number): Observable<User[]> {
-    const newUrl = `${this.url}/${userId}`;
+    const newUrl = `${this.apiUrl}/users/${userId}`;
     return this.http.get<User[]>(newUrl).pipe(
       catchError(this.handleError<User[]>(`getUser for userId=${userId}`))
     );
   }
 
   addUser(user: any): Observable<any> {
-    return this.http.post<any>(this.url, user).pipe(
+    const newUrl = `${this.apiUrl}/users`;
+    return this.http.post<any>(newUrl, user).pipe(
       catchError(this.handleError<any>(`addUser`))
     );
   }
 
   loginUser(user: any): Observable<any> {
-    const newUrl = "http://localhost:3000/users/login";
+    const newUrl = `${this.apiUrl}/users/login`;
     return this.http.post<any>(newUrl, user).pipe(
       catchError(this.handleError<any>(`loginUser`))
     );
   }
 
   signupUser(user: any): Observable<any> {
-    const newUrl = "http://localhost:3000/users";
+    const newUrl = `${this.apiUrl}/users`;
     return this.http.post<any>(newUrl, user).pipe(
       catchError(this.handleError<any>(`signupUser`))
     );
   }
 
   getProtected(): Observable<any> {
-    const newUrl = "http://localhost:3000/protected";
-    // return this.http.get<any>(newUrl).pipe(
-    //   catchError(this.handleError<any>(`signupUser`))
-    // );
+    const newUrl = `${this.apiUrl}/protected`;
     return this.http.get<any>(newUrl);
   }  
 }

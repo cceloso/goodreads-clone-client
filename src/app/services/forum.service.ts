@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Socket } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
 import { Topic } from '../models/topic';
 import { Reply } from '../models/reply';
@@ -34,8 +35,8 @@ export class ForumService {
     console.log("inside sendReply service");
     this.socket.emit("sendReply", replyObject, topicId);
   }
-
-  private url = 'http://localhost:3000/forums';
+  
+  private apiUrl = environment.apiUrl;
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -45,34 +46,35 @@ export class ForumService {
   }
   
   getTopic(topicId: string): Observable<Topic[]> {
-    const newUrl = `${this.url}/${topicId}`;
+    const newUrl = `${this.apiUrl}/forums/${topicId}`;
     return this.http.get<Topic[]>(newUrl).pipe(
       catchError(this.handleError<Topic[]>(`getTopic`))
     );
   }
 
   getTopics(): Observable<Topic[]> {
-    return this.http.get<Topic[]>(this.url).pipe(
+    const newUrl = `${this.apiUrl}/forums`;
+    return this.http.get<Topic[]>(newUrl).pipe(
       catchError(this.handleError<Topic[]>(`getTopics`))
     );
   }
 
   getTopicsByFlair(flair: string): Observable<Topic[]> {
-    const newUrl = `${this.url}?flair=${flair}`;
+    const newUrl = `${this.apiUrl}/forums?flair=${flair}`;
     return this.http.get<Topic[]>(newUrl).pipe(
       catchError(this.handleError<Topic[]>(`getTopicsByFlair`))
     );
   }
 
   getTopicsByUser(userId: string): Observable<Topic[]> {
-    const newUrl = `${this.url}?userId=${userId}`;
+    const newUrl = `${this.apiUrl}/forums?userId=${userId}`;
     return this.http.get<Topic[]>(newUrl).pipe(
       catchError(this.handleError<Topic[]>(`getTopicsByUser`))
     );
   }
 
   searchTopics(searchParam: string): Observable<Topic[]> {
-    const newUrl = `${this.url}?q=${searchParam}`;
+    const newUrl = `${this.apiUrl}/forums?q=${searchParam}`;
     return this.http.get<Topic[]>(newUrl)
       .pipe(
         catchError(this.handleError<Topic[]>('searchTopics', []))
@@ -80,21 +82,21 @@ export class ForumService {
   }
 
   addTopic(topic: any, userId: number): Observable<any> {
-    const newUrl = `${this.url}?userId=${userId}`;
+    const newUrl = `${this.apiUrl}/forums?userId=${userId}`;
     return this.http.post<any>(newUrl, topic).pipe(
       catchError(this.handleError<any>(`addTopic`))
     );
   }
 
   getReplies(topicId: string): Observable<Reply[]> {
-    const newUrl = `${this.url}/${topicId}/replies`;
+    const newUrl = `${this.apiUrl}/forums/${topicId}/replies`;
     return this.http.get<Reply[]>(newUrl).pipe(
       catchError(this.handleError<Reply[]>(`getReplies`))
     );
   }
 
   addReply(content: any, topicId: string, userId: number): Observable<any> {
-    const newUrl = `${this.url}/${topicId}/replies?userId=${userId}`;
+    const newUrl = `${this.apiUrl}/forums/${topicId}/replies?userId=${userId}`;
     return this.http.post<any>(newUrl, content).pipe(
       catchError(this.handleError<any>(`addReply`))
     );
