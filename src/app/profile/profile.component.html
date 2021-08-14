@@ -1,25 +1,26 @@
-<div *ngIf="!displayNotFound">
-    <!-- <table class="table"> -->
+<div *ngIf="!displayNotFound" class="table-responsive">
     <table class="table table-borderless" *ngIf="userInfo">
         <tbody>
             <tr>
                 <th class="profile-pic">
-                    <span class="material-icons account-circle">account_circle</span>
+                    <img src="../../assets/default_user.png" alt="user_profile_pic" class="user-icon">
                 </th>
                 <td>
-                    <tbody>
-                        <tr>
-                            <th class="serif username">{{ userInfo.userName }}</th>
-                        </tr>
-                        <tr>
-                            <th>Joined in</th>
-                            <td>{{ userInfo.dateCreated }}</td>
-                        </tr>
-                        <tr>
-                            <th>About me</th>
-                            <td>Empty</td>
-                        </tr>
-                    </tbody>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th class="serif username">{{ userInfo.userName }}</th>
+                            </tr>
+                            <tr>
+                                <th>Joined in</th>
+                                <td>{{ convertDate(userInfo.dateCreated) }}</td>
+                            </tr>
+                            <!-- <tr>
+                                <th>About me</th>
+                                <td>Empty</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
                 </td>
             </tr>
         </tbody>

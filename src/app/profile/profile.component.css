@@ -25,7 +25,7 @@ a:hover {
 }
 
 th {
-    font-size: .9rem;
+    padding-right: 12px;
 }
 
 .read-more {
@@ -34,4 +34,13 @@ th {
 
 .read-more:hover {
     text-decoration: underline;
+}
+
+.user-icon {
+    width: 100px;
+    height: auto;
+}
+
+table.table {
+    width: auto;
 }

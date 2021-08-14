@@ -1,6 +1,8 @@
 <div class="row" *ngIf="comment">
     <div class="col-lg-1 col-sm-2">
-        <img src="../../assets/default_user.png" alt="user_profile_pic">
+        <a routerLink="/users/{{ comment.userId }}">
+            <img src="../../assets/default_user.png" alt="user_profile_pic">
+        </a>
     </div>
     <div class="col comment-text">
         <span class="fw-bold me-1">

@@ -1,7 +1,9 @@
 <div *ngIf="review" class="col user-info-review">
     <div class="row mb-4">
         <div class="col-lg-1 col-sm-2">
-            <img src="../../assets/default_user.png" alt="user_profile_pic">
+            <a routerLink="/users/{{ review.userId }}">
+                <img src="../../assets/default_user.png" alt="user_profile_pic">
+            </a>
         </div>
         <div class="col">
             <div class="user-description d-inline me-1">

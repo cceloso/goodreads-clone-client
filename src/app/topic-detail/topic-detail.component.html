@@ -10,12 +10,10 @@
         <div class="card-body">
             <p class="card-text">
                 <small class="text-muted">
-                    Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
+                    Posted by <span class="fw-bold"><a routerLink="/users/{{ topic.userId }}">{{ topic.userName }}</a></span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
                 </small>
             </p>
-            <a routerLink="/forums/{{ topic.id }}">
-                <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
-            </a>
+            <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
             <span
                 class="d-inline-block flair mb-2"
                 [class.discussion]="topic.flair == 'Discussion'"

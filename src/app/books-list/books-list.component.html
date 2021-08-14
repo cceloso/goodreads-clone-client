@@ -31,7 +31,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="view-more" *ngIf="totalBooks > 6 && displayElementsForGenrePage">
+    <div class="view-more" *ngIf="totalBooks > 3 && displayElementsForGenrePage">
         <a routerLink="/books" [queryParams]="{ genre: genreName }" class="float-end">View more</a>
     </div>
 </div>

@@ -78,4 +78,11 @@ export class ProfileComponent implements OnInit {
   onClickDisplayNav(displayReviews: boolean) {
     this.displayReviews = displayReviews;
   }
+
+  convertDate(dateTime: string) {
+    let splittedArr = dateTime.split(' ');
+    let datePostedStr = splittedArr.slice(1, 4).join(' ');
+
+    return datePostedStr;
+  }
 }

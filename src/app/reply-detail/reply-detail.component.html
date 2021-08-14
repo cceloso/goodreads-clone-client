@@ -1,9 +1,13 @@
 <div class="row" *ngIf="reply">
     <div class="col-user">
-        <img src="../../assets/default_user.png" alt="user_profile_pic">
+        <a routerLink="/users/{{ reply.userId }}">
+            <img src="../../assets/default_user.png" alt="user_profile_pic">
+        </a>
     </div>
     <div class="col reply-text">
-        <span class="fw-bold me-1">{{ reply.userName }}</span>
+        <span class="fw-bold me-1">
+            <a routerLink="/users/{{ reply.userId }}">{{ reply.userName }}</a>
+        </span>
         <span class="text-muted">
             {{ convertDate(reply.dateCreated) }}
         </span>

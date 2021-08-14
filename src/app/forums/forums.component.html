@@ -10,26 +10,6 @@
     </button>
 </form>
 
-<!-- <ul class="nav nav-pills mb-3">
-    <li class="nav-item">
-        <a class="nav-link">
-            <span class="material-icons">schedule</span>
-            Newest first
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link">
-            Oldest first
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active">
-            <span class="material-icons">local_fire_department</span>
-            Most replies
-        </a>
-    </li>
-</ul> -->
-
 <ul class="nav nav-pills" *ngIf="searchParam == 'undefined'">
     <li class="nav-item me-3 mb-3">
         <a class="nav-link" [class.all]="selectedFlair == 'All'" (click)="onClickFlair('All')">
@@ -70,7 +50,7 @@
         <div class="card-body">
             <p class="card-text">
                 <small class="text-muted">
-                    Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
+                    Posted by <span class="fw-bold"><a routerLink="/users/{{ topic.userId }}">{{ topic.userName }}</a></span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
                 </small>
             </p>
             <a routerLink="/forums/{{ topic.id }}">
