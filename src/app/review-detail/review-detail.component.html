@@ -14,7 +14,12 @@
             <span class="material-icons star-rate" [class.checked]="review.rating >= 3">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 4">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating == 5">star_rate</span>
-            <!-- <div class="d-inline float-end text-muted">{{ review.dateCreated.split('T')[0] }}</div> -->
+
+            <div class="row">
+                <div class="text-muted">
+                    {{ convertDate(review.dateCreated) }}
+                </div>
+            </div>
 
             <div class="row mb-2">
                 <div class="review-text serif mt-2">
@@ -23,10 +28,6 @@
                     <a class="review-text serif read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && review.review.length > 575">...read more</a>
                     <a class="review-text serif read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && review.review.length > 575">(read less)</a>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="text-muted">{{ review.dateCreated.split('T')[0] }}</div>
             </div>
             
             <div class="row">
