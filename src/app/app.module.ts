@@ -38,6 +38,9 @@ import { BooksListComponent } from './books-list/books-list.component';
 import { TopicsByUserComponent } from './topics-by-user/topics-by-user.component';
 
 import { environment } from 'src/environments/environment';
+import { NotFoundResourceComponent } from './not-found-resource/not-found-resource.component';
+import { CommentDetailComponent } from './comment-detail/comment-detail.component';
+import { RepliesComponent } from './replies/replies.component';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
@@ -69,7 +72,10 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
     TopicAddComponent,
     ChangeGenreFormatPipe,
     BooksListComponent,
-    TopicsByUserComponent
+    TopicsByUserComponent,
+    NotFoundResourceComponent,
+    CommentDetailComponent,
+    RepliesComponent
   ],
   imports: [
     BrowserModule,

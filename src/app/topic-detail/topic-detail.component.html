@@ -5,40 +5,45 @@
     </a>
 </div>
 
-<div class="card mb-3 px-2" *ngIf="topic">
-    <div class="card-body">
-        <p class="card-text">
-            <small class="text-muted">
-                Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
-            </small>
-        </p>
-        <a routerLink="/forums/{{ topic.id }}">
-            <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
-        </a>
-        <span
-            class="d-inline-block flair mb-2"
-            [class.discussion]="topic.flair == 'Discussion'"
-            [class.recommendations]="topic.flair == 'Recommendations'"
-            [class.others]="topic.flair == 'Others'">
-            {{ topic.flair }}
-        </span>
-        <p class="card-text">
-            {{ topic.content.slice(0, 300) }}
-            <span *ngIf="readMore">{{ topic.content.slice(300) }}</span>
-            <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && topic.content.length > 300">...read more</a>
-            <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && topic.content.length > 300">(read less)</a>
-        </p>
-        <p class="card-text">
-            <a (click)="onClickViewReplies()" title="View/hide replies">
+<div *ngIf="!displayNotFound">
+    <div class="card mb-3 px-2" *ngIf="topic">
+        <div class="card-body">
+            <p class="card-text">
                 <small class="text-muted">
-                    <span class="material-icons me-2">comment</span>
-                    <span *ngIf="replyCtr == 0">No replies</span>
-                    <span *ngIf="replyCtr != 0">{{ replyCtr }} <span *ngIf="replyCtr == 1">reply</span><span *ngIf="replyCtr > 1">replies</span></span>
+                    Posted by <span class="fw-bold">{{ topic.userName }}</span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
                 </small>
+            </p>
+            <a routerLink="/forums/{{ topic.id }}">
+                <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
             </a>
-        </p>
+            <span
+                class="d-inline-block flair mb-2"
+                [class.discussion]="topic.flair == 'Discussion'"
+                [class.recommendations]="topic.flair == 'Recommendations'"
+                [class.others]="topic.flair == 'Others'">
+                {{ topic.flair }}
+            </span>
+            <p class="card-text">
+                {{ topic.content.slice(0, 300) }}
+                <span *ngIf="readMore">{{ topic.content.slice(300) }}</span>
+                <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && topic.content.length > 300">...read more</a>
+                <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && topic.content.length > 300">(read less)</a>
+            </p>
+            <p class="card-text">
+                <a (click)="onClickViewReplies()" title="View/hide replies">
+                    <small class="text-muted">
+                        <span class="material-icons me-2">comment</span>
+                        <span *ngIf="replyCtr == 0">No replies</span>
+                        <span *ngIf="replyCtr != 0">{{ replyCtr }} <span *ngIf="replyCtr == 1">reply</span><span *ngIf="replyCtr > 1">replies</span></span>
+                    </small>
+                </a>
+            </p>
+        </div>
     </div>
+
+    <!-- <app-reply-detail *ngIf="viewReplies"></app-reply-detail> -->
+    <app-reply-detail (increaseReplyCtr)="increaseReplyCtr()"></app-reply-detail>
 </div>
 
-<!-- <app-reply-detail *ngIf="viewReplies"></app-reply-detail> -->
-<app-reply-detail (increaseReplyCtr)="increaseReplyCtr()"></app-reply-detail>
+
+<app-not-found-resource *ngIf="displayNotFound" [resource]="'Forum post'"></app-not-found-resource>

@@ -22,6 +22,8 @@ export class ProfileComponent implements OnInit {
   lastReviewIndex: number = 6;
 
   displayReviews: boolean = true;
+  
+  displayNotFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +43,11 @@ export class ProfileComponent implements OnInit {
     this.userService.getUser(this.userId)
       .subscribe(val => {
         console.log("user gotten:", val);
-        this.userInfo = val;
+        if(typeof val == "string") {
+          this.displayNotFound = true;
+        } else {
+          this.userInfo = val;
+        }
       });
   }
 

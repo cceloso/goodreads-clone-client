@@ -31,13 +31,13 @@ export class TopBarComponent implements OnInit {
     this.userId = this.authService.getUserId();
     this.authService.isLoggedIn()
     .subscribe(isLoggedIn => {
-      console.log("val from login observable:", isLoggedIn);
+      // console.log("val from login observable:", isLoggedIn);
       this.isLoggedIn = isLoggedIn;
     });
     
     this.userService.newUserState
       .subscribe(() => {
-        console.log("newUserState triggered in top bar");
+        // console.log("newUserState triggered in top bar");
         this.isLoggedIn = true;
       });
   }
@@ -50,8 +50,8 @@ export class TopBarComponent implements OnInit {
 
   onSubmit(): void {
     const searchParam = this.searchForm.value.searchParam;
-    console.log(this.searchForm.value);
-    console.log(searchParam);
+    // console.log(this.searchForm.value);
+    // console.log(searchParam);
 
     this.searchForm.setValue({
       searchParam: ''

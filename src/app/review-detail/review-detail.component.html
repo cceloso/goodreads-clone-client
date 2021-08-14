@@ -1,17 +1,20 @@
 <div *ngIf="review" class="col user-info-review">
     <div class="row mb-4">
-        <div class="col-lg-1">
-            <span class="material-icons account-circle me-1">account_circle</span>
+        <div class="col-lg-1 col-sm-2">
+            <img src="../../assets/default_user.png" alt="user_profile_pic">
         </div>
         <div class="col">
-            <!-- <div class="user-description d-inline me-1"><span class="fw-bold">User with id {{ review.userId }}</span> rated it</div> -->
-            <div class="user-description d-inline me-1"><span class="fw-bold">{{ review.userName }}</span> rated it</div>
+            <div class="user-description d-inline me-1">
+                <span class="fw-bold">
+                    <a routerLink="/users/{{ review.userId }}">{{ review.userName }}</a>
+                </span> rated it
+            </div>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 1">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 2">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 3">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating >= 4">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating == 5">star_rate</span>
-            <div class="d-inline float-end text-muted">{{ review.dateCreated.split('T')[0] }}</div>
+            <!-- <div class="d-inline float-end text-muted">{{ review.dateCreated.split('T')[0] }}</div> -->
 
             <div class="row mb-2">
                 <div class="review-text serif mt-2">
@@ -20,6 +23,10 @@
                     <a class="review-text serif read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && review.review.length > 575">...read more</a>
                     <a class="review-text serif read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && review.review.length > 575">(read less)</a>
                 </div>
+            </div>
+
+            <div class="row">
+                <div class="text-muted">{{ review.dateCreated.split('T')[0] }}</div>
             </div>
             
             <div class="row">

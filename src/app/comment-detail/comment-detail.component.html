@@ -1,0 +1,19 @@
+<div class="row" *ngIf="comment">
+    <div class="col-lg-1 col-sm-2">
+        <img src="../../assets/default_user.png" alt="user_profile_pic">
+    </div>
+    <div class="col comment-text">
+        <span class="fw-bold me-1">
+            <a routerLink="/users/{{ comment.userId }}">{{ comment.userName }}</a>
+        </span>
+        <span>
+            {{ comment.comment.slice(0, 300) }}
+            <span *ngIf="readMore">{{ comment.comment.slice(300) }}</span>
+            <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && comment.comment.length > 300">...read more</a>
+            <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && comment.comment.length > 300">(read less)</a>
+        </span>
+        <div class="text-muted">
+            {{ comment.dateCreated.split('T')[0] }} {{ comment.dateCreated.split('T')[1].split(':').slice(0, 2).join(':') }}
+        </div>
+    </div>
+</div>

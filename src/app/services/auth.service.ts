@@ -36,18 +36,12 @@ export class AuthService {
 
       if(isExpired) {
         return of(false);
-        // return this.getIsUserLoggedIn.emit(false);
-        // return false;
       }
 
       return of(true);
-      // return this.getIsUserLoggedIn.emit(true);
-      // return true;
     }
 
     return of(false);
-    // return this.getIsUserLoggedIn.emit(false);
-    // return false;
   }
 
   public isAuthenticated() {
@@ -82,10 +76,10 @@ export class AuthService {
   }
 
   getUserId() {
-    console.log("inside getUserId in auth service");
+    // console.log("inside getUserId in auth service");
     
     const token = localStorage.getItem("id_token") || "";
-    console.log("token:", token);
+    // console.log("token:", token);
     let userId = 0;
 
     if(token) {
@@ -96,7 +90,7 @@ export class AuthService {
       }
     }
     
-    console.log("userId:", userId);
+    // console.log("userId:", userId);
     return userId;
   }
 }

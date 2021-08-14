@@ -1,4 +1,4 @@
-<div class="container" *ngIf="book">
+<div class="container" *ngIf="book && !displayNotFound">
     <div class="row">
         <div class="col-lg-3 mb-3">
             <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="book-cover" alt="{{ book.title }}">
@@ -32,3 +32,5 @@
         </div>
     </div>
 </div>
+
+<app-not-found-resource *ngIf="displayNotFound" [resource]="'Book'"></app-not-found-resource>

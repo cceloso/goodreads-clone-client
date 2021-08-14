@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'books/:bookId', component: BookDetailComponent },
   { path: 'books?genre=:genreName', component: BooksComponent },
   { path: 'books/:bookId/reviews', component: ReviewsComponent },
-  { path: 'reviews', component: ReviewsByUserComponent, canActivate: [AuthGuard] },
+  // { path: 'reviews', component: ReviewsByUserComponent, canActivate: [AuthGuard] },
   { path: 'search', component: SearchComponent },
   { path: 'authors', component: BooksByAuthorComponent },
   // { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },

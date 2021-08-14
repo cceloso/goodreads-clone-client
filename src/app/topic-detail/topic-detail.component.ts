@@ -16,6 +16,7 @@ export class TopicDetailComponent implements OnInit {
   viewReplies: boolean = false;
   replyCtr: number = 0;
   readMore: boolean = false;
+  displayNotFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,9 +32,13 @@ export class TopicDetailComponent implements OnInit {
 
     this.forumService.getTopic(this.topicId)
       .subscribe(topic => {
-        this.topic = topic[0];
-        this.replyCtr = this.topic.replyCtr;
-        // console.log(this.topic);
+        console.log("topic:", topic);
+        if(topic == undefined) {
+          this.displayNotFound = true;
+        } else {
+          this.topic = topic[0];
+          this.replyCtr = this.topic.replyCtr;
+        }
       });
   }
 

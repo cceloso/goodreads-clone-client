@@ -15,6 +15,7 @@ export class BookDetailComponent implements OnInit {
   genres: string[] = [];
   description: string = "";
   readMore: boolean = false;
+  displayNotFound: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,9 +31,14 @@ export class BookDetailComponent implements OnInit {
     this.bookService.getBook(this.bookId)
       .subscribe(book => {
         console.log("book from getBook:", book);
-        this.book = book;
-        this.genres = this.book.genres.split(',');
-        this.description = this.book.description.replace(/\\n/g,'<br/><br/>');
+        
+        if(book == undefined) {
+          this.displayNotFound = true;
+        } else {
+          this.book = book;
+          this.genres = this.book.genres.split(',');
+          this.description = this.book.description.replace(/\\n/g,'<br/><br/>');
+        }
       });
   }
 
