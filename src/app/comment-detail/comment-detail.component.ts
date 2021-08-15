@@ -16,7 +16,9 @@ export class CommentDetailComponent implements OnInit {
   @Input() inputParams?: any;
   bookId: string = "";
   reviewId: string = "";
+  commentId: string = "";
   userId: number = 0;
+  posterId: number = -1;
   comment?: Comment;
   readMore: boolean = false;
   
@@ -30,6 +32,11 @@ export class CommentDetailComponent implements OnInit {
     this.reviewId = this.inputParams.reviewId;
     this.comment = this.inputParams.comment;
     this.userId = this.authService.getUserId();
+
+    if(this.comment) {
+      this.commentId = this.comment.id;
+      this.posterId = this.comment.userId;
+    }
   }
 
   onClickReadMore(): void {
@@ -48,5 +55,16 @@ export class CommentDetailComponent implements OnInit {
     const datePostedStr = datePosted.toLocaleString();
 
     return datePostedStr;
+  }
+
+  onDeleteComment(): void {
+    console.log("clicked on delete comment");
+    console.log("commentId:", this.commentId);
+    this.commentService.deleteComment(this.bookId, this.reviewId, this.commentId, this.userId)
+      .subscribe(val => {
+        console.log("val:", val);
+        console.log("deleted review");
+        window.location.reload();
+      });
   }
 }

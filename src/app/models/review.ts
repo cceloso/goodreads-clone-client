@@ -6,6 +6,6 @@ export interface Review {
     bookId: string,
     title: string,
     author: string,
-    userId: string,
+    userId: number,
     userName: string
 }

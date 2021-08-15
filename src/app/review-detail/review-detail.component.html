@@ -17,6 +17,11 @@
             <span class="material-icons star-rate" [class.checked]="review.rating >= 4">star_rate</span>
             <span class="material-icons star-rate" [class.checked]="review.rating == 5">star_rate</span>
 
+            <!-- <span class="material-icons float-end">more_horiz</span> -->
+            <span class="text-muted float-end" *ngIf="userId == posterId">
+                <a class="delete-btn" (click)="onDeleteReview()">Delete</a>
+            </span>
+
             <div class="row">
                 <div class="text-muted">
                     {{ convertDate(review.dateCreated) }}
@@ -31,7 +36,7 @@
                     <a class="review-text serif read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && review.review.length > 575">(read less)</a>
                 </div>
             </div>
-            
+
             <div class="row">
                 <app-comments class="mt-2" [bookAndReviewId]="{bookId: bookId, reviewId: review.id}"></app-comments>
             </div>

@@ -37,4 +37,11 @@ export class CommentService {
       catchError(this.handleError<any>(`addComment`))
     );
   }
+
+  deleteComment(bookId: string, reviewId: string, commentId: string, userId: number): Observable<any> {
+    const newUrl = `${this.apiUrl}/books/${bookId}/reviews/${reviewId}/comments/${commentId}?userId=${userId}`;
+    return this.http.delete<any>(newUrl).pipe(
+      catchError(this.handleError<any>(`deleteComment`))
+    );
+  }
 }

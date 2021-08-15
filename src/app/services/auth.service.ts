@@ -76,7 +76,7 @@ export class AuthService {
   }
 
   getUserId() {
-    // console.log("inside getUserId in auth service");
+    console.log("inside getUserId in auth service");
     
     const token = localStorage.getItem("id_token") || "";
     // console.log("token:", token);
@@ -90,7 +90,7 @@ export class AuthService {
       }
     }
     
-    // console.log("userId:", userId);
+    console.log("userId:", userId);
     return userId;
   }
 }

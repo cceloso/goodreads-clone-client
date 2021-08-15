@@ -77,10 +77,17 @@ export class BookService {
       );
   }
 
-  addBook(book: any): Observable<any> {
-    const newUrl = `${this.apiUrl}/books`;
+  addBook(book: any, userId: number): Observable<any> {
+    const newUrl = `${this.apiUrl}/books?userId=${userId}`;
     return this.http.post<any>(newUrl, book).pipe(
-      catchError(this.handleError<any>(`addBook book`))
+      catchError(this.handleError<any>(`addBook`))
+    );
+  }
+  
+  deleteBook(bookId: string, userId: number): Observable<any> {
+    const newUrl = `${this.apiUrl}/books/${bookId}?userId=${userId}`;
+    return this.http.delete<any>(newUrl).pipe(
+      catchError(this.handleError<any>(`deleteBook`))
     );
   }
 }

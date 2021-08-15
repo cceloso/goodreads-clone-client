@@ -47,3 +47,11 @@ img {
 .col-user {
     width: 65px;
 }
+
+.delete-btn {
+    font-size: .8rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}

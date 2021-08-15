@@ -4,12 +4,13 @@ export interface Book {
     author: string,
     isbn: string,
     publisher: string,
-    published: number,
+    published: string,
     description: string,
     imageUrl: string,
     totalRating: number,
     averageRating: number,
     ratingCtr: number,
     reviewCtr: number,
-    genres: string
+    genres: string,
+    userId: number
 }

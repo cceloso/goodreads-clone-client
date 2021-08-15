@@ -51,4 +51,11 @@ export class ReviewService {
       catchError(this.handleError<any>(`addReview`))
     );
   }
+  
+  deleteReview(bookId: string, reviewId: string, userId: number): Observable<any> {
+    const newUrl = `${this.apiUrl}/books/${bookId}/reviews/${reviewId}?userId=${userId}`;
+    return this.http.delete<any>(newUrl).pipe(
+      catchError(this.handleError<any>(`deleteReview`))
+    );
+  }
 }

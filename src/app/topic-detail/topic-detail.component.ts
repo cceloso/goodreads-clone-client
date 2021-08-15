@@ -64,6 +64,10 @@ export class TopicDetailComponent implements OnInit {
   increaseReplyCtr() {
     this.replyCtr += 1;
   }
+  
+  decreaseReplyCtr() {
+    this.replyCtr -= 1;
+  }
 
   onClickReadMore(): void {
     this.readMore = !this.readMore;

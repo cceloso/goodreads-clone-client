@@ -4,6 +4,6 @@ export interface Reply {
     dateCreated: string,
     lastUpdated: string,
     topicId: string,
-    userId: string,
+    userId: number,
     userName: string
 }

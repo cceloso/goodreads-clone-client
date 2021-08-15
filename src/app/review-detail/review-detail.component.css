@@ -58,3 +58,11 @@ img {
         width: 40px;
     }
 }
+
+.delete-btn {
+    font-size: .8rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}

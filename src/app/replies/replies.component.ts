@@ -14,6 +14,7 @@ import { Reply } from '../models/reply';
 })
 export class RepliesComponent implements OnInit {
   @Output() increaseReplyCtr: EventEmitter<any> = new EventEmitter();
+  @Output() decreaseReplyCtr: EventEmitter<any> = new EventEmitter();
   replies: Reply[] = [];
   topicId: string = "";
   userId: number = 0;
@@ -41,6 +42,20 @@ export class RepliesComponent implements OnInit {
         console.log("replyObject from socket event:", replyObject);
         this.replies.push(replyObject);
         this.increaseReplyCtr.emit(null);
+      });
+
+    this.forumService.updatedReply
+      .subscribe(replyObject => {
+        console.log("replyId from socket event:", replyObject.id);
+        this.replies[this.replies.findIndex(reply => reply.id == replyObject.id)] = replyObject;
+        console.log("updated replies:", this.replies);
+      });
+    
+    this.forumService.removedReply
+      .subscribe(removedReplyId => {
+        console.log("replyId from socket event:", removedReplyId);
+        this.replies = this.replies.filter((reply) => reply.id != removedReplyId);
+        this.decreaseReplyCtr.emit(null);
       });
   }
 

@@ -5,9 +5,15 @@
         </div>
         <div class="col-lg-9">
             <div class="row">
+                <div *ngIf="userId == posterId">
+                    <button type="button" class="btn btn-outline-dark mb-2 float-end" (click)="onDeleteBook()" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#successModal">
+                        <span class="material-icons">delete</span>
+                        Delete book
+                    </button>
+                </div>
                 <h3>{{ book.title }}</h3>
                 <h4>by {{ book.author }}</h4>
-                <p class="book-rating-info">Average rating: <span class="fw-bold">{{ book.averageRating }}</span> · {{ book.ratingCtr }} rating<span *ngIf="book.ratingCtr != 1">s</span> · Published by {{ book.publisher }} in {{ book.published }} · ISBN: {{ book.isbn }}</p>
+                <p class="book-rating-info">Average rating: <span class="fw-bold">{{ book.averageRating }}</span> · {{ book.ratingCtr }} rating<span *ngIf="book.ratingCtr != 1">s</span><span *ngIf="book.publisher || book.published"> · Published <span *ngIf="book.publisher">by {{ book.publisher }}</span><span *ngIf="book.published">in {{ book.published }}</span></span><span *ngIf="book.isbn"> · ISBN: {{ book.isbn }}</span></p>
                 <p class="book-description serif">
                     {{ description.slice(0, 300) }}
                     <span class="book-description serif" *ngIf="readMore">{{ description.slice(300) }}</span>
@@ -34,3 +40,17 @@
 </div>
 
 <app-not-found-resource *ngIf="displayNotFound" [resource]="'Book'"></app-not-found-resource>
+
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onSuccessClose()"></button>
+            </div>
+            <div class="modal-body">
+                Book was successfully deleted.
+            </div>
+        </div>
+    </div>
+</div>

@@ -37,13 +37,15 @@ export class TopBarComponent implements OnInit {
     
     this.userService.newUserState
       .subscribe(() => {
-        // console.log("newUserState triggered in top bar");
+        console.log("newUserState triggered in top bar");
         this.isLoggedIn = true;
+        this.userId = this.authService.getUserId();
       });
   }
 
   onLogout(): void {
     this.authService.logout();
+    this.userId = 0;
     this.isLoggedIn = false;
     this.router.navigate(['/login']);
   }

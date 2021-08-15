@@ -1,4 +1,4 @@
-<div *ngIf="!displayNotFound" class="table-responsive">
+<div *ngIf="!displayNotFound">
     <table class="table table-borderless" *ngIf="userInfo">
         <tbody>
             <tr>
@@ -11,9 +11,18 @@
                             <tr>
                                 <th class="serif username">{{ userInfo.userName }}</th>
                             </tr>
+                            <tr *ngIf="userInfo.firstName">
+                                <td>
+                                    <span class="fw-bold">Name:</span>
+                                    <span> {{ userInfo.firstName}}</span>
+                                    <span *ngIf="userInfo.lastName"> {{ userInfo.lastName}}</span>
+                                </td>
+                            </tr>
                             <tr>
-                                <th>Joined in</th>
-                                <td>{{ convertDate(userInfo.dateCreated) }}</td>
+                                <td>
+                                    <span class="fw-bold">Joined in:</span>
+                                    <span> {{ convertDate(userInfo.dateCreated) }}</span>
+                                </td>
                             </tr>
                             <!-- <tr>
                                 <th>About me</th>

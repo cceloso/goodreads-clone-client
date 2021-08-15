@@ -4,6 +4,6 @@ export interface Comment {
     dateCreated: string,
     bookId: string,
     reviewId: string,
-    userId: string,
+    userId: number,
     userName: string
 }

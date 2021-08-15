@@ -11,6 +11,9 @@
         <span class="text-muted">
             {{ convertDate(comment.dateCreated) }}
         </span>
+        <span class="text-muted float-end" *ngIf="userId == posterId">
+            <a class="delete-btn" (click)="onDeleteComment()">Delete</a>
+        </span>
         <div>
             {{ comment.comment.slice(0, 300) }}
             <span *ngIf="readMore">{{ comment.comment.slice(300) }}</span>

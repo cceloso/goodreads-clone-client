@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
+import { AuthService } from '../services/auth.service';
 import { BookService } from '../services/book.service';
 
 import { Genre } from '../models/genre';
@@ -15,6 +16,7 @@ export class BookAddComponent implements OnInit {
   allGenres: Genre[] = [];
   addResultHeading: string = "";
   addResultMessage: string = "";
+  userId: number = 0;
 
   bookForm = this.fb.group({
     title: ['', Validators.required],
@@ -33,11 +35,13 @@ export class BookAddComponent implements OnInit {
   constructor(
     private router: Router,
     private fb: FormBuilder,
+    private authService: AuthService,
     private bookService: BookService,
   ) { }
 
   ngOnInit(): void {
     this.getGenres();
+    this.userId = this.authService.getUserId();
   }
 
   get genres() {
@@ -49,12 +53,14 @@ export class BookAddComponent implements OnInit {
   // }
 
   onSubmit(): void {
+    this.userId = this.authService.getUserId();
+
     console.log("just submitted");
     console.log(this.bookForm.value);
     
     console.log("genres after formatting is changed:", this.bookForm.value.genres);
     
-    this.bookService.addBook(this.bookForm.value)
+    this.bookService.addBook(this.bookForm.value, this.userId)
       .subscribe(val => {
         console.log("added book!");
         console.log("val:", val);

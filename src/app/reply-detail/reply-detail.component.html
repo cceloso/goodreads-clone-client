@@ -11,11 +11,25 @@
         <span class="text-muted">
             {{ convertDate(reply.dateCreated) }}
         </span>
-        <div>
+        <span class="text-muted float-end" *ngIf="userId == posterId">
+            <a class="delete-btn" (click)="onClickEdit()">Edit</a>
+            <span class="mx-2">|</span>
+            <a class="delete-btn" (click)="onDeleteReply()">Delete</a>
+        </span>
+        <div *ngIf="!editReply">
             {{ reply.content.slice(0, 300) }}
             <span *ngIf="readMore">{{ reply.content.slice(300) }}</span>
             <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && reply.content.length > 300">...read more</a>
             <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && reply.content.length > 300">(read less)</a>
+        </div>
+        <div *ngIf="editReply">
+            <form [formGroup]="replyForm">
+                <textarea class="form-control reply-text py-2" id="newReply" rows="1" formControlName="content"></textarea>
+                <div class="float-end">
+                    <button type="button" class="btn btn-secondary mt-2" [disabled]="!replyForm.valid" (click)="onCancelEdit()">Cancel</button>
+                    <button type="button" class="btn btn-dark mt-2 ms-2" [disabled]="!replyForm.valid" (click)="onEditReply()">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
