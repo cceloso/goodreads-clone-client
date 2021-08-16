@@ -55,15 +55,8 @@ export class BookAddComponent implements OnInit {
   onSubmit(): void {
     this.userId = this.authService.getUserId();
 
-    console.log("just submitted");
-    console.log(this.bookForm.value);
-    
-    console.log("genres after formatting is changed:", this.bookForm.value.genres);
-    
     this.bookService.addBook(this.bookForm.value, this.userId)
       .subscribe(val => {
-        console.log("added book!");
-        console.log("val:", val);
         if(val == undefined) {
           this.addResultHeading = "Error";
           this.addResultMessage = "Book was not added. Book with that title and author already exists."
@@ -76,7 +69,7 @@ export class BookAddComponent implements OnInit {
   }
 
   onSuccessClose(): void {
-    // window.location.reload();
+    window.location.reload();
   }
 
   onClose(): void {
@@ -123,7 +116,5 @@ export class BookAddComponent implements OnInit {
         i++;
       });
     }
-
-    console.log("updated genres:", this.bookForm.value.genres);
   }
 }

@@ -23,8 +23,7 @@ export class BookService {
   
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.log("There's an error!");
-      console.error(error.error.error.message); // log to console instead
+      console.error(error); // log to console instead
 
       return of(result as T);
     };

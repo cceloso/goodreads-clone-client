@@ -1,5 +1,4 @@
 <h3>Search results for "{{ searchParam }}"</h3>
-<!-- <h4>Search results for "{{ searchParam }}"</h4> -->
 
 <div class="row" *ngIf="books.length == 0">
     <div>
@@ -11,7 +10,7 @@
     <div class="col-md-2 col-sm-6 d-inline my-2" *ngFor="let book of booksToDisplay">
         <div class="card mb-3" style="width: 18rem;">
             <a routerLink="/books/{{ book.id }}">
-                <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="card-img-top" alt="{{ book.title }}" title="{{ book.title }}">
+                <img src="{{ startingUrl }}/{{ book.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="card-img-top" alt="{{ book.title }}" title="{{ book.title }}">
             </a>
             <div class="card-body">
                 <a routerLink="/books/{{ book.id }}">
@@ -20,7 +19,7 @@
                 <p class="card-text serif text-truncate" title="by {{ book.author }}">by {{ book.author }}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">
+                <li class="list-group-item text-muted">
                     Average rating: {{ book.averageRating }}
                 </li>
             </ul>

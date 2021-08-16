@@ -18,13 +18,6 @@ export class UserService {
     private socket: Socket
   ) { }
 
-  newUserState = this.socket.fromEvent<any>("newUserState");
-
-  updateNavbar() {
-    console.log("inside updateNavbar service");
-    this.socket.emit("updateNavbar");
-  }
-
   private apiUrl = environment.apiUrl;
   
   private handleError<T>(operation = 'operation', result?: T) {

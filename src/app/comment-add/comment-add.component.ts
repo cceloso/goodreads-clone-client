@@ -35,8 +35,6 @@ export class CommentAddComponent implements OnInit {
   onSubmit(): void {
     this.commentService.addComment(this.bookId, this.reviewId, this.userId, this.commentForm.value)
       .subscribe(val => {
-        // console.log("added comment!");
-        // console.log(val);
         this.commentForm.setValue({
           comment: '',
         });

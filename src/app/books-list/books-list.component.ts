@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Book } from '../models/book';
 import { BookService } from '../services/book.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-books-list',
   templateUrl: './books-list.component.html',
@@ -22,7 +24,10 @@ export class BooksListComponent implements OnInit {
   pages: number[] = [];
   booksToDisplayCount: number = 6;
   booksToDisplay: Book[] = [];
-
+  
+  apiUrl: string = environment.apiUrl;
+  startingUrl: string = `${this.apiUrl}/public/images/books`;
+  
   constructor(
     private route: ActivatedRoute,
     private bookService: BookService

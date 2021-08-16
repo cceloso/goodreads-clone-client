@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@ang
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
+import { SocketService } from '../services/socket.service';
 
 import { Reply } from '../models/reply';
 
@@ -25,13 +26,13 @@ export class ReplyAddComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private forumService: ForumService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
-    this.forumService.newReply
+    this.socketService.newReply
       .subscribe(replyObject => {
-        console.log("replyObject from socket event:", replyObject);
         this.replies.push(replyObject);
       });
   }
@@ -39,12 +40,6 @@ export class ReplyAddComponent implements OnInit {
   onSubmit(): void {
     this.forumService.addReply(this.replyForm.value, this.topicId, this.userId)
       .subscribe(replyObject => {
-        console.log("added reply!");
-        console.log(replyObject);
-
-        console.log("will send via socket!");
-        // this.forumService.sendReply(replyObject);
-        
         this.replyForm.setValue({
           content: '',
         });

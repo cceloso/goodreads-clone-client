@@ -69,17 +69,13 @@ export class AuthService {
       let expiresAt = "";
       if(expiration) {
         expiresAt = JSON.parse(expiration);
-        console.log("expiresAt:", expiresAt);
       }
 
       return moment(expiresAt);
   }
 
   getUserId() {
-    console.log("inside getUserId in auth service");
-    
     const token = localStorage.getItem("id_token") || "";
-    // console.log("token:", token);
     let userId = 0;
 
     if(token) {
@@ -90,7 +86,6 @@ export class AuthService {
       }
     }
     
-    console.log("userId:", userId);
     return userId;
   }
 }

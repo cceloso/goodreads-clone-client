@@ -7,7 +7,7 @@
 <div class="row mx-auto" *ngIf="books.length != 0">
     <div class="col-md-2 col-sm-6 d-inline mt-2 mb-3" *ngFor="let book of booksToDisplay">
         <a routerLink="/books/{{ book.id }}">
-            <img src="../../assets/books/{{ book.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="card-img-top book-cover" alt="{{ book.title }}" title="{{ book.title }}">
+            <img src="{{ startingUrl }}/{{ book.title.split(' ').join('_') }}.jpg" onerror="this.src='../../assets/books/Default.jpg'" class="card-img-top book-cover" alt="{{ book.title }}" title="{{ book.title }}">
         </a>
     </div>
 </div>

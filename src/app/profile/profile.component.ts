@@ -33,7 +33,6 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.userId = this.authService.getUserId();
     this.userId = Number(this.route.snapshot.paramMap.get('userId'));
     this.getUser();
     this.getReviewsByUser();
@@ -42,7 +41,6 @@ export class ProfileComponent implements OnInit {
   getUser(): void {
     this.userService.getUser(this.userId)
       .subscribe(val => {
-        console.log("user gotten:", val);
         if(typeof val == "string") {
           this.displayNotFound = true;
         } else {

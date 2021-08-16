@@ -58,12 +58,10 @@ export class CommentDetailComponent implements OnInit {
   }
 
   onDeleteComment(): void {
-    console.log("clicked on delete comment");
-    console.log("commentId:", this.commentId);
     this.commentService.deleteComment(this.bookId, this.reviewId, this.commentId, this.userId)
       .subscribe(val => {
-        console.log("val:", val);
-        console.log("deleted review");
+        // console.log("deleted comment");
+        // console.log("val:", val);
         window.location.reload();
       });
   }

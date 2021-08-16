@@ -4,6 +4,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@ang
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-topic-add',
@@ -37,6 +38,7 @@ export class TopicAddComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private forumService: ForumService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
@@ -44,17 +46,8 @@ export class TopicAddComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log("clicked submit");
-    console.log(this.topicForm.value);
-
     this.forumService.addTopic(this.topicForm.value, this.userId)
     .subscribe(topicObject => {
-      console.log("added topic!");
-      console.log(topicObject);
-
-      console.log("will send topic via socket!");
-      this.forumService.sendTopic(topicObject);
-
       this.topicForm.setValue({
         title: '',
         content: '',
@@ -64,7 +57,7 @@ export class TopicAddComponent implements OnInit {
   }
 
   onClose(): void {
-    console.log("clicked close");
+    // console.log("clicked close");
   }
 
 }

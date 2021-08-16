@@ -39,15 +39,11 @@ export class ReviewAddComponent implements OnInit {
     this.reviewService.getReviewByUserAndBook(this.userId, this.bookId)
       .subscribe(val => {
         this.userHasReview = val;
-        console.log("userHasReview in review-add after calling service:", this.userHasReview);
       });
   }
 
   onSubmit(): void {
     this.userId = this.authService.getUserId();
-
-    console.log(this.reviewForm.value);
-    console.log(this.userId);
 
     this.reviewService.addReview(this.bookId, this.reviewForm.value)
       .subscribe(val => {
@@ -66,7 +62,6 @@ export class ReviewAddComponent implements OnInit {
     this.reviewForm.patchValue({
       rating: this.ratingValue,
     });
-    console.log("changed rating to", this.ratingValue);
   }
 
   onClearRating(): void {

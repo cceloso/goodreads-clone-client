@@ -18,22 +18,6 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.userService.getProtected()
-    //   .subscribe(val => {
-    //     if(val) {
-    //       console.log(val);
-    //       this.message = "You are authenticated!";
-    //     }
-    //   },
-    //   (err) => {
-    //     console.log("err:", err);
-    //     if(err.status === 401) {
-    //       this.message = "You are not authorized to visit this route.";
-    //     }
-    //   },
-    //   () => {
-    //     console.log("HTTP request done");
-    //   });
     this.userId = this.authService.getUserId();
   }
 }

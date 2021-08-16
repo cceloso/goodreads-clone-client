@@ -3,6 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@ang
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
+import { SocketService } from '../services/socket.service';
 
 import { Reply } from '../models/reply';
 
@@ -31,6 +32,7 @@ export class ReplyDetailComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private forumService: ForumService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
@@ -78,28 +80,18 @@ export class ReplyDetailComponent implements OnInit {
   }
 
   onEditReply(): void {
-    console.log("clicked on edit reply");
-    console.log("replyId:", this.replyId);
-    console.log("newReply:", this.replyForm.value);
-
     this.forumService.editReply(this.replyForm.value, this.topicId, this.replyId, this.userId)
       .subscribe(replyObject => {
-        console.log("edited reply");
-        console.log("replyObject:", replyObject);
-        console.log("will send via socket!");
-        this.forumService.updateReply(replyObject, this.topicId, this.replyId);
+        // console.log("edited reply");
+        // console.log("replyObject:", replyObject);
       });
   }
 
   onDeleteReply(): void {
-    console.log("clicked on delete reply");
-    console.log("replyId:", this.replyId);
     this.forumService.deleteReply(this.topicId, this.replyId, this.userId)
       .subscribe(val => {
-        console.log("deleted reply");
-        console.log("val:", val);
-        console.log("will send via socket!");
-        this.forumService.removeReply(this.topicId, this.replyId);
+        // console.log("deleted reply");
+        // console.log("val:", val);
       });
   }
 }

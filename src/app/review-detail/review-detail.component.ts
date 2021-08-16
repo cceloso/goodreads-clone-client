@@ -55,12 +55,8 @@ export class ReviewDetailComponent implements OnInit {
   }
 
   onDeleteReview(): void {
-    console.log("clicked on delete review");
-    console.log("reviewId:", this.reviewId);
     this.reviewService.deleteReview(this.bookId, this.reviewId, this.userId)
       .subscribe(val => {
-        console.log("val:", val);
-        console.log("deleted review");
         window.location.reload();
       });
   }

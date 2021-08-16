@@ -5,6 +5,8 @@ import { Review } from '../models/review';
 
 import { ReviewService } from '../services/review.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-reviews-by-user',
   templateUrl: './reviews-by-user.component.html',
@@ -12,13 +14,15 @@ import { ReviewService } from '../services/review.service';
 })
 export class ReviewsByUserComponent implements OnInit {
   reviews: Review[] = [];
-  // userId: string = "1";
   userId: number = 0;
 
   readMore: boolean = false;
   reviewsToDisplay: Review[] = [];
   reviewsToDisplayCount: number = 6;
   lastReviewIndex: number = 6;
+
+  apiUrl: string = environment.apiUrl;
+  startingUrl: string = `${this.apiUrl}/public/images/books`;
   
   constructor(
     private route: ActivatedRoute,

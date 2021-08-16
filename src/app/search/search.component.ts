@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Book } from '../models/book';
 import { BookService } from '../services/book.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -18,6 +20,9 @@ export class SearchComponent implements OnInit {
   pages: number[] = [];
   booksToDisplayCount: number = 12;
   booksToDisplay: Book[] = [];
+
+  apiUrl: string = environment.apiUrl;
+  startingUrl: string = `${this.apiUrl}/public/images/books`;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +40,6 @@ export class SearchComponent implements OnInit {
   searchBooks(searchParam: string): void {
     this.bookService.searchBooks(searchParam)
     .subscribe(books => {
-      console.log("books:", books);
       this.books = books;
       this.booksToDisplay = this.books.slice(0, this.booksToDisplayCount);
       this.maxPage = Math.ceil(this.books.length / this.booksToDisplayCount);

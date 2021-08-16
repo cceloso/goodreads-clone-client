@@ -9,6 +9,7 @@ import { Topic } from '../models/topic';
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-forums',
@@ -34,6 +35,7 @@ export class ForumsComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private forumService: ForumService,
+    private socketService: SocketService,
     private fb: FormBuilder,
   ) { }
 
@@ -48,10 +50,9 @@ export class ForumsComponent implements OnInit {
         this.getTopics();
       }
     })
-    this.forumService.newTopic
+
+    this.socketService.newTopic
       .subscribe(topicObject => {
-        console.log("topicObject from socket event:", topicObject);
-        
         if(this.selectedFlair == topicObject.flair || this.selectedFlair == "All") {
           this.topics.unshift(topicObject);
           this.topicsToDisplay = this.topics.slice(0, this.lastTopicIndex);
@@ -118,8 +119,6 @@ export class ForumsComponent implements OnInit {
 
   onSubmit(): void {
     const searchParam = this.searchForm.value.searchParam;
-    console.log(this.searchForm.value);
-    console.log(searchParam);
 
     this.searchForm.setValue({
       searchParam: ''

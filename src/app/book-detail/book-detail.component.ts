@@ -7,6 +7,8 @@ import { Book } from '../models/book';
 import { AuthService } from '../services/auth.service';
 import { BookService } from '../services/book.service';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-book-detail',
   templateUrl: './book-detail.component.html',
@@ -21,6 +23,9 @@ export class BookDetailComponent implements OnInit {
   displayNotFound: boolean = false;
   userId: number = 0;
   posterId: number = -1;
+
+  apiUrl: string = environment.apiUrl;
+  startingUrl: string = `${this.apiUrl}/public/images/books`;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,8 +43,6 @@ export class BookDetailComponent implements OnInit {
     this.bookId = String(this.route.snapshot.paramMap.get('bookId'));
     this.bookService.getBook(this.bookId)
       .subscribe(book => {
-        console.log("book from getBook:", book);
-        
         if(book == undefined) {
           this.displayNotFound = true;
         } else {
@@ -58,8 +61,8 @@ export class BookDetailComponent implements OnInit {
   onDeleteBook(): void {
     this.bookService.deleteBook(this.bookId, this.userId)
       .subscribe(val => {
-        console.log("deleted book!");
-        console.log("val:", val);
+        // console.log("deleted book!");
+        // console.log("val:", val);
       })
   }
 

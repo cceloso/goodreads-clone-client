@@ -32,7 +32,6 @@ export class TopicDetailComponent implements OnInit {
 
     this.forumService.getTopic(this.topicId)
       .subscribe(topic => {
-        console.log("topic:", topic);
         if(topic == undefined) {
           this.displayNotFound = true;
         } else {
@@ -58,7 +57,6 @@ export class TopicDetailComponent implements OnInit {
 
   onClickViewReplies() {
     this.viewReplies = !this.viewReplies;
-    console.log("View replies in topic-detail:", this.viewReplies);
   }
 
   increaseReplyCtr() {

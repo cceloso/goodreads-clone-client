@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
+import { SocketService } from '../services/socket.service';
 
 import { Reply } from '../models/reply';
 
@@ -12,7 +13,7 @@ import { Reply } from '../models/reply';
   templateUrl: './replies.component.html',
   styleUrls: ['./replies.component.css']
 })
-export class RepliesComponent implements OnInit {
+export class RepliesComponent implements OnInit, OnDestroy {
   @Output() increaseReplyCtr: EventEmitter<any> = new EventEmitter();
   @Output() decreaseReplyCtr: EventEmitter<any> = new EventEmitter();
   replies: Reply[] = [];
@@ -29,56 +30,46 @@ export class RepliesComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private forumService: ForumService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
     this.topicId = String(this.route.snapshot.paramMap.get('topicId'));
     this.getReplies();
-    console.log(`will join forum ${this.topicId}`);
-    this.forumService.joinForum(this.topicId);
-    this.forumService.newReply
+    this.socketService.listenToUpdate("topicUpdate", this.topicId);
+    this.socketService.newReply
       .subscribe(replyObject => {
-        console.log("replyObject from socket event:", replyObject);
         this.replies.push(replyObject);
         this.increaseReplyCtr.emit(null);
       });
 
-    this.forumService.updatedReply
+    this.socketService.updatedReply
       .subscribe(replyObject => {
-        console.log("replyId from socket event:", replyObject.id);
         this.replies[this.replies.findIndex(reply => reply.id == replyObject.id)] = replyObject;
-        console.log("updated replies:", this.replies);
       });
     
-    this.forumService.removedReply
+    this.socketService.removedReply
       .subscribe(removedReplyId => {
-        console.log("replyId from socket event:", removedReplyId);
         this.replies = this.replies.filter((reply) => reply.id != removedReplyId);
         this.decreaseReplyCtr.emit(null);
       });
   }
 
-  getReplies(): void {
-    console.log("inside getReplies");
-    console.log("topicId:", this.topicId);
+  ngOnDestroy(): void {
+    this.socketService.stopListeningToUpdate("topicUpdate", this.topicId);
+  }
 
+  getReplies(): void {
     this.forumService.getReplies(this.topicId)
       .subscribe(replies => {
         this.replies = replies;
-        console.log("replies:", this.replies);
       });
   }
 
   onSubmit(): void {
     this.forumService.addReply(this.replyForm.value, this.topicId, this.userId)
       .subscribe(replyObject => {
-        console.log("added reply!");
-        console.log(replyObject);
-
-        console.log("will send via socket!");
-        this.forumService.sendReply(replyObject, this.topicId);
-        
         this.replyForm.setValue({
           content: '',
         });
