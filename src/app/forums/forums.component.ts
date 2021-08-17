@@ -69,11 +69,8 @@ export class ForumsComponent implements OnInit {
     
     this.socketService.removedTopic
       .subscribe(removedTopicId => {
-        console.log("removedTopicId:", removedTopicId);
         this.topics = this.topics.filter((topic) => topic.id != removedTopicId);
-        console.log("filtered topics:", this.topics);
         this.topicsToDisplay = this.topics.slice(0, this.lastTopicIndex);
-        console.log("topics to display:", this.topicsToDisplay);
       });
   }
 

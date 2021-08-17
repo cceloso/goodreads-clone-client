@@ -165,8 +165,8 @@ export class TopicDetailComponent implements OnInit {
   onDeleteTopic(): void {
     this.forumService.deleteTopic(this.topicId, this.userId)
       .subscribe(val => {
-        console.log("deleted reply");
-        console.log("val:", val);
+        // console.log("deleted reply");
+        // console.log("val:", val);
       });
   }
 }

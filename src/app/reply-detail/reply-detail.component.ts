@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
@@ -21,6 +21,7 @@ export class ReplyDetailComponent implements OnInit {
   userId: number = 0;
   posterId: number = -1;
   readMore: boolean = false;
+  
   editReply: boolean = false;
   oldReply: string = "";
 

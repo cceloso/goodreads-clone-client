@@ -16,6 +16,11 @@ export class SocketService {
 
   newUserState = this.socket.fromEvent<any>("newUserState");
 
+  newComment = this.socket.fromEvent<any>("newComment");
+  updatedComment = this.socket.fromEvent<any>("updatedComment");
+  removedComment = this.socket.fromEvent<any>("removedComment");
+
+
   newTopic = this.socket.fromEvent<Topic>("newTopic");
   updatedTopic = this.socket.fromEvent<any>("updatedTopic");
   removedTopic = this.socket.fromEvent<any>("removedTopic");

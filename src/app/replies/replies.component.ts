@@ -37,7 +37,9 @@ export class RepliesComponent implements OnInit, OnDestroy {
     this.userId = this.authService.getUserId();
     this.topicId = String(this.route.snapshot.paramMap.get('topicId'));
     this.getReplies();
+
     this.socketService.listenToUpdate("topicUpdate", this.topicId);
+    
     this.socketService.newReply
       .subscribe(replyObject => {
         this.replies.push(replyObject);

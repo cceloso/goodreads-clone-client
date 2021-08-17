@@ -55,10 +55,14 @@ img {
     }
 }
 
-.delete-btn {
+.edit-delete-btn {
     font-size: .8rem;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+.btn-dark {
+    background-color: #382110;
 }

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Comment } from '../models/comment';
-import { User } from '../models/user';
 
 import { AuthService } from '../services/auth.service';
 import { CommentService } from '../services/comment.service';
-import { UserService } from '../services/user.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-comment-detail',
@@ -21,10 +21,19 @@ export class CommentDetailComponent implements OnInit {
   posterId: number = -1;
   comment?: Comment;
   readMore: boolean = false;
+
+  editComment: boolean = false;
+  oldComment: string = "";
+
+  commentForm = this.fb.group({
+    comment: ['', Validators.required],
+  });
   
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
@@ -36,6 +45,10 @@ export class CommentDetailComponent implements OnInit {
     if(this.comment) {
       this.commentId = this.comment.id;
       this.posterId = this.comment.userId;
+      this.oldComment = this.comment.comment;
+      this.commentForm.setValue({
+        comment: this.oldComment,
+      });
     }
   }
 
@@ -57,12 +70,32 @@ export class CommentDetailComponent implements OnInit {
     return datePostedStr;
   }
 
+  onClickEdit(): void {
+    this.editComment = true;
+  }
+
+  onCancelEdit(): void {
+    this.editComment = false;
+    this.commentForm.setValue({
+      comment: this.oldComment,
+    });
+  }
+
+  onEditComment(): void {
+    this.commentService.editComment(this.bookId, this.reviewId, this.commentId, this.userId, this.commentForm.value)
+      .subscribe(val => {
+        // console.log("edited reply");
+        // console.log("replyObject:", replyObject);
+        // console.log("val:", val);
+      });
+  }
+
   onDeleteComment(): void {
     this.commentService.deleteComment(this.bookId, this.reviewId, this.commentId, this.userId)
       .subscribe(val => {
         // console.log("deleted comment");
         // console.log("val:", val);
-        window.location.reload();
+        // window.location.reload();
       });
   }
 }

@@ -12,13 +12,25 @@
             {{ convertDate(comment.dateCreated) }}
         </span>
         <span class="text-muted float-end" *ngIf="userId == posterId">
-            <a class="delete-btn" (click)="onDeleteComment()">Delete</a>
+            <a class="edit-delete-btn" (click)="onClickEdit()">Edit</a>
+            <span class="mx-2">|</span>
+            <a class="edit-delete-btn" (click)="onDeleteComment()">Delete</a>
         </span>
-        <div>
+        <div *ngIf="!editComment">
             {{ comment.comment.slice(0, 300) }}
             <span *ngIf="readMore">{{ comment.comment.slice(300) }}</span>
             <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="!readMore && comment.comment.length > 300">...read more</a>
             <a class="read-more ms-1" (click)="onClickReadMore()" *ngIf="readMore && comment.comment.length > 300">(read less)</a>
+        </div>
+        <div *ngIf="editComment">
+            <form [formGroup]="commentForm">
+                <textarea class="form-control comment-text py-2" id="newComment" rows="1" formControlName="comment" placeholder="Write a comment..."></textarea>
+                <!-- <button type="submit" class="btn btn-dark float-end mt-2" [disabled]="!commentForm.valid" (click)="onEditComment()">Submit</button> -->
+                <div class="float-end">
+                    <button type="button" class="btn btn-secondary mt-2" (click)="onCancelEdit()">Cancel</button>
+                    <button type="button" class="btn btn-dark mt-2 ms-2" [disabled]="!commentForm.valid" (click)="onEditComment()">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Comment } from '../models/comment';
-import { User } from '../models/user';
 
 import { AuthService } from '../services/auth.service';
 import { CommentService } from '../services/comment.service';
-import { UserService } from '../services/user.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-comments',
@@ -23,13 +22,31 @@ export class CommentsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private commentService: CommentService
+    private commentService: CommentService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
     this.bookId = this.bookAndReviewId.bookId;
     this.reviewId = this.bookAndReviewId.reviewId;
     this.userId = this.authService.getUserId();
+
+    this.socketService.listenToUpdate("bookUpdate", this.bookId);
+
+    this.socketService.newComment
+      .subscribe(commentObject => {
+        this.comments.push(commentObject);
+      });
+
+    this.socketService.updatedComment
+      .subscribe(commentObject => {
+        this.comments[this.comments.findIndex(comment => comment.id == commentObject.id)] = commentObject;
+      });
+
+    this.socketService.removedComment
+      .subscribe(removedCommentId => {
+        this.comments = this.comments.filter((comment) => comment.id != removedCommentId);
+      });
   }
 
   onViewComments(): void {
