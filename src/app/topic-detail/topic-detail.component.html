@@ -14,7 +14,7 @@
 
                 </small>
                 <span class="float-end" *ngIf="userId == posterId">
-                    <a class="edit-delete-btn text-muted" (click)="onClickEdit()">Edit</a>
+                    <a class="edit-delete-btn text-muted" (click)="onClickEdit()" data-bs-toggle="modal" data-bs-target="#addTopicModal">Edit</a>
                     <span class="mx-2 text-muted">|</span>
                     <a class="edit-delete-btn text-muted" (click)="onDeleteTopic()">Delete</a>
                 </span>
@@ -50,5 +50,39 @@
     <app-replies (increaseReplyCtr)="increaseReplyCtr()" (decreaseReplyCtr)="decreaseReplyCtr()"></app-replies>
 </div>
 
-
 <app-not-found-resource *ngIf="displayNotFound" [resource]="'Forum post'"></app-not-found-resource>
+
+<div class="modal fade" id="addTopicModal" tabindex="-1" aria-labelledby="addTopicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit topic</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCancelEdit()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="topicForm">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <div class="fw-bold">{{ oldTitle }}</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="content" class="form-label">Content</label>
+                        <textarea class="form-control" id="content" rows="5" formControlName="content"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="flair" class="form-label d-block">Flair</label>
+                        <select class="dropdown px-2 py-2" name="dropdown" formControlName="flair" (change)="changeFlair($event)">
+                            <option class="flair-option" *ngFor="let flair of flairs">{{ flair }}</option>
+                         </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancelEdit()">Close</button>
+                <button type="submit" class="btn btn-dark" [disabled]="!topicForm.valid" (click)="onEditTopic()" data-bs-dismiss="modal">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

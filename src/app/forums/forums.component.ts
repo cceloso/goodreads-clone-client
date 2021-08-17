@@ -58,6 +58,14 @@ export class ForumsComponent implements OnInit {
           this.topicsToDisplay = this.topics.slice(0, this.lastTopicIndex);
         }
       });
+
+    this.socketService.updatedTopic
+      .subscribe(topicObject => {
+        if(this.selectedFlair == topicObject.flair || this.selectedFlair == "All") {
+          this.topics[this.topics.findIndex(topic => topic.id == topicObject.id)] = topicObject;
+          this.topicsToDisplay = this.topics.slice(0, this.lastTopicIndex);
+        }
+      });
     
     this.socketService.removedTopic
       .subscribe(removedTopicId => {

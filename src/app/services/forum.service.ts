@@ -67,6 +67,13 @@ export class ForumService {
       catchError(this.handleError<any>(`addTopic`))
     );
   }
+  
+  editTopic(topic: any, topicId: string, userId: number): Observable<any> {
+    const newUrl = `${this.apiUrl}/forums/${topicId}?userId=${userId}`;
+    return this.http.put<any>(newUrl, topic).pipe(
+      catchError(this.handleError<any>(`editTopic`))
+    );
+  }
 
   deleteTopic(topicId: string, userId: number): Observable<any> {
     const newUrl = `${this.apiUrl}/forums/${topicId}?userId=${userId}`;

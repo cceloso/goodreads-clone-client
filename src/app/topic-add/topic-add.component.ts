@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { ForumService } from '../services/forum.service';
@@ -33,6 +33,7 @@ export class TopicAddComponent implements OnInit {
       })
     }
   }
+  
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,

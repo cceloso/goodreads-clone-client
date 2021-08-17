@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Topic } from '../models/topic';
 
@@ -24,11 +25,35 @@ export class TopicDetailComponent implements OnInit {
   displayNotFound: boolean = false;
 
   editTopic: boolean = false;
-  oldTopic: string = "";
+  oldTitle: string = "";
+  oldContent: string = "";
+  oldFlair: string = "";
+  oldFlairIndex: number = 0;
+
+  flairs: string[] = ['General Question/Information', 'Discussion', 'Recommendations', 'Others'];
+
+  topicForm = this.fb.group({
+    title: ['', Validators.required],
+    content: ['', Validators.required],
+    flair: [this.flairs[0], Validators.required]
+  });
+
+  get flair() {
+    return this.topicForm.get('flair');
+  }
+
+  changeFlair(e: any) {
+    if(this.flair) {
+      this.flair.setValue(e.target.value, {
+        onlySelf: true
+      })
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private fb: FormBuilder,
     private authService: AuthService,
     private forumService: ForumService,
     private socketService: SocketService,
@@ -38,6 +63,14 @@ export class TopicDetailComponent implements OnInit {
     this.userId = this.authService.getUserId();
     this.getTopic();
 
+    this.socketService.updatedTopic
+      .subscribe(topicObject => {
+        if(topicObject != undefined) {
+          this.topic = topicObject;
+          this.initValues(topicObject);
+        }
+      });
+    
     this.socketService.removedTopic
       .subscribe(removedTopicId => {
         if(this.topicId == removedTopicId) {
@@ -45,6 +78,20 @@ export class TopicDetailComponent implements OnInit {
           this.router.navigate(['/forums']);
         }
       });
+  }
+
+  initValues(topic: Topic): void {
+    this.replyCtr = topic.replyCtr;
+    this.posterId = topic.userId;
+    this.oldTitle = topic.title;
+    this.oldContent = topic.content;
+    this.oldFlair = topic.flair;
+    this.oldFlairIndex = this.flairs.indexOf(this.oldFlair);
+    this.topicForm.setValue({
+      title: this.oldTitle,
+      content: this.oldContent,
+      flair: this.flairs[this.oldFlairIndex],
+    });
   }
 
   getTopic(): void {
@@ -56,9 +103,7 @@ export class TopicDetailComponent implements OnInit {
           this.displayNotFound = true;
         } else {
           this.topic = topic[0];
-          this.replyCtr = this.topic.replyCtr;
-          this.posterId = this.topic.userId;
-          this.oldTopic = this.topic.content;
+          this.initValues(this.topic);
         }
       });
   }
@@ -99,17 +144,22 @@ export class TopicDetailComponent implements OnInit {
 
   onCancelEdit(): void {
     this.editTopic = false;
-    // this.replyForm.setValue({
-    //   content: this.oldReply,
-    // });
+    this.topicForm.setValue({
+      title: this.oldTitle,
+      content: this.oldContent,
+      flair: this.flairs[this.oldFlairIndex],
+    });
   }
 
   onEditTopic(): void {
-    // this.forumService.editReply(this.replyForm.value, this.topicId, this.replyId, this.userId)
-    //   .subscribe(replyObject => {
-    //     // console.log("edited reply");
-    //     // console.log("replyObject:", replyObject);
-    //   });
+    this.forumService.editTopic(this.topicForm.value, this.topicId, this.userId)
+    .subscribe(topicObject => {
+      this.topicForm.setValue({
+        title: '',
+        content: '',
+        flair: this.flairs[0],
+      });
+    });
   }
 
   onDeleteTopic(): void {
