@@ -11,7 +11,13 @@
             <p class="card-text">
                 <small class="text-muted">
                     Posted by <span class="fw-bold"><a routerLink="/users/{{ topic.userId }}">{{ topic.userName }}</a></span> <span class="mx-2">·</span> {{ convertDate(topic.dateCreated) }}
+
                 </small>
+                <span class="float-end" *ngIf="userId == posterId">
+                    <a class="edit-delete-btn text-muted" (click)="onClickEdit()">Edit</a>
+                    <span class="mx-2 text-muted">|</span>
+                    <a class="edit-delete-btn text-muted" (click)="onDeleteTopic()">Delete</a>
+                </span>
             </p>
             <h5 class="card-title fw-bold serif d-inline me-2 mb-2">{{ topic.title }}</h5>
             <span

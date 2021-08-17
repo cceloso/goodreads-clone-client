@@ -17,10 +17,11 @@ export class SocketService {
   newUserState = this.socket.fromEvent<any>("newUserState");
 
   newTopic = this.socket.fromEvent<Topic>("newTopic");
+  removedTopic = this.socket.fromEvent<any>("removedTopic");
 
   newReply = this.socket.fromEvent<Reply>("newReply");
-  removedReply = this.socket.fromEvent<any>("removedReply");
   updatedReply = this.socket.fromEvent<any>("updatedReply");
+  removedReply = this.socket.fromEvent<any>("removedReply");
 
   listenToUpdate(eventName: string, topicId: string) {
     this.socket.emit("listenToUpdate", eventName, topicId);

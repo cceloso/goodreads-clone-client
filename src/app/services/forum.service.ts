@@ -68,6 +68,13 @@ export class ForumService {
     );
   }
 
+  deleteTopic(topicId: string, userId: number): Observable<any> {
+    const newUrl = `${this.apiUrl}/forums/${topicId}?userId=${userId}`;
+    return this.http.delete<any>(newUrl).pipe(
+      catchError(this.handleError<any>(`deleteTopic`))
+    );
+  }
+
   getReplies(topicId: string): Observable<Reply[]> {
     const newUrl = `${this.apiUrl}/forums/${topicId}/replies`;
     return this.http.get<Reply[]>(newUrl).pipe(

@@ -6,6 +6,6 @@ export interface Topic {
     dateCreated: string,
     lastUpdated: string,
     replyCtr: number,
-    userId: string,
+    userId: number,
     userName: string
 }
