@@ -55,3 +55,7 @@ img {
 a:hover {
     text-decoration: underline;
 }
+
+.btn-dark {
+    background-color: #382110;
+}

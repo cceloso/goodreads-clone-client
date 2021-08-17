@@ -37,8 +37,11 @@
         </a>
     </li>
 </ul>
-
 <div *ngIf="topics.length == 0">
+    <div *ngIf="searchParam != 'undefined'" class="fw-bold mb-2">
+        Search results for "{{ searchParam }}"
+    </div>
+    
     No results found.
 </div>
 

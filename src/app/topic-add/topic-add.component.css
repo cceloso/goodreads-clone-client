@@ -1,3 +1,17 @@
 .dropdown {
     cursor: pointer;
 }
+
+.btn-outline-dark {
+    color: #382110;
+    border-color: #382110;
+}
+
+.btn-outline-dark:hover {
+    color: white;
+    background-color: #382110;
+}
+
+.btn-dark {
+    background-color: #382110;
+}
