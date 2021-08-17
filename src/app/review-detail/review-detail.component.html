@@ -11,16 +11,16 @@
                     <a routerLink="/users/{{ review.userId }}">{{ review.userName }}</a>
                 </span> rated it
             </div>
-            <span class="material-icons star-rate" [class.checked]="review.rating >= 1">star_rate</span>
-            <span class="material-icons star-rate" [class.checked]="review.rating >= 2">star_rate</span>
-            <span class="material-icons star-rate" [class.checked]="review.rating >= 3">star_rate</span>
-            <span class="material-icons star-rate" [class.checked]="review.rating >= 4">star_rate</span>
-            <span class="material-icons star-rate" [class.checked]="review.rating == 5">star_rate</span>
+            <span class="material-icons star-rate-fixed" [class.checked]="review.rating >= 1">star_rate</span>
+            <span class="material-icons star-rate-fixed" [class.checked]="review.rating >= 2">star_rate</span>
+            <span class="material-icons star-rate-fixed" [class.checked]="review.rating >= 3">star_rate</span>
+            <span class="material-icons star-rate-fixed" [class.checked]="review.rating >= 4">star_rate</span>
+            <span class="material-icons star-rate-fixed" [class.checked]="review.rating == 5">star_rate</span>
 
             <!-- <span class="material-icons float-end">more_horiz</span> -->
             <span class="text-muted float-end" *ngIf="userId == posterId">
-                <a class="edit-delete-btn" (click)="onClickEdit()" data-bs-toggle="modal" data-bs-target="#editReviewModal">Edit</a>
-                <span class="mx-2">|</span>
+                <!-- <a class="edit-delete-btn" (click)="onClickEdit()" data-bs-toggle="modal" data-bs-target="#editReviewModal">Edit</a>
+                <span class="mx-2">|</span> -->
                 <a class="edit-delete-btn" (click)="onDeleteReview()">Delete</a>
             </span>
 

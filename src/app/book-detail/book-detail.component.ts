@@ -23,6 +23,8 @@ export class BookDetailComponent implements OnInit {
   displayNotFound: boolean = false;
   userId: number = 0;
   posterId: number = -1;
+  ratingCtr: number = 0;
+  averageRating: number = 0;
 
   apiUrl: string = environment.apiUrl;
   startingUrl: string = `${this.apiUrl}/public/images/books`;
@@ -50,12 +52,26 @@ export class BookDetailComponent implements OnInit {
           this.genres = this.book.genres.split(',');
           this.description = this.book.description.replace(/\\n/g,'<br/><br/>');
           this.posterId = this.book.userId;
+          this.ratingCtr = Number(this.book.ratingCtr);
+          this.averageRating = Number(this.book.averageRating);
         }
       });
   }
 
   onClickReadMore(): void {
     this.readMore = !this.readMore;
+  }
+
+  increaseRatingCtr() {
+    this.ratingCtr += 1;
+  }
+  
+  decreaseRatingCtr() {
+    this.ratingCtr -= 1;
+  }
+
+  updateAverageRating(newAverageRating: number) {
+    this.averageRating = newAverageRating;
   }
 
   onDeleteBook(): void {

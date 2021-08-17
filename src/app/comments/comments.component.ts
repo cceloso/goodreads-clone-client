@@ -19,6 +19,7 @@ export class CommentsComponent implements OnInit {
   comments: Comment[] = [];
   viewComments: boolean = false;
   readMore: boolean = false;
+  room: string = "";
 
   constructor(
     private authService: AuthService,
@@ -30,28 +31,36 @@ export class CommentsComponent implements OnInit {
     this.bookId = this.bookAndReviewId.bookId;
     this.reviewId = this.bookAndReviewId.reviewId;
     this.userId = this.authService.getUserId();
+    this.room = `${this.bookId}-${this.reviewId}`;
 
-    this.socketService.listenToUpdate("bookUpdate", this.bookId);
+    // this.socketService.listenToUpdate("bookUpdate", `${this.bookId}-${this.reviewId}`);
 
     this.socketService.newComment
-      .subscribe(commentObject => {
-        this.comments.push(commentObject);
+      .subscribe(reviewIdAndCommentObject => {
+        if(reviewIdAndCommentObject.reviewId == this.reviewId) {
+          this.comments.push(reviewIdAndCommentObject.commentObject);
+        }
       });
 
     this.socketService.updatedComment
-      .subscribe(commentObject => {
-        this.comments[this.comments.findIndex(comment => comment.id == commentObject.id)] = commentObject;
+      .subscribe(reviewIdAndCommentObject => {
+        if(reviewIdAndCommentObject.reviewId == this.reviewId) {
+          this.comments[this.comments.findIndex(comment => comment.id == reviewIdAndCommentObject.commentObject.id)] = reviewIdAndCommentObject.commentObject;
+        }
       });
 
     this.socketService.removedComment
-      .subscribe(removedCommentId => {
-        this.comments = this.comments.filter((comment) => comment.id != removedCommentId);
+      .subscribe(reviewIdAndCommentId => {
+        if(reviewIdAndCommentId.reviewId == this.reviewId) {
+          this.comments = this.comments.filter((comment) => comment.id != reviewIdAndCommentId.commentId);
+        }
       });
   }
 
   onViewComments(): void {
     this.viewComments = !this.viewComments;
     this.getComments();
+    this.socketService.listenToUpdate("bookUpdate", this.room);
   }
 
   getComments(): void {

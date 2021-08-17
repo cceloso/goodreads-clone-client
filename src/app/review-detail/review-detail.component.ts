@@ -75,6 +75,16 @@ export class ReviewDetailComponent implements OnInit {
 
   onClickEdit(): void {
     this.editReview = true;
+    // if(this.review) {
+    //   this.reviewId = this.review.id;
+    //   this.posterId = this.review.userId;
+    //   this.oldRatingValue = this.review.rating;
+    //   this.oldReview = this.review.review;
+    //   this.reviewForm.patchValue({
+    //     review: this.oldReview
+    //   });
+    // }
+    // console.log("review:", this.review);
   }
 
   onCancelEdit(): void {
@@ -101,7 +111,7 @@ export class ReviewDetailComponent implements OnInit {
 
   onEditReview(): void {
     this.reviewService.editReview(this.bookId, this.reviewId, this.userId, this.reviewForm.value)
-    .subscribe(topicObject => {
+    .subscribe(val => {
       // this.reviewForm.setValue({
       //   rating: '',
       //   review: ''

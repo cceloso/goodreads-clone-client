@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { Review } from '../models/review';
 
@@ -12,6 +12,9 @@ import { SocketService } from '../services/socket.service';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
+  @Output() increaseRatingCtr: EventEmitter<any> = new EventEmitter();
+  @Output() decreaseRatingCtr: EventEmitter<any> = new EventEmitter();
+  @Output() updateAverageRating: EventEmitter<any> = new EventEmitter();
   @Input() bookId: string = "";  
   userId: number = 0;
   reviews: Review[] = [];
@@ -32,18 +35,23 @@ export class ReviewsComponent implements OnInit {
     this.socketService.listenToUpdate("bookUpdate", this.bookId);
 
     this.socketService.newReview
-      .subscribe(reviewObject => {
-        this.reviews.push(reviewObject);
+      .subscribe(reviewAndAverageRating => {
+        this.reviews.unshift(reviewAndAverageRating.reviewObject);
+        this.increaseRatingCtr.emit(null);
+        this.updateAverageRating.emit(reviewAndAverageRating.averageRating);
       });
 
     this.socketService.updatedReview
-      .subscribe(reviewObject => {
-        this.reviews[this.reviews.findIndex(review => review.id == reviewObject.id)] = reviewObject;
+      .subscribe(reviewAndAverageRating => {
+        this.reviews[this.reviews.findIndex(review => review.id == reviewAndAverageRating.reviewObject.id)] = reviewAndAverageRating.reviewObject;
+        this.updateAverageRating.emit(reviewAndAverageRating.averageRating);
       });
 
     this.socketService.removedReview
-      .subscribe(reviewIdAndUserId => {
-        this.reviews = this.reviews.filter((review) => review.id != reviewIdAndUserId.reviewId);
+      .subscribe(reviewIdAndUserIdAndAverageRating => {
+        this.reviews = this.reviews.filter((review) => review.id != reviewIdAndUserIdAndAverageRating.reviewId);
+        this.decreaseRatingCtr.emit(null);
+        this.updateAverageRating.emit(reviewIdAndUserIdAndAverageRating.averageRating);
       });
   }
 

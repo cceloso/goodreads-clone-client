@@ -37,8 +37,8 @@ export class ReviewAddComponent implements OnInit {
     this.getReviewByUserAndBook();
 
     this.socketService.removedReview
-      .subscribe(reviewIdAndUserId => {
-        if(reviewIdAndUserId.userId == this.userId) {
+      .subscribe(reviewIdAndUserIdAndAverageRating => {
+        if(reviewIdAndUserIdAndAverageRating.userId == this.userId) {
           this.userHasReview = false;
         }
       });
