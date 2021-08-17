@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Review } from '../models/review';
-import { User } from '../models/user';
 
 import { AuthService } from '../services/auth.service';
 import { ReviewService } from '../services/review.service';
-import { UserService } from '../services/user.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-reviews',
@@ -22,19 +21,35 @@ export class ReviewsComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private reviewService: ReviewService,
-    private userService: UserService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
     this.getReviews();
     this.userId = this.authService.getUserId();
     this.getReviewByUserAndBook();
+
+    this.socketService.listenToUpdate("bookUpdate", this.bookId);
+
+    this.socketService.newReview
+      .subscribe(reviewObject => {
+        this.reviews.push(reviewObject);
+      });
+
+    this.socketService.updatedReview
+      .subscribe(reviewObject => {
+        this.reviews[this.reviews.findIndex(review => review.id == reviewObject.id)] = reviewObject;
+      });
+
+    this.socketService.removedReview
+      .subscribe(reviewIdAndUserId => {
+        this.reviews = this.reviews.filter((review) => review.id != reviewIdAndUserId.reviewId);
+      });
   }
 
   getReviewByUserAndBook(): void {
     this.reviewService.getReviewByUserAndBook(this.userId, this.bookId)
       .subscribe(val => {
-        // console.log("val:", typeof val);
         this.userHasReview = val;
       });
   }
@@ -43,7 +58,6 @@ export class ReviewsComponent implements OnInit {
     this.reviewService.getReviews(this.bookId)
       .subscribe(reviews => {
         this.reviews = reviews;
-        // console.log(this.reviews);
       });
   }
 

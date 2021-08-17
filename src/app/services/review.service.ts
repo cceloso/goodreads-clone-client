@@ -45,10 +45,17 @@ export class ReviewService {
     );
   }
 
-  addReview(bookId: string, review: any): Observable<any> {
-    const newUrl = `${this.apiUrl}/books/${bookId}/reviews`;
+  addReview(bookId: string, userId: number, review: any): Observable<any> {
+    const newUrl = `${this.apiUrl}/books/${bookId}/reviews?userId=${userId}`;
     return this.http.post<any>(newUrl, review).pipe(
       catchError(this.handleError<any>(`addReview`))
+    );
+  }
+  
+  editReview(bookId: string, reviewId: string, userId: number, review: any): Observable<any> {
+    const newUrl = `${this.apiUrl}/books/${bookId}/reviews/${reviewId}?userId=${userId}`;
+    return this.http.put<any>(newUrl, review).pipe(
+      catchError(this.handleError<any>(`editReview`))
     );
   }
   

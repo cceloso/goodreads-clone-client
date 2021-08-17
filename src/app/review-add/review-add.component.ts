@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { ReviewService } from '../services/review.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-review-add',
@@ -28,11 +29,19 @@ export class ReviewAddComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private reviewService: ReviewService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
     this.userId = this.authService.getUserId();
     this.getReviewByUserAndBook();
+
+    this.socketService.removedReview
+      .subscribe(reviewIdAndUserId => {
+        if(reviewIdAndUserId.userId == this.userId) {
+          this.userHasReview = false;
+        }
+      });
   }
 
   getReviewByUserAndBook(): void {
@@ -45,7 +54,7 @@ export class ReviewAddComponent implements OnInit {
   onSubmit(): void {
     this.userId = this.authService.getUserId();
 
-    this.reviewService.addReview(this.bookId, this.reviewForm.value)
+    this.reviewService.addReview(this.bookId, this.userId, this.reviewForm.value)
       .subscribe(val => {
         this.reviewForm.setValue({
           rating: '',
@@ -53,7 +62,7 @@ export class ReviewAddComponent implements OnInit {
         });
         this.userHasReview = true;
         this.addReview.emit(null);
-        window.location.reload();
+        // window.location.reload();
       });
   }
 

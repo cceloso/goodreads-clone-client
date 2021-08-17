@@ -19,7 +19,9 @@
 
             <!-- <span class="material-icons float-end">more_horiz</span> -->
             <span class="text-muted float-end" *ngIf="userId == posterId">
-                <a class="delete-btn" (click)="onDeleteReview()">Delete</a>
+                <a class="edit-delete-btn" (click)="onClickEdit()" data-bs-toggle="modal" data-bs-target="#editReviewModal">Edit</a>
+                <span class="mx-2">|</span>
+                <a class="edit-delete-btn" (click)="onDeleteReview()">Delete</a>
             </span>
 
             <div class="row">
@@ -39,6 +41,39 @@
 
             <div class="row">
                 <app-comments class="mt-2" [bookAndReviewId]="{bookId: bookId, reviewId: review.id}"></app-comments>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editReviewModal" tabindex="-1" aria-labelledby="editReviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onCancelEdit()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="reviewForm">
+                    <div class="mb-3">
+                        <label for="rating" class="form-label me-1 d-inline">Rating</label>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 1" (click)="updateReview(1)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 2" (click)="updateReview(2)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 3" (click)="updateReview(3)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue >= 4" (click)="updateReview(4)">star_rate</span>
+                        <span class="material-icons star-rate" [class.checked]="ratingValue == 5" (click)="updateReview(5)">star_rate</span>
+                        <a class="clear ms-1 d-inline" (click)="onClearRating()">Clear</a>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="review" class="form-label">Review</label>
+                        <textarea class="form-control" id="review" rows="5" formControlName="review"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCancelEdit()">Close</button>
+                <button type="submit" class="btn btn-dark" [disabled]="!reviewForm.valid" (click)="onEditReview()" data-bs-dismiss="modal">Submit</button>
             </div>
         </div>
     </div>

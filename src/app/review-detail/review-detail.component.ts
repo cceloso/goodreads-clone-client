@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 import { Review } from '../models/review';
 
 import { AuthService } from '../services/auth.service';
 import { ReviewService } from '../services/review.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-review-detail',
@@ -19,10 +21,22 @@ export class ReviewDetailComponent implements OnInit {
   posterId: number = -1;
   review?: Review;
   readMore: boolean = false;
+
+  editReview: boolean = false;
+  oldRatingValue: number = 0;
+  oldReview: string = "";
+  ratingValue: number = 0;
+
+  reviewForm = this.fb.group({
+    rating: ['', Validators.required],
+    review: ['', Validators.required]
+  });
   
   constructor(
+    private fb: FormBuilder,
     private authService: AuthService,
     private reviewService: ReviewService,
+    private socketService: SocketService,
   ) { }
 
   ngOnInit(): void {
@@ -33,6 +47,11 @@ export class ReviewDetailComponent implements OnInit {
     if(this.review) {
       this.reviewId = this.review.id;
       this.posterId = this.review.userId;
+      this.oldRatingValue = this.review.rating;
+      this.oldReview = this.review.review;
+      this.reviewForm.patchValue({
+        review: this.oldReview
+      });
     }
   }
 
@@ -54,10 +73,46 @@ export class ReviewDetailComponent implements OnInit {
     return datePostedStr;
   }
 
+  onClickEdit(): void {
+    this.editReview = true;
+  }
+
+  onCancelEdit(): void {
+    this.editReview = false;
+    this.reviewForm.setValue({
+      rating: this.oldRatingValue,
+      review: this.oldReview
+    });
+  }
+
+  updateReview(rating: number): void {
+    this.ratingValue = rating;
+    this.reviewForm.patchValue({
+      rating: this.ratingValue,
+    });
+  }
+
+  onClearRating(): void {
+    this.ratingValue = 0;
+    this.reviewForm.patchValue({
+      rating: '',
+    });
+  }
+
+  onEditReview(): void {
+    this.reviewService.editReview(this.bookId, this.reviewId, this.userId, this.reviewForm.value)
+    .subscribe(topicObject => {
+      // this.reviewForm.setValue({
+      //   rating: '',
+      //   review: ''
+      // });
+    });
+  }
+
   onDeleteReview(): void {
     this.reviewService.deleteReview(this.bookId, this.reviewId, this.userId)
       .subscribe(val => {
-        window.location.reload();
+        // window.location.reload();
       });
   }
 }
