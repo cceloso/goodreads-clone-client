@@ -1,0 +1,41 @@
+version: "3"
+ 
+services:
+    goodreads_web:
+        image: 443736785131.dkr.ecr.ap-southeast-1.amazonaws.com/goodreads_web
+        build: ./angular-mini-app
+        ports:
+            - '80:80'
+        command: 'bash start-env.sh'
+        deploy:
+          resources:
+            limits:
+              cpus: '1'
+              memory: 2048M
+
+    goodreads_api:
+        image: 443736785131.dkr.ecr.ap-southeast-1.amazonaws.com/goodreads_api
+        build: ./miniApp
+        ports:
+            - '3000:3000'
+        environment:
+            - DB_HOST=goodreads_mysql
+            - DB_PORT=3306
+            - DB_USER=root
+            - DB_PASSWORD=password
+            - DB_NAME=mydb
+        command: "bash start.sh goodreads_mysql:3306 goodreads_redis:6379"
+    
+    goodreads_mysql:
+        image: mysql:5.7.32
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_DATABASE=mydb
+    
+    goodreads_redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        command: 'redis-server --requirepass "Password123"'

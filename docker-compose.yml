@@ -1,0 +1,30 @@
+version: "3"
+ 
+services:
+    goodreads_web:
+        extends:
+            file: docker-compose-base.yml
+            service: goodreads_web
+        volumes:
+            - ./angular-mini-app/:/app
+        ports:
+            - 4200:4200
+            - 49153:49153
+        command: 'bash start.sh'
+
+    goodreads_api:
+        extends:
+            file: docker-compose-base.yml
+            service: goodreads_api
+        volumes:
+            - ./miniApp/:/app
+    
+    goodreads_mysql:
+        extends:
+            file: docker-compose-base.yml
+            service: goodreads_mysql
+    
+    goodreads_redis:
+        extends:
+            file: docker-compose-base.yml
+            service: goodreads_redis
