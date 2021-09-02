@@ -1,4 +1,6 @@
-# AngularMiniApp
+# AngularGoodreadsCloneMiniApp
+
+This is a full-stack application inspired by Goodreads. It was built using Angular for the front-end, nodeJS for the back-end, mySQL and Redis for the data stores, and socket.IO for real-time web. In the app, users can add books, write reviews and comments, and discuss books and other topics in forums. It was done during the Saperium Internship Program 2021.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.2.
 
